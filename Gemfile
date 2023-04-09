@@ -36,9 +36,6 @@ gem 'rack-cors'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'
 
-# A ruby implementation of the RFC 7519 OAuth JSON Web Token (JWT) standard.
-gem 'jwt'
-
 # I18n
 gem 'i18n'
 

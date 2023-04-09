@@ -4,14 +4,21 @@
 # User Model
 #
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  devise :database_authenticatable,
-         :jwt_authenticatable,
-         :registerable,
-         jwt_revocation_strategy: JwtDenylist
+  # Devise
+  include Devise::JWT::RevocationStrategies::JTIMatcher
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable,
+         :jwt_authenticatable, jwt_revocation_strategy: self
+  
+  # Callbacks
+  before_save :set_slug
 
   # Enums
   enum perfil: %i[player temp gm adm master]
+
+  def jwt_payload
+    super	
+  end
 
   %i[qtd_gp_coin qtd_gp_cash bonus_xp bonus_rxp bonus_drop bonus_wxp bonus_gwxp bonus_ep bonus_crftxp
      bonus_petxp].each do |method|
@@ -42,4 +49,9 @@ class User < ApplicationRecord
   def self.tmp?
     perfil == 1 && data_expiracao.present?
   end
+
+  def set_slug
+    self.slug = "#{username}:#{DateTime.now}&#{rand(1..9999999)}"
+  end
 end
+

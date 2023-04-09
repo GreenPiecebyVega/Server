@@ -281,7 +281,6 @@ DEPENDENCIES
   faker
   i18n
   jbuilder
-  jwt
   mysql2 (~> 0.5)
   pry
   pry-rails

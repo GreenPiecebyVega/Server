@@ -8,8 +8,8 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :username,           null: false
       t.string :encrypted_password, null: false
       t.string :slug,               null: false
-      t.string :unique_session_id,  null: false
-      t.string :jwt_token
+      t.string :jti,                null: false
+      
 
       ## Attrs
       t.string :nome,          null: false
@@ -77,12 +77,11 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.timestamps null: false
     end
 
-    add_index :users, :unique_session_id,    unique: true
     add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
     add_index :users, :confirmation_token,   unique: true
     add_index :users, :unlock_token,         unique: true
     add_index :users, :slug,                 unique: true
-    add_index :users, :jwt_token,            unique: true
+    add_index :users, :jti,                  unique: true
   end
 end

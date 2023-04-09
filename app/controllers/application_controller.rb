@@ -3,7 +3,7 @@
 #
 #  GP Application Controller
 #
-class ApplicationController < ActionController::API
+class ApplicationController < ActionController::Api
   protect_from_forgery with: :exception
 
   # Autorizações
@@ -17,10 +17,6 @@ class ApplicationController < ActionController::API
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-
-  def after_sign_out_path_for(resource_or_scope); end
-
-  def after_sign_out_path_for(resource_or_scope); end
 
   protected
 

@@ -4,7 +4,11 @@
 ```console
 rake users:create_dev && rails s
 ```
-E-mail:: greenpiecemmorpg@gmail.com | Senha:: gpmaster
+# Testes Iniciais
+curl -H "Content-Type: application/json" -XGET http://localhost:3000/api/v1/posts
+
+# Generating
+rails g scaffold Api::V1::Post title:string content:text
 
 GP Conventional Docs
 1. **Ruby**

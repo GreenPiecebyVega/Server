@@ -18,17 +18,8 @@ namespace :users do
     )
     user.save!
 
-    # Create jwt
-    # This will be genereted by web_application after_create
-	  # Just the web application domain IP and Unreal Engine Client IP will comunicate with this application
-    # Apenas usuários requisitarão ao servidor
-    # Usuário podem ter acesso mestre controlado pelo pundit
-    payload = { id: "#{user.id};#{Time.now.to_i}" }
-    secret = YAML.load_file(Rails.root.join('app', 'controllers', 'api', 'config.yml'))
-    user.jwt_token = JWT.encode(payload, secret['gp']['secret'], 'HS256')
-    user.save!
+    Api::V1::Post.create(title: 'asd', content: 'asd')
 
     puts 'Master dev Criado. | Senha:: gpmaster | E-mail:: greenpiecemmorpg@gmail.com'
-    puts "JWT Account Token: #{user.jwt_token}"
   end
 end

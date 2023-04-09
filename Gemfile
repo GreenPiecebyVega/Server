@@ -53,6 +53,7 @@ gem 'rubocop', '~> 1.49', require: false
 
 # Auth
 gem 'devise'
+gem 'devise-jwt'
 
 group :development, :test do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]

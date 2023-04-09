@@ -1,12 +1,5 @@
 # Green Piece by VegaSoft
 
-# Creating ur dev account
-```console
-rake users:create_dev && rails s
-```
-# Testes Iniciais
-curl -H "Content-Type: application/json" -XGET http://localhost:3000/api/v1/posts
-
 # Generating
 rails g scaffold Api::V1::Post title:string content:text
 
@@ -46,38 +39,7 @@ GP Conventional Docs
 9. **Faker**
   [Documentation](https://www.rubydoc.info/gems/faker/)
 
-### Rspec test enviroment
-Usaremos o ambiente de test para rodas nossos testes com rspec, dessa forma, o banco de dados do ambiente de desenvolvimento não sofrerá mudanças indesejáveis e não será afetado pelo database_cleaner-active_record gem.  
-
-* Just sets up ur test database currently called by app_test if already not prepared
-```console
-  rake db:test:prepare
-```   
-* Run migrate if needed
-```console
-  rails db:migrate RAILS_ENV=test
-```   
-* Running all specs
-```console
-  RAILS_ENV=test rspec
-```   
-* Running single spec
-```console
-  RAILS_ENV=test rspec spec/models/some_model_spec.rb
-```   
-* **IMPOORTANT**: If you run rspec in development enviroment his **data will be lost**, so make sure to set RAILS_ENV=test plus rspec 
-command.   
-* We do that because we want to run spec from development. Of course is included on best pratices by default convention.
-* **RSpec não roda em ambiente de produção.** raises 'The Rails environment is running in production mode!'
-
-### Helpers
-We can simply write an alias to overwrite the rspec command adding the following to ~/.bashrc file, after this, save and source ~/.bashrc to make the alias avaliable, on the current bash.   
-* **The alias will be avaliable in a new wsl instance too**.
-```console
-  alias rspec="RAILS_ENV=test rspec"
-```   
 ### Use binding.pry for debugging
-
 * Here the application test will stop and u will have acess to the response, by exit, the test will continue
 ```console
   get current_usuario.root_path

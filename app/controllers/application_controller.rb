@@ -5,7 +5,7 @@
 #
 class ApplicationController < ActionController::API
   before_action :configure_permitted_parameters, if: :devise_controller?
-  
+
   respond_to :json
 
   # Autorizações
@@ -13,7 +13,7 @@ class ApplicationController < ActionController::API
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   include SessionHelper
-  
+
   protected
 
   def configure_permitted_parameters

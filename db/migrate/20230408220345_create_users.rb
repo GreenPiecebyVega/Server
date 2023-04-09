@@ -9,7 +9,6 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :encrypted_password, null: false
       t.string :slug,               null: false
       t.string :jti,                null: false
-      
 
       ## Attrs
       t.string :nome,          null: false

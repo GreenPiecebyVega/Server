@@ -9,16 +9,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :jwt_authenticatable, jwt_revocation_strategy: self
-  
+
   # Callbacks
-  before_save :set_slug
+  before_create :set_slug
 
   # Enums
-  enum perfil: %i[player temp gm adm master]
-
-  def jwt_payload
-    super	
-  end
+  enum perfil: %i[player temp gm master]
 
   %i[qtd_gp_coin qtd_gp_cash bonus_xp bonus_rxp bonus_drop bonus_wxp bonus_gwxp bonus_ep bonus_crftxp
      bonus_petxp].each do |method|
@@ -27,16 +23,8 @@ class User < ApplicationRecord
     end
   end
 
-  # Regular Account
-  def self.gp_player?
-    perfil == 1
-  end
-
+  # Headers
   def self.master?
-    perfil == 4
-  end
-
-  def self.adm?
     perfil == 3
   end
 
@@ -50,8 +38,12 @@ class User < ApplicationRecord
     perfil == 1 && data_expiracao.present?
   end
 
+  # Default
+  def self.gp_player?
+    perfil == 0
+  end
+
   def set_slug
-    self.slug = "#{username}:#{DateTime.now}&#{rand(1..9999999)}"
+    self.slug = "#{username}:#{DateTime.now}&#{rand(1..9_999_999)}"
   end
 end
-

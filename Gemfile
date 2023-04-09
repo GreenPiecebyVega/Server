@@ -9,18 +9,17 @@ gem 'rails', '~> 7.0.4', '>= 7.0.4.3'
 gem 'mysql2', '~> 0.5'
 gem 'bootsnap', require: false
 gem 'puma', '~> 5.0'
-gem 'bootsnap', require: false
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'devise'
 gem 'devise-jwt'
-gem 'jbuilder'
-gem 'pundit'
 gem 'rack-cors'
+gem 'pundit'
+gem 'jbuilder'
 gem 'rails-i18n', '~> 7.0.0'
 gem 'redis', '~> 4.0'
-gem 'rack-cors'
+
 gem 'rest-client'
 gem 'rubocop', '~> 1.49', require: false
 

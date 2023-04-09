@@ -29,7 +29,7 @@ module GreenPieceBackend
     end
 
     # App by GP_SERVER_INSTANCE
-    valid_servers_instances = ['gp_america_latina'] 
+    valid_servers_instances = ['gp_america_latina']
     raise 'Invalid Server Game Instance' unless ENV['GP_SERVER_INSTANCE'].in?(valid_servers_instances)
 
     config.app_instance = ENV['GP_SERVER_INSTANCE']

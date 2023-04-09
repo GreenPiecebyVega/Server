@@ -12,8 +12,6 @@ class ApplicationController < ActionController::API
   include Pundit::Authorization
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  include SessionHelper
-
   protected
 
   def configure_permitted_parameters

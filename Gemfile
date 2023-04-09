@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -6,17 +7,17 @@ ruby '3.2.2'
 
 gem 'rails', '~> 7.0.4', '>= 7.0.4.3'
 
-gem 'mysql2', '~> 0.5'
 gem 'bootsnap', require: false
+gem 'mysql2', '~> 0.5'
 gem 'puma', '~> 5.0'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
-gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'devise'
 gem 'devise-jwt'
-gem 'rack-cors'
-gem 'pundit'
+gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'jbuilder'
+gem 'pundit'
+gem 'rack-cors'
 gem 'rails-i18n', '~> 7.0.0'
 gem 'redis', '~> 4.0'
 

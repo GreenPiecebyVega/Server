@@ -40,7 +40,7 @@ class User < ApplicationRecord
 
   # Default
   def self.gp_player?
-    perfil == 0
+    perfil.zero?
   end
 
   def set_slug

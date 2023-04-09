@@ -8,13 +8,13 @@ default: &default
 
 development:
   <<: *default
-  database: <%= ENV["DB_NAME"] %>-development
+  database: <%= ENV["DB_NAME"] %>_development
 
 test:
   <<: *default
-  database: <%= ENV["DB_NAME"] %>-test
+  database: <%= ENV["DB_NAME"] %>_test
 
 production:
   <<: *default
-  database: <%= ENV["DB_NAME"] %>-production
+  database: <%= ENV["DB_NAME"] %>_production
   username: <%= ENV["DB_USERNAME"] %>

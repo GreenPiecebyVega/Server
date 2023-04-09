@@ -3,18 +3,12 @@
 #
 #  GP Application Controller
 #
-class ApplicationController < ActionController::Api
-  protect_from_forgery with: :exception
-
+class ApplicationController < ActionController::API
   # Autorizações
   include Pundit::Authorization
   include SessionHelper
 
   respond_to :json
-
-  before_action :authenticate_user!
-  before_action :store_location, unless: -> { user_signed_in? or devise_controller? }
-  before_action :configure_permitted_parameters, if: :devise_controller?
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 

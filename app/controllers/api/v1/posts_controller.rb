@@ -9,6 +9,7 @@ module Api
       # GET /api/v1/posts.json
       def index
         @api_v1_posts = Api::V1::Post.all
+        render json: @api_v1_posts 
       end
 
       # GET /api/v1/posts/1

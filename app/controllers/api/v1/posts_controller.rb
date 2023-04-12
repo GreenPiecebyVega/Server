@@ -1,60 +1,57 @@
-# frozen_string_literal: true
+class Api::V1::PostsController < ApplicationController
+  before_action :authenticate_user!, only: %i[create update destroy]
 
-module Api
-  module V1
-    class PostsController < ApplicationController
-      before_action :set_api_v1_post, only: %i[show update destroy]
+  # POST /api/v1/posts
+  def create
+    authorize Post
+    post = Post.create_post!(create_params, current_user)
+    render json: post_show(post, { message: I18n.t('controllers.posts.created') })
+  end
 
-      # GET /api/v1/posts
-      # GET /api/v1/posts.json
-      def index
-        @api_v1_posts = Api::V1::Post.all
-        render json: @api_v1_posts
-      end
+  # DELETE /api/v1/posts/:id
+  def destroy
+    post = Post.find(params[:id])
+    authorize post
+    post = Post.delete_post!(post)
+    render json: post_show(post, { message: I18n.t('controllers.posts.deleted') })
+  end
 
-      # GET /api/v1/posts/1
-      # GET /api/v1/posts/1.json
-      def show; end
+  # GET /api/v1/posts
+  def index
+    posts = policy_scope(Post)
+    posts = posts.for_index(params)
+    render json: PostIndexSerializer.new(posts, list_options).serializable_hash.to_json
+  end
 
-      # POST /api/v1/posts
-      # POST /api/v1/posts.json
-      def create
-        @api_v1_post = Api::V1::Post.new(api_v1_post_params)
+  # GET /api/v1/posts/:slug
+  def show
+    post = Post.friendly.find(params[:id])
+    options = show_options
+    options[:params] = options[:params].merge({ all: params[:all] }) if params[:all].present?
+    render json: PostShowSerializer.new(post, options).serializable_hash.to_json
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: I18n.t('api.not_found') }, status: 404
+  end
 
-        if @api_v1_post.save
-          render :show, status: :created, location: @api_v1_post
-        else
-          render json: @api_v1_post.errors, status: :unprocessable_entity
-        end
-      end
+  # PUT /api/v1/posts/:id
+  def update
+    post = Post.find(params[:id])
+    authorize post
+    post = Post.update_post!(post, update_params)
+    render json: post_show(post, { message: I18n.t('controllers.posts.updated') })
+  end
 
-      # PATCH/PUT /api/v1/posts/1
-      # PATCH/PUT /api/v1/posts/1.json
-      def update
-        if @api_v1_post.update(api_v1_post_params)
-          render :show, status: :ok, location: @api_v1_post
-        else
-          render json: @api_v1_post.errors, status: :unprocessable_entity
-        end
-      end
+  private
 
-      # DELETE /api/v1/posts/1
-      # DELETE /api/v1/posts/1.json
-      def destroy
-        @api_v1_post.destroy
-      end
+  def create_params
+    params.require(:post).permit(:title, :content, :published_at)
+  end
 
-      private
+  def update_params
+    params.require(:post).permit(:id, :title, :content, :published_at)
+  end
 
-      # Use callbacks to share common setup or constraints between actions.
-      def set_api_v1_post
-        @api_v1_post = Api::V1::Post.find(params[:id])
-      end
-
-      # Only allow a list of trusted parameters through.
-      def api_v1_post_params
-        params.require(:api_v1_post).permit(:title, :content)
-      end
-    end
+  def post_show(post, meta = {})
+    PostShowSerializer.new(post, show_options(meta)).serializable_hash.to_json
   end
 end

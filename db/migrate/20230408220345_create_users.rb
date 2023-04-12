@@ -5,12 +5,12 @@ class CreateUsers < ActiveRecord::Migration[7.0]
     create_table :users do |t|
       ## Database authenticatable
       t.string :email,              null: false
-      t.string :username,           null: false
       t.string :encrypted_password, null: false
+
       t.string :slug,               null: false
-      t.string :jti,                null: false
 
       ## Attrs
+      t.string :username,      null: false
       t.string :nome,          null: false
       t.string :sobrenome,     null: false
       t.string :telefone,      null: false
@@ -56,11 +56,11 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.datetime :remember_created_at
 
       ## Trackable
-      t.integer  :sign_in_count, default: 0, null: false
-      t.datetime :current_sign_in_at
-      t.datetime :last_sign_in_at
-      t.string   :current_sign_in_ip
-      t.string   :last_sign_in_ip
+      # t.integer  :sign_in_count, default: 0, null: false
+      # t.datetime :current_sign_in_at
+      # t.datetime :last_sign_in_at
+      # t.string   :current_sign_in_ip
+      # t.string   :last_sign_in_ip
 
       ## Confirmable
       t.string   :confirmation_token
@@ -81,6 +81,5 @@ class CreateUsers < ActiveRecord::Migration[7.0]
     add_index :users, :confirmation_token,   unique: true
     add_index :users, :unlock_token,         unique: true
     add_index :users, :slug,                 unique: true
-    add_index :users, :jti,                  unique: true
   end
 end

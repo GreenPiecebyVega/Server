@@ -1,1 +1,31 @@
 pt_BR:
+  api:
+    bad_request: "Requisição mal formada."
+    error: "API error: %{error} at LOC: %{loc}"
+    not_found: "Não foi possível encontrar o que você estava procurando."
+    ok: "ok"
+    oops: "Oops! Aconteceu um erro."
+    unauthorized: "Não Autorizado."
+  controllers:
+    confirmations:
+      resent: "Reenviamos uma confirmação para o seu e-mail."
+      success: "E-mail confirmado com sucesso."
+    passwords:
+      email_required: "Email é obrigatório."
+      email_sent: "Email enviado. Por favor verifique seu e-mail."
+      success: "Password atualizado com sucesso. Você talvez precise logar novamente."
+    registrations:
+      confirm: "Por favor confirme seu endereço de e-mail."
+    sessions:
+      sign_out: "Deslogado com sucesso."
+    users:
+      updated: "Atualizado com sucesso."
+    posts:
+      created: "Post created successfully."
+      deleted: "Post deleted successfully."
+      updated: "Post updated successfully."
+  models:
+    users:
+      slug_numbers: "cannot be only numbers, please add at least one character."
+      username: "must be alphanumeric or underscore/dash only and must contain at least one character."
+      username_numbers: "cannot be only numbers, please add at least one character."

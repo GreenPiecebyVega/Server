@@ -12,6 +12,9 @@ module GreenPieceBackend
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
+    # Configuration for the application, engines, and railties goes here.
+    config.autoload_paths << Rails.root.join('lib')
+
     # Locale pt-BR
     config.i18n.default_locale            = :pt_BR
     config.i18n.available_locales         = %i[pt_BR en]
@@ -34,7 +37,14 @@ module GreenPieceBackend
 
     config.app_instance = ENV['GP_SERVER_INSTANCE']
 
+    # Only loads a smaller set of middleware suitable for API only apps.
+    # Middleware like session, flash, cookies can be added back manually.
+    # Skip views, helpers and assets when generating a new resource.
+    config.api_only = true
+
     # Error handler
     config.exceptions_app = routes
+    # Queues
+    # config.active_job.queue_adapter = :sidekiq
   end
 end

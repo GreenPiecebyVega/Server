@@ -14,7 +14,7 @@ class UserPolicy < ApplicationPolicy
       if user.master?
         scope
       else
-        scope.where('user.updated_at', (Date.today - 60.day))
+        scope
       end
     end
   end

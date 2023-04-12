@@ -32,9 +32,6 @@ GP Conventional Docs
 
 8. **Pundit Matchers**
   [Documentation](https://github.com/punditcommunity/pundit-matchers#matchers)
-  
-9. **Faker**
-  [Documentation](https://www.rubydoc.info/gems/faker/)
 
 ### Use binding.pry for debugging
 * Here the application test will stop and u will have acess to the response, by exit, the test will continue

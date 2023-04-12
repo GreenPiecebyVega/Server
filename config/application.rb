@@ -31,19 +31,13 @@ module GreenPieceBackend
       g.request_specs true
     end
 
-    # App by GP_SERVER_INSTANCE
-    valid_servers_instances = ['gp_america_latina']
-    raise 'Invalid Server Game Instance' unless ENV['GP_SERVER_INSTANCE'].in?(valid_servers_instances)
-
-    config.app_instance = ENV['GP_SERVER_INSTANCE']
-
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
     # Error handler
-    config.exceptions_app = routes
+    # config.exceptions_app = routes
     # Queues
     # config.active_job.queue_adapter = :sidekiq
   end

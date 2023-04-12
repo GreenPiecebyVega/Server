@@ -24,8 +24,6 @@ RUN apk add --no-cache --update --virtual run-dependencies \
   mariadb-dev \
   mariadb-connector-c-dev
 
-
-
 RUN mkdir $APP_ROOT && \
     chown $USER_ID:$GROUP_ID $APP_ROOT
 

@@ -1,23 +1,27 @@
-module Posts::Logic
-  extend ActiveSupport::Concern
+# frozen_string_literal: true
 
-  included do
-    def self.create_post!(params, user)
-      post = Post.new(params.merge({
-        user_id: user.id,
-      }))
-      post.save!
-      post
-    end
+module Posts
+  module Logic
+    extend ActiveSupport::Concern
 
-    def self.delete_post!(post)
-      post.destroy!
-      post
-    end
+    included do
+      def self.create_post!(params, user)
+        post = Post.new(params.merge({
+                                       user_id: user.id
+                                     }))
+        post.save!
+        post
+      end
 
-    def self.update_post!(post, params)
-      post.update!(params)
-      post
+      def self.delete_post!(post)
+        post.destroy!
+        post
+      end
+
+      def self.update_post!(post, params)
+        post.update!(params)
+        post
+      end
     end
   end
 end

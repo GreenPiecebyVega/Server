@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 # frozen_string_literal
 
 module ObjectCreators
-
   def create_allowlisted_jwts(params = {})
     user = params[:user].presence || create_user
     user.allowlisted_jwts.create!(
@@ -15,17 +16,17 @@ module ObjectCreators
     user = params[:user].presence || create_user
     last_id = Post.limit(1).order(id: :desc).pluck(:id).first || 0
     Post.create!({
-      title: params[:title].presence || "Post #{last_id+1}",
-      content: params[:content].presence || "Post content #{last_id+1}",
-      user_id: user.id
-    })
+                   title: params[:title].presence || "Post #{last_id + 1}",
+                   content: params[:content].presence || "Post content #{last_id + 1}",
+                   user_id: user.id
+                 })
   end
 
   def create_user(params = {})
     last_id = User.limit(1).order(id: :desc).pluck(:id).first || 0
     user = User.new(
-      email: params[:email].present? ? "#{params[:email]}@test.com" : "testtest#{last_id+1}@test.com",
-      username: params[:username].present? ? "#{params[:username]}" : "testtest#{last_id+1}",
+      email: params[:email].present? ? "#{params[:email]}@test.com" : "testtest#{last_id + 1}@test.com",
+      username: params[:username].present? ? (params[:username]).to_s : "testtest#{last_id + 1}",
       password: 'password',
       password_confirmation: 'password',
       nome: 'vishnudev',
@@ -54,8 +55,8 @@ module ObjectCreators
   def get_headers(login)
     jwt = get_jwt(login)
     {
-      "Accept": "application/json",
-      "Content-Type": "application/json",
+      "Accept": 'application/json',
+      "Content-Type": 'application/json',
       'HTTP_JWT_AUD': get_aud,
       'Authorization': "Bearer #{jwt}"
 
@@ -65,11 +66,11 @@ module ObjectCreators
   def get_jwt(login)
     # NOTE: RSPEC sucks (uses HTTP_ because WTF)
     headers = { 'HTTP_JWT_AUD': get_aud }
-    post '/users/sign_in', params: {
-      user: { login: login, password: 'password' },
-      browser: get_browser,
-      os: get_os
-    }, headers: headers
+    post('/users/sign_in', params: {
+           user: { login:, password: 'password' },
+           browser: get_browser,
+           os: get_os
+         }, headers:)
     JSON.parse(response.body, object_class: OpenStruct).jwt
   end
 end

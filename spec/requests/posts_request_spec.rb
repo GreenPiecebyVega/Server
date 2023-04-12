@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "api/v1/posts", type: :request do
+RSpec.describe 'api/v1/posts', type: :request do
   # Create
   context 'POST /api/v1/posts' do
     context 'without a user' do
@@ -15,7 +17,7 @@ RSpec.describe "api/v1/posts", type: :request do
         user = create_user
         headers = get_headers(user.username)
         url = '/api/v1/posts'
-        post url, params: '{ "post": { "title": "post 1", "content": "content 1" } }', headers: headers
+        post(url, params: '{ "post": { "title": "post 1", "content": "content 1" } }', headers:)
         parsed = JSON.parse(response.body, object_class: OpenStruct)
         expect(response).to have_http_status(200)
         expect(parsed.data.attributes.user.id).to eq(user.id)
@@ -37,7 +39,7 @@ RSpec.describe "api/v1/posts", type: :request do
       it 'should not let me destroy an post' do
         user = create_user
         user2 = create_user
-        record = create_post({ user: user })
+        record = create_post({ user: })
         url = "/api/v1/posts/#{record.id}"
         delete url, headers: get_headers(user2.username)
         expect(response).to have_http_status(404)
@@ -47,7 +49,7 @@ RSpec.describe "api/v1/posts", type: :request do
     context 'as a user (owner)' do
       it 'should let me destroy a post' do
         user = create_user
-        record = create_post({ user: user })
+        record = create_post({ user: })
         url = "/api/v1/posts/#{record.id}"
         delete url, headers: get_headers(user.username)
         expect(response).to have_http_status(200)
@@ -59,8 +61,8 @@ RSpec.describe "api/v1/posts", type: :request do
   context 'GET /api/v1/posts' do
     it 'Returns a status of 200 with a list of posts' do
       user = create_user
-      create_post({ user: user })
-      create_post({ user: user })
+      create_post({ user: })
+      create_post({ user: })
       get '/api/v1/posts'
       parsed = JSON.parse(response.body, object_class: OpenStruct)
       expect(response).to have_http_status(200)
@@ -78,7 +80,7 @@ RSpec.describe "api/v1/posts", type: :request do
 
     it 'Returns post if sending back slug' do
       user = create_user(username: 'testtest')
-      record = create_post({ user: user })
+      record = create_post({ user: })
       get "/api/v1/posts/#{record.slug}"
       parsed = JSON.parse(response.body, object_class: OpenStruct)
       expect(response).to have_http_status(200)
@@ -87,7 +89,7 @@ RSpec.describe "api/v1/posts", type: :request do
 
     it 'Returns a post if sending back id' do
       user = create_user(username: 'testtest')
-      record = create_post({ user: user })
+      record = create_post({ user: })
       get "/api/v1/posts/#{record.id}"
       parsed = JSON.parse(response.body, object_class: OpenStruct)
       expect(response).to have_http_status(200)
@@ -110,10 +112,10 @@ RSpec.describe "api/v1/posts", type: :request do
       it 'should not let me update a post' do
         user = create_user
         user2 = create_user
-        record = create_post({ user: user })
+        record = create_post({ user: })
         headers = get_headers(user2.username)
         url = "/api/v1/posts/#{record.id}"
-        put url, params: '{ "post": { "title": "post updated 1" } }', headers: headers
+        put(url, params: '{ "post": { "title": "post updated 1" } }', headers:)
         expect(response).to have_http_status(404)
       end
     end
@@ -121,10 +123,10 @@ RSpec.describe "api/v1/posts", type: :request do
     context 'as a post owner' do
       it 'should let me update a post' do
         user = create_user
-        record = create_post({ user: user })
+        record = create_post({ user: })
         headers = get_headers(user.username)
         url = "/api/v1/posts/#{record.id}"
-        put url, params: '{ "post": { "title": "post updated 1" } }', headers: headers
+        put(url, params: '{ "post": { "title": "post updated 1" } }', headers:)
         parsed = JSON.parse(response.body, object_class: OpenStruct)
         expect(response).to have_http_status(200)
         expect(parsed.data.attributes.title).to eq('post updated 1')

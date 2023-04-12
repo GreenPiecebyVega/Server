@@ -11,11 +11,7 @@ class UserPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if user.master?
-        scope
-      else
-        scope
-      end
+      scope
     end
   end
 end

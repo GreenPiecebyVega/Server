@@ -1,21 +1,24 @@
-module Users::Logic
+# frozen_string_literal: true
+
+module Users
+  module Logic
     extend ActiveSupport::Concern
-  
+
     included do
       def for_display
         {
-          id: id,
-          slug: slug,
-          username: username,
-          email: email
+          id:,
+          slug:,
+          username:,
+          email:
         }
       end
-  
+
       def for_others
         {
-          username: username
+          username:
         }
       end
     end
   end
-  
+end

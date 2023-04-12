@@ -1,17 +1,19 @@
-module Posts::Scopes
-  extend ActiveSupport::Concern
+# frozen_string_literal: true
 
-  included do
-    scope :for_index, ->(params) {
-      query = includes(:user).order(id: :desc)
-      query = query.published if params[:published].present?
-      if params[:rss].present?
-        query = query.published.limit(5)
-      end
-      query
-    }
-    scope :published, ->() {
-      where.not(published_at: nil)
-    }
+module Posts
+  module Scopes
+    extend ActiveSupport::Concern
+
+    included do
+      scope :for_index, lambda { |params|
+        query = includes(:user).order(id: :desc)
+        query = query.published if params[:published].present?
+        query = query.published.limit(5) if params[:rss].present?
+        query
+      }
+      scope :published, lambda {
+        where.not(published_at: nil)
+      }
+    end
   end
 end

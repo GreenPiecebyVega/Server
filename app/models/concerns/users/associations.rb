@@ -1,7 +1,11 @@
-module Users::Associations
-  extend ActiveSupport::Concern
+# frozen_string_literal: true
 
-  included do
-    has_many :posts, dependent: :destroy
+module Users
+  module Associations
+    extend ActiveSupport::Concern
+
+    included do
+      has_many :posts, dependent: :destroy
+    end
   end
 end

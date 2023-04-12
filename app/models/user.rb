@@ -1,49 +1,5 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: users
-#
-#  id                     :bigint           not null, primary key
-#  email                  :string(255)      not null
-#  encrypted_password     :string(255)      not null
-#  slug                   :string(255)      not null
-#  username               :string(255)      not null
-#  nome                   :string(255)      not null
-#  sobrenome              :string(255)      not null
-#  telefone               :string(255)      not null
-#  data_nascimento        :date             not null
-#  sexo                   :integer          default(0)
-#  sexo_outro             :string(255)
-#  qtd_gp_coin            :decimal(10, 2)   default(0.0)
-#  qtd_gp_cash            :decimal(4, 2)    default(0.0)
-#  bonus_xp               :decimal(3, 2)    default(0.0)
-#  bonus_rxp              :decimal(3, 2)    default(0.0)
-#  bonus_drop             :decimal(3, 2)    default(0.0)
-#  bonus_wxp              :decimal(3, 2)    default(0.0)
-#  bonus_gwxp             :decimal(3, 2)    default(0.0)
-#  bonus_crftxp           :decimal(3, 2)    default(0.0)
-#  bonus_petxp            :decimal(3, 2)    default(0.0)
-#  bonus_ep               :decimal(3, 2)    default(0.0)
-#  esta_online            :boolean          default(FALSE)
-#  esta_ativo             :boolean          default(FALSE)
-#  data_expiracao         :date
-#  perfil                 :integer          default("player")
-#  reset_password_token   :string(255)
-#  reset_password_sent_at :datetime
-#  remember_created_at    :datetime
-#  confirmation_token     :string(255)
-#  confirmed_at           :datetime
-#  confirmation_sent_at   :datetime
-#  failed_attempts        :integer          default(0), not null
-#  unlock_token           :string(255)
-#  locked_at              :datetime
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
-#
-#
-# User Model as account
-#
 class User < ApplicationRecord
   # Concerns
   include Users::Allowlist
@@ -68,7 +24,7 @@ class User < ApplicationRecord
 
   def login
     @login || username || email
-  end  
+  end
 
   # Enums
   enum perfil: %i[player temp gm master]

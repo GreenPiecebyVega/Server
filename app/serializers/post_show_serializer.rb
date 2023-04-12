@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PostShowSerializer
   include FastJsonapi::ObjectSerializer
 
@@ -7,7 +9,7 @@ class PostShowSerializer
              :slug,
              :title,
              :published_at
-        
+
   attribute :user do |post|
     {
       id: post.user_id,

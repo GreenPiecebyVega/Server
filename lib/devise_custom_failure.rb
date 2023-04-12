@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DeviseCustomFailure < Devise::FailureApp
   def respond
     # If fails on certain actions, then ignore and make request as if no user.

@@ -1,7 +1,11 @@
-module Posts::Associations
-  extend ActiveSupport::Concern
+# frozen_string_literal: true
 
-  included do
-    belongs_to :user
+module Posts
+  module Associations
+    extend ActiveSupport::Concern
+
+    included do
+      belongs_to :user
+    end
   end
 end

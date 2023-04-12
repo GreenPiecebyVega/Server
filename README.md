@@ -1,8 +1,5 @@
 # Green Piece by VegaSoft
 
-# Generating
-rails g scaffold Api::V1::Post title:string content:text
-
 GP Conventional Docs
 1. **Ruby**
   [Official Style Guide](https://rubystyle.guide/)

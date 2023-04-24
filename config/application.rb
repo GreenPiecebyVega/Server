@@ -12,6 +12,9 @@ module GreenPieceBackend
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
+    # Allowing web console on docker container IP
+    config.web_console.whitelisted_ips = '172.18.0.1'
+
     # Configuration for the application, engines, and railties goes here.
     config.autoload_paths << Rails.root.join('lib')
 

@@ -5,7 +5,7 @@ ENV APP_ROOT /greenpiece
 ENV BUNDLE_CACHE_PATH /greenpiece/vendor/bundle/cache
 ENV BUNDLE_PATH /usr/local/bundle
 ENV BUNDLE_BIN /usr/local/bundle/bin
-ENV USER=greenpiece_developer
+ENV USER=dev
 ENV GROUP=developer
 ENV USER_ID=1000
 ENV GROUP_ID=1001
@@ -42,7 +42,7 @@ RUN mkdir ${APP_ROOT} && \
 RUN bundle config --global frozen 1
 
 USER ${USER}
-WORKDIR /home/${USER}
+WORKDIR /greenpiece
 
 COPY --chown=${USER} Gemfile Gemfile.lock ./
 

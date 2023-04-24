@@ -1,6 +1,6 @@
 # Green Piece by VegaSoft
 
-docker exec greenpiecebackend-greenpiece-1 rake db:create
+docker exec greenpiecebackend-greenpiece-1 rake db:create   
 docker exec greenpiecebackend-greenpiece-1 rake db:migrate
 
 GP Conventional Docs

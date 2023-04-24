@@ -1,29 +1,55 @@
-version: '3'
-
 services:
-  database:
-    image: mysql
+  #########
+  # MYSQL #
+  #########
+  mysql:
+    image: mysql:8.0.28
+    command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: greenpiece_dev
     ports:
-      - 3306:3306
+      - "3306:3306"
     volumes:
-      - ./mysql:/var/lib/mysql
-
-  greenpiece:
-    build: .
-    entrypoint: /app/entrypoint
-    restart: always
-    ports:
-      - 3000:3000
+      - mysql:/var/lib/mysql
+  ######
+  # GP #
+  ######
+  greenpiece: 
+    build:
+      context: .
+      dockerfile: Dockerfile
     depends_on:
-      - database
-    env_file:
-      - env.development
+      - mysql
+    ports: 
+      - "3000:3000"
     volumes:
-      - .:/app
-
+      - .:/greenpiece
+      - bundle:/bundle
+    env_file: .env
+    links:
+      - "mysql"
+    environment:
+      - RAILS_ENV=development
+  #########
+  # REDIS #
+  #########
+  redis:
+    image: redis:6.2.6-alpine
+    volumes:
+      - redis:/data
+  ###########
+  # SIDEKIQ #
+  ###########
+  sidekiq:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bundle exec sidekiq
+    depends_on:
+      - redis
+    ports: []
 volumes:
-  app:
   mysql:
+  redis:
+  bundle:

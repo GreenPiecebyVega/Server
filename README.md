@@ -1,5 +1,8 @@
 # Green Piece by VegaSoft
 
+docker exec greenpiecebackend-greenpiece-1 rake db:create
+docker exec greenpiecebackend-greenpiece-1 rake db:migrate
+
 GP Conventional Docs
 1. **Ruby**
   [Official Style Guide](https://rubystyle.guide/)

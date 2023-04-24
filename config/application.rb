@@ -17,7 +17,7 @@ module GreenPieceBackend
 
     # Locale pt-BR
     config.i18n.default_locale            = :pt_BR
-    config.i18n.available_locales         = %i[pt_BR en]
+    config.i18n.available_locales         = %i[pt_BR]
     config.time_zone                      = 'Brasilia'
     config.active_record.default_timezone = :local
 
@@ -37,8 +37,9 @@ module GreenPieceBackend
     config.api_only = true
 
     # Error handler
-    # config.exceptions_app = routes
-    # Queues
-    # config.active_job.queue_adapter = :sidekiq
+    config.exceptions_app = routes
+
+    # GP JOBS #
+    config.active_job.queue_adapter     = :sidekiq
   end
 end

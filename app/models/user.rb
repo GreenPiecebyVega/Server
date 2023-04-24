@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  # Writers
+  attr_writer :login
+
   # Concerns
   include Users::Allowlist
   include Users::Associations
@@ -13,23 +16,20 @@ class User < ApplicationRecord
          :recoverable,
          :rememberable,
          :validatable,
-         :jwt_authenticatable,
-         jwt_revocation_strategy: self
+         :jwt_authenticatable, jwt_revocation_strategy: self
 
   extend FriendlyId
   friendly_id :username, use: [:slugged]
 
-  # Devise override for logging in with username or email
-  attr_writer :login
+  # Enums
+  enum perfil: %i[player temporaria gm master]
 
+  # Devise override for logging in with username or email
   def login
     @login || username || email
   end
 
-  # Enums
-  enum perfil: %i[player temp gm master]
-
-  # Headers
+  # Head
   def self.master?
     perfil == 3
   end
@@ -40,7 +40,7 @@ class User < ApplicationRecord
   end
 
   # Conta Temporária
-  def self.tmp?
+  def self.temporaria?
     perfil == 1 && data_expiracao.present?
   end
 

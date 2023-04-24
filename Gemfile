@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.2.2'
 
 gem 'rails', '~> 7.0.4', '>= 7.0.4.3'
-
+gem 'tzinfo-data'
 gem 'bootsnap', require: false
 gem 'devise'
 gem 'devise-jwt'
@@ -21,7 +21,9 @@ gem 'rack-cors'
 gem 'rails-i18n', '~> 7.0.0'
 gem 'rest-client'
 gem 'rubocop', '~> 1.49', require: false
-gem 'sitemap_generator'
+gem 'redis'
+gem 'sidekiq'
+
 
 group :development do
   gem 'annotate'
@@ -45,5 +47,3 @@ group :test do
   gem 'simplecov', require: false
   gem 'webdrivers'
 end
-
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

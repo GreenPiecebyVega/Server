@@ -1,44 +1,59 @@
 FROM ruby:3.2.2-alpine
 
-ARG USER_ID=1000
-ARG GROUP_ID=1000
-
-ENV APP_ROOT /app
-ENV BUNDLE_CACHE_PATH /app/vendor/bundle
+ENV BUNDLER_VERSION=2.4.10
+ENV APP_ROOT /greenpiece
+ENV BUNDLE_CACHE_PATH /greenpiece/vendor/bundle/cache
 ENV BUNDLE_PATH /usr/local/bundle
 ENV BUNDLE_BIN /usr/local/bundle/bin
-ENV USER=greenpiece
-ENV GROUP=greenpiece
+ENV USER=greenpiece_developer
+ENV GROUP=developer
+ENV USER_ID=1000
+ENV GROUP_ID=1001
+
+RUN apk add --update --no-cache \
+  gcc \
+  g++ \
+  git \
+  libstdc++ \
+  libffi-dev \
+  libc-dev \ 
+  linux-headers \
+  libxml2-dev \
+  libxslt-dev \
+  libgcrypt-dev \
+  make \
+  netcat-openbsd \
+  nodejs \
+  openssl \
+  pkgconfig \
+  tzdata \
+  yarn \
+  bash \
+  ruby-dev \
+  mariadb-dev \
+  mariadb-connector-c-dev
 
 RUN addgroup -g $GROUP_ID --system $GROUP && \
     adduser -u $USER_ID --gecos '' -G $GROUP --disabled-password $USER
 
-RUN apk add --no-cache --update --virtual run-dependencies \
-  bash \
-  build-base \
-  ruby-dev \
-  gcc \
-  make \
-  libffi-dev \
-  libstdc++ gcompat \
-  mariadb-dev \
-  mariadb-connector-c-dev
-
-RUN mkdir $APP_ROOT && \
-    chown $USER_ID:$GROUP_ID $APP_ROOT
+RUN mkdir ${APP_ROOT} && \
+    chown ${USER_ID}:${GROUP_ID} ${APP_ROOT}
 
 RUN bundle config --global frozen 1
 
-USER $USER
+USER ${USER}
+WORKDIR /home/${USER}
 
-WORKDIR $APP_ROOT
+COPY --chown=${USER} Gemfile Gemfile.lock ./
 
-COPY --chown=$USER Gemfile Gemfile.lock ./
+RUN gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)"
 
 RUN bundle config set path vendor/bundle
 
-RUN [ -f /vendor/bundle.tgz ] && tar -xvzf /vendor/bundle.tgz -C /vendor/ || bundle install
+RUN bundle config build.nokogiri --use-system-libraries
 
-RUN bundle check
+RUN bundle check || bundle install
 
-COPY --chown=$USER_ID:$GROUP_ID . .
+COPY --chown=${USER}_ID:${GROUP_ID} . ./
+
+ENTRYPOINT ["./entrypoints/docker-entrypoint.sh"]

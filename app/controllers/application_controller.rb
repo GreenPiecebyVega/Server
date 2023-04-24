@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
-  include Pundit
-
   rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 

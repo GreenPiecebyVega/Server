@@ -6,14 +6,14 @@ Rails.application.routes.draw do
   get '/users/password/edit', to: 'errors#not_found', via: :all
 
   devise_for :users, controllers: {
-                      confirmations: 'confirmations',
-                      passwords: 'passwords',
-                      registrations: 'registrations',
-                      sessions: 'sessions'
-                    }, path_names: {
-                      sign_in: 'sign-in',
-                      sign_out: 'sign-out'
-                    }
+    confirmations: 'confirmations',
+    passwords: 'passwords',
+    registrations: 'registrations',
+    sessions: 'sessions'
+  }, path_names: {
+    sign_in: 'sign-in',
+    sign_out: 'sign-out'
+  }
 
   # Ping to ensure server is up
   resources :ping, only: [:index] do

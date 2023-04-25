@@ -6,7 +6,7 @@ class RegistrationsController < Devise::RegistrationsController
   def new
     render json: 'Not Allowed', status: 401
   end
-  
+
   # POST /users
   # Specs No
   def create

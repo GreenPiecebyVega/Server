@@ -3,7 +3,9 @@
 require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
+  # Allow Webconsole and Mysql Comunication trough containers
   config.hosts.clear
+  
   # Settings specified here will take precedence over those in config/application.rb.
   config.enable_reloading = true
   # In the development environment your application's code is reloaded any time

@@ -5,8 +5,7 @@ services:
   mysql:
     image: mysql:8.0.28
     restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: greenpiece_dev
+    env_file: .env  
     ports:
       - "3306:3306"
     volumes:
@@ -28,8 +27,6 @@ services:
     env_file: .env
     links:
       - "mysql"
-    environment:
-      - RAILS_ENV=development
   #########
   # REDIS #
   #########

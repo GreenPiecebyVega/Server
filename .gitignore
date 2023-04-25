@@ -6,7 +6,6 @@
 
 # Ignore bundler config.
 /.bundle
-.env
 .ruby-version
 
 # Git just for now

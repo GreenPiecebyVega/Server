@@ -2,7 +2,7 @@ FROM ruby:3.2.2-alpine
 
 ENV BUNDLER_VERSION=2.4.10
 ENV APP_ROOT /greenpiece
-ENV BUNDLE_CACHE_PATH /greenpiece/vendor/bundle/cache
+ENV BUNDLE_CACHE_PATH /greenpiece/vendor/bundle
 ENV BUNDLE_PATH /usr/local/bundle
 ENV BUNDLE_BIN /usr/local/bundle/bin
 ENV USER=dev
@@ -46,9 +46,10 @@ WORKDIR /greenpiece
 
 COPY --chown=${USER} Gemfile Gemfile.lock ./
 
-RUN gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)"
+RUN gem update --system --no-document && \
+    gem install -N bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)"
 
-RUN bundle config set path vendor/bundle
+RUN bundle config set path /greenpiece/vendor/bundle
 
 RUN bundle config build.nokogiri --use-system-libraries
 

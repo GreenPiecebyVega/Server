@@ -23,7 +23,7 @@ services:
       - "3000:3000"
     volumes:
       - .:/greenpiece
-      - bundle:/bundle
+      - bundle:/greenpiece/vendor/bundle
     env_file: .env
     links:
       - "mysql"
@@ -46,6 +46,7 @@ services:
       - redis
     ports: []
 volumes:
+  greenpiece:
+  bundle:
   mysql:
   redis:
-  bundle:

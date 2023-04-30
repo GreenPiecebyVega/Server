@@ -9,16 +9,16 @@ Rails.application.routes.draw do
   get '/users/sign-in', to: 'errors#not_found', via: :all
   get '/users/password/edit', to: 'errors#not_found', via: :all
   devise_for :users,
-              controllers: {
-                confirmations: 'confirmations',
-                passwords: 'passwords',
-                registrations: 'registrations',
-                sessions: 'sessions'
-              },
-              path_names: {
-                sign_in: 'sign-in',
-                sign_out: 'sign-out'
-              }
+             controllers: {
+               confirmations: 'confirmations',
+               passwords: 'passwords',
+               registrations: 'registrations',
+               sessions: 'sessions'
+             },
+             path_names: {
+               sign_in: 'sign-in',
+               sign_out: 'sign-out'
+             }
 
   ##########
   ## Ping ##

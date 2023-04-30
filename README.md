@@ -1,17 +1,37 @@
 # Green Piece by VegaSoft
-install docker on ur machine   
 
-sudo dockerd -> starts docker   
+Install docker
 
-docker compose build --no-cache   
-docker compose up   
-docker exec -it greenpiecebackend-server-1 bash   
+Starts docker   
+```console
+sudo service docker start
+```
+Build  
+```console
+docker compose build --no-cache
+```
+Up   
+```console
+docker compose up
+```
+Containers Bash   
+```console
+docker exec -it greenpiecebackend-server-1 bash
+```
 
-Running sidekiq and debug on container
+## Running sidekiq 4 debug on container
 bundle exec sidekiq --environment development -C config/sidekiq.yml  
 
 ## Mailer
 We are using letter_opening gem, we can preview e-mail beside sending them
+
+## Annotations
+```console
+annotate
+```   
+```console
+annotate --delete 
+```
 
 ## GP Conventional Docs
 1. **Ruby**

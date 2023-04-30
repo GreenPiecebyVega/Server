@@ -8,6 +8,9 @@ pt_BR:
           has_many: Não é possível excluir o registro pois existem %{record} dependentes
       models:
         user:
+          username_only_letters_and_numbers: "Apenas letras e números."
+          username_should_start_with_letters: "Deve comerçar com uma letra."
+          username_not_allowed_caracteres: "Contém caracters não permitidos."
           attributes:
             email:
               taken: 'Email já está em uso.'
@@ -25,8 +28,8 @@ pt_BR:
               too_short:
                 one: 'é muito curta (mínimo: 1 caracter)'
                 other: 'é muito curta (mínimo: %{count} caracteres)'
-            confirmation_token
-              invalid: ''
+            confirmation_token:
+              invalid: 'O token de confirmação é inválido.'
   api:
     bad_request: "Requisição mal formada."
     error: "API error: %{error} at LOC: %{loc}"
@@ -48,8 +51,4 @@ pt_BR:
       sign_out: "Deslogado com sucesso."
     users:
       updated: "Atualizado com sucesso."
-  models:
-    users:
-      slug_numbers: "cannot be only numbers, please add at least one character."
-      username: "must be alphanumeric or underscore/dash only and must contain at least one character."
-      username_numbers: "cannot be only numbers, please add at least one character."
+      

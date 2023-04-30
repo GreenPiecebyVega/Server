@@ -20,7 +20,9 @@ docker exec -it greenpiecebackend-server-1 bash
 ```
 
 ## Running sidekiq 4 debug on container
-bundle exec sidekiq --environment development -C config/sidekiq.yml  
+```console
+bundle exec sidekiq --environment development -C config/sidekiq.yml
+```
 
 ## Mailer
 We are using letter_opening gem, we can preview e-mail beside sending them

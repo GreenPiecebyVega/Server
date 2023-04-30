@@ -1,20 +1,28 @@
 # frozen_string_literal: true
 
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
-  # Override devise
+  ###########
+  ## Users ##
+  ###########
   get '/users/sign-in', to: 'errors#not_found', via: :all
   get '/users/password/edit', to: 'errors#not_found', via: :all
+  devise_for :users,
+              controllers: {
+                confirmations: 'confirmations',
+                passwords: 'passwords',
+                registrations: 'registrations',
+                sessions: 'sessions'
+              },
+              path_names: {
+                sign_in: 'sign-in',
+                sign_out: 'sign-out'
+              }
 
-  devise_for :users, controllers: {
-    confirmations: 'confirmations',
-    passwords: 'passwords',
-    registrations: 'registrations',
-    sessions: 'sessions'
-  }, path_names: {
-    sign_in: 'sign-in',
-    sign_out: 'sign-out'
-  }
-
+  ##########
+  ## Ping ##
+  ##########
   # Ping to ensure server is up
   resources :ping, only: [:index] do
     collection do
@@ -22,7 +30,9 @@ Rails.application.routes.draw do
     end
   end
 
-  # APIs
+  ##########
+  ## APIs ##
+  ##########
   namespace :api do
     namespace :v1 do
       resources :posts, only: %i[create destroy index show update]
@@ -34,7 +44,9 @@ Rails.application.routes.draw do
     end
   end
 
-  # Errors
+  ############
+  ## ERRORS ##
+  ############
   match '*unmatched', to: 'errors#not_found', via: :all
   match '/404', to: 'errors#not_found', via: :all
   match '/500', to: 'errors#internal_server_error', via: :all

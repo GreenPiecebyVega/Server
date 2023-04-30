@@ -1,4 +1,32 @@
 pt_BR:
+  activerecord:
+    errors:
+      messages:
+        record_invalid: 'A validação falhou: %{errors}'
+        restrict_dependent_destroy:
+          has_one: Não é possível excluir o registro pois existe um %{record} dependente
+          has_many: Não é possível excluir o registro pois existem %{record} dependentes
+      models:
+        user:
+          attributes:
+            email:
+              taken: 'Email já está em uso.'
+              invalid: 'é inválido.'
+            current_password:
+              invalid: 'é inválida'
+            password:
+              invalid: 'é inválida'
+              too_short:
+                one: 'é muito curta (mínimo: 1 caracter)'
+                other: 'é muito curta (mínimo: %{count} caracteres)'
+            username:
+              taken: 'Username já está em uso.'
+              invalid: 'é inválida'
+              too_short:
+                one: 'é muito curta (mínimo: 1 caracter)'
+                other: 'é muito curta (mínimo: %{count} caracteres)'
+            confirmation_token
+              invalid: ''
   api:
     bad_request: "Requisição mal formada."
     error: "API error: %{error} at LOC: %{loc}"
@@ -20,10 +48,6 @@ pt_BR:
       sign_out: "Deslogado com sucesso."
     users:
       updated: "Atualizado com sucesso."
-    posts:
-      created: "Post created successfully."
-      deleted: "Post deleted successfully."
-      updated: "Post updated successfully."
   models:
     users:
       slug_numbers: "cannot be only numbers, please add at least one character."

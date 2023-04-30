@@ -27,6 +27,7 @@ gem 'tzinfo-data'
 group :development do
   gem 'annotate'
   gem 'web-console', '~> 4.2'
+  gem "letter_opener"
 end
 
 group :development, :test do

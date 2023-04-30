@@ -1,5 +1,4 @@
 FROM ruby:3.2.2-alpine
-
 ENV BUNDLER_VERSION=2.4.10
 ENV APP_ROOT /greenpiece
 ENV BUNDLE_CACHE_PATH /greenpiece/vendor/bundle
@@ -11,6 +10,7 @@ ENV USER_ID=1000
 ENV GROUP_ID=1001
 
 RUN apk add --update --no-cache \
+  vim \
   gcc \
   g++ \
   git \
@@ -47,6 +47,7 @@ WORKDIR /greenpiece
 COPY --chown=${USER} Gemfile Gemfile.lock ./
 
 RUN gem update --system --no-document && \
+    gem install mailcatcher && \
     gem install -N bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)"
 
 RUN bundle config set path /greenpiece/vendor/bundle

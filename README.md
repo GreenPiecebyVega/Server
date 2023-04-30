@@ -25,7 +25,8 @@ bundle exec sidekiq --environment development -C config/sidekiq.yml
 ```
 
 ## Mailer
-We are using letter_opening gem, we can preview e-mail beside sending them
+We are using letter_opening gem, we can preview e-mail beside sending them   
+Visible at 'tmp', 'mailers_preview'
 
 ## Annotations
 ```console

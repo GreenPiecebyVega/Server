@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
+  include ActionController::MimeResponds
+  respond_to :json
   include Pundit::Authorization
 
-  rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -41,7 +42,7 @@ class ApplicationController < ActionController::API
   # Set any kind of params data needed for the options
   def get_params_data
     if current_user.present?
-      { user: current_user, }
+      { user: current_user }
     else
       {}
     end
@@ -54,6 +55,7 @@ class ApplicationController < ActionController::API
   end
 
   def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:login])
     devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :username, :nome, :sobrenome,
                                                        :data_nascimento, :sexo, :sexo_outro,
                                                        :telefone, :perfil
@@ -61,12 +63,6 @@ class ApplicationController < ActionController::API
   end
 
   private
-
-  def record_invalid(exception)
-    message = exception.message.partition('Validation failed: ').last
-    render json: { meta: { message: message } }, status: 401
-    return
-  end
 
   def user_not_authorized
     render json: { message: I18n.t('unauthorized') }, status: 404

@@ -4,7 +4,6 @@ services:
   #########
   mysql:
     image: mysql:8.0.28
-    restart: always
     env_file: .env  
     ports:
       - "3306:3306"
@@ -23,11 +22,9 @@ services:
       - "3000:3000"
     volumes:
       - .:/greenpiece
-      - bundle:/greenpiece/vendor/bundle
     env_file: .env
     links:
       - "mysql"
-    restart: on-failure
   #########
   # REDIS #
   #########
@@ -46,9 +43,7 @@ services:
     depends_on:
       - redis
     ports: []
-    restart: on-failure
 volumes:
   greenpiece:
-  bundle:
   mysql:
   redis:

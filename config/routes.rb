@@ -6,8 +6,6 @@ Rails.application.routes.draw do
   ###########
   ## Users ##
   ###########
-  get '/users/sign-in', to: 'errors#not_found', via: :all
-  get '/users/password/edit', to: 'errors#not_found', via: :all
   devise_for :users,
              controllers: {
                confirmations: 'confirmations',
@@ -16,8 +14,8 @@ Rails.application.routes.draw do
                sessions: 'sessions'
              },
              path_names: {
-               sign_in: 'sign-in',
-               sign_out: 'sign-out'
+               sign_in: 'signin',
+               sign_out: 'signout'
              }
 
   ##########
@@ -50,4 +48,9 @@ Rails.application.routes.draw do
   match '*unmatched', to: 'errors#not_found', via: :all
   match '/404', to: 'errors#not_found', via: :all
   match '/500', to: 'errors#internal_server_error', via: :all
+
+  # TESTES #
+  namespace :users do
+    get 'sign-in', to: 'sessions#new'
+  end
 end

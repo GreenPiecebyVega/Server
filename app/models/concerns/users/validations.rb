@@ -5,6 +5,8 @@ module Users
     extend ActiveSupport::Concern
 
     included do
+      validates :nome, :sobrenome, :data_nascimento, :sexo,
+                presence: true
       validates :email,
                 presence: true,
                 uniqueness: { case_sensitive: false }

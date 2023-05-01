@@ -3,7 +3,6 @@
 module Api
   module V1
     class BaseCharactersController < ApplicationController
-      
       before_action :authenticate_user!
       before_action :set_permited_params, only: %i[create update destroy]
 
@@ -47,9 +46,7 @@ module Api
       def post_show(post, meta = {})
         BaseCharacters::ShowSerializer.new(post, show_options(meta)).serializable_hash.to_json
       end
-      
-      private
-      
+
       def base_characters_params
         params.require(:base_character).permit(
           :name,

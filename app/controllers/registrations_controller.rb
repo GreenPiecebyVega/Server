@@ -1,11 +1,5 @@
-# frozen_string_literal: true
-
 class RegistrationsController < Devise::RegistrationsController
   respond_to :json
-
-  def new
-    render json: 'Not Allowed', status: 401
-  end
 
   # POST /users
   # Specs No

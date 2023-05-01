@@ -6,7 +6,7 @@ class CreateCharacters < ActiveRecord::Migration[7.0]
       t.string :name
       t.string :slug
       t.string :class
-      
+
       t.timestamps null: false
     end
   end

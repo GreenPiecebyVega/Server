@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 class User < ApplicationRecord
   # Writers
   attr_writer :login
@@ -14,8 +13,10 @@ class User < ApplicationRecord
          :confirmable,
          :registerable,
          :recoverable,
+         :trackable,
          :rememberable,
          :validatable,
+         :timeoutable,
          :jwt_authenticatable, jwt_revocation_strategy: self
 
   extend FriendlyId
@@ -47,6 +48,10 @@ class User < ApplicationRecord
   # Default
   def self.gp_player?
     perfil.zero?
+  end
+
+  def full_name
+    "#{nome} #{sobrenome}".capitalize
   end
 
   # Use :login for searching username and email

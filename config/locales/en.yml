@@ -1,4 +1,35 @@
 en:
+  devise:
+    mailer:
+      confirmation_instructions:
+        subject: "Confirmation instructions for ${user.name}"
+      reset_password_instructions:
+        subject: "Reset password instructions for ${user.name}"
+      unlock_instructions:
+        subject: "Unlock instructions for ${user.name}"
+      email_changed:
+        subject: "Email Changed for ${user.name}"
+      password_change:
+        subject: "Password Changed for ${user.name}"
+  activerecord:
+    errors:
+      messages:
+        record_invalid: 'Validation failed: %{errors}'
+        restrict_dependent_destroy:
+          has_one: Unable to delete record as there is a %{record} dependent
+          has_many: Unable to delete record as there are %{record} dependents
+      models:
+        user:
+          attributes:
+            email:
+              taken: 'E-mail is already in use.'
+            current_password:
+              invalid: 'is invalid.'
+            password:
+              invalid: 'is invalid.'
+              too_short:
+                one: 'too short (minimum: 1 character)'
+                other: 'is too short (minimum: %{count} characters)'
   api:
     bad_request: "Bad Request"
     error: "API error: %{error} at LOC: %{loc}"

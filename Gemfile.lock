@@ -139,6 +139,10 @@ GEM
     jsonapi-serializer (2.2.0)
       activesupport (>= 4.2)
     jwt (2.7.0)
+    launchy (2.5.2)
+      addressable (~> 2.8)
+    letter_opener (1.8.1)
+      launchy (>= 2.2, < 3)
     loofah (2.20.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -332,6 +336,7 @@ DEPENDENCIES
   friendly_id (~> 5.4.0)
   jbuilder
   jsonapi-serializer
+  letter_opener
   mysql2 (~> 0.5)
   pry
   pry-rails

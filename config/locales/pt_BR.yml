@@ -3,8 +3,8 @@ pt_BR:
     bad_request: "Requisição mal formada."
     error: "API error: %{error} at LOC: %{loc}"
     not_found: "Não foi possível encontrar o que você estava procurando."
-    ok: "ok"
-    oops: "Oops! Aconteceu um erro."
+    ok: "Sucesso"
+    oops: "Oops!"
     unauthorized: "Não Autorizado."
   controllers:
     confirmations:

@@ -50,4 +50,9 @@ ActiveSupport::Inflector.inflections do |inflect|
   # User
   inflect.irregular('user', 'users')
   inflect.irregular('User', 'Users')
+
+  # Base Characters
+  inflect.irregular('base_character', 'base_characters')
+  # Characters
+  inflect.irregular('BaseCharacter', 'BaseCharacters')
 end

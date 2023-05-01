@@ -5,7 +5,7 @@ module Users
     extend ActiveSupport::Concern
 
     included do
-      has_many :posts, dependent: :destroy
+      
     end
   end
 end

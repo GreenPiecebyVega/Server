@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-module Posts
+class BaseCharacter
   module Associations
     extend ActiveSupport::Concern
 
     included do
-      belongs_to :user
+      has_many :characters
     end
   end
 end

@@ -50,7 +50,7 @@ class PasswordsController < Devise::PasswordsController
 
   def respond_with(resource, _opts = {})
     render json: {
-      message: I18n.t('controllers.passwords.success'),
+      message: I18n.t('devise.passwords.success'),
       user: resource.for_display,
       jwt: current_token
     }

@@ -3,7 +3,7 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   origins = if Rails.env.development?
               [
-                'localhost:3000', 'localhost:3001', 'localhost:5000'
+                'localhost:3000', 'localhost:3001', '*'
               ].freeze
             else
               [
@@ -13,7 +13,8 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins origins
     resource '*',
-             headers: :any,
-             methods: %i[get post put patch delete options head]
+      headers: :any,
+      methods: %i[get post put patch delete options head],
+      expose: ["Authorization"]
   end
 end

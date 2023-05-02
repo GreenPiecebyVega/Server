@@ -7,7 +7,7 @@ class ConfirmationsController < Devise::ConfirmationsController
     yield resource if block_given?
 
     if successfully_sent?(resource)
-      render json: { message: I18n.t('controllers.confirmations.resent') }, status: 200
+      render json: { message: I18n.t('devise.confirmations.resent') }, status: 200
     else
       render json: resource.errors, status: 401
     end
@@ -19,7 +19,7 @@ class ConfirmationsController < Devise::ConfirmationsController
     yield resource if block_given?
 
     if resource.errors.empty?
-      render json: { message: I18n.t('controllers.confirmations.success') }, status: 200
+      render json: { message: I18n.t('devise.confirmations.success') }, status: 200
     else
       render json: resource.errors, status: 401
     end

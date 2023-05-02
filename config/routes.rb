@@ -6,10 +6,7 @@ Rails.application.routes.draw do
   ###########
   ## Users ##
   ###########
-  devise_for :users, 
-              defaults: { 
-                format: :json 
-              },
+  devise_for :users,
               controllers: {
                 confirmations: 'confirmations',
                 passwords: 'passwords',

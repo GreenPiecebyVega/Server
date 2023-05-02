@@ -17,9 +17,14 @@ Containers Bash
 docker exec -it greenpiecebackend-server-1 bash
 ```
 
+## Migrating
+```console
+docker exec -it greenpiecebackend-server-1 rails db:migrate
+```
+
 ## Running sidekiq for debugging on container
 ```console
-bundle exec sidekiq --environment development -C config/sidekiq.yml
+docker exec -it greenpiecebackend-server-1 bundle exec sidekiq -C config/sidekiq.yml
 ```
 
 ## Mailer Preview

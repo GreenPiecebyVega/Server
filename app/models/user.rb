@@ -25,6 +25,7 @@
 #  esta_ativo             :boolean          default(FALSE)
 #  esta_online            :boolean          default(FALSE)
 #  failed_attempts        :integer          default(0), not null
+#  jti                    :string(255)      not null
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string(255)
 #  locked_at              :datetime
@@ -51,6 +52,7 @@
 #
 #  index_users_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_users_on_email                 (email) UNIQUE
+#  index_users_on_jti                   (jti) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #  index_users_on_slug                  (slug) UNIQUE
 #  index_users_on_unlock_token          (unlock_token) UNIQUE
@@ -59,14 +61,11 @@ class User < ApplicationRecord
   # Writers
   attr_writer :login
 
-  include Devise::JWT::RevocationStrategies::Allowlist
-
   # Concerns
-  include Users::Allowlist
   include Users::Associations
   include Users::Logic
   include Users::Validations
-
+  include Devise::JWT::RevocationStrategies::JTIMatcher
   devise :database_authenticatable,
          :confirmable,
          :registerable,

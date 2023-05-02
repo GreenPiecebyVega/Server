@@ -6,6 +6,7 @@ module Users
 
     included do
       validates :nome, :sobrenome, :data_nascimento, :sexo,
+                :telefone,
                 presence: true
       validates :email,
                 presence: true,

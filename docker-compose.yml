@@ -39,7 +39,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: bundle exec sidekiq --environment development -C config/sidekiq.yml 
+    command: bundle exec sidekiq -C config/sidekiq.yml 
     depends_on:
       - redis
     ports: []

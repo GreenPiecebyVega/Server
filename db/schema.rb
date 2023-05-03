@@ -10,25 +10,61 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_02_235758) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_02_154136) do
   create_table "base_characters", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "nome", null: false
     t.string "slug", null: false
-    t.integer "class", null: false
+    t.integer "gp_character_base", null: false
+    t.decimal "hp", precision: 10, default: "0"
+    t.decimal "mp", precision: 10, default: "0"
+    t.integer "ataque", default: 0
+    t.integer "ataque_magico", default: 0
+    t.integer "defesa", default: 0
+    t.decimal "amplificação_de_dano_fisico", precision: 2, scale: 2
+    t.decimal "amplificação_de_dano_magico", precision: 2, scale: 2
+    t.decimal "evasão", precision: 2, scale: 2
+    t.decimal "preecisão", precision: 2, scale: 2
+    t.decimal "esquiva", precision: 2, scale: 2, default: "0.0"
+    t.decimal "amplificação_de_tx", precision: 10
+    t.decimal "taxa_critica", precision: 2, scale: 2
+    t.decimal "dano_critico", precision: 3, scale: 2, default: "0.0"
+    t.decimal "roubo_de_hp", precision: 2, scale: 2
+    t.decimal "roubo_de_mp", precision: 2, scale: 2
+    t.decimal "resistencia_a_taxa_critica", precision: 2, scale: 2
+    t.decimal "resistencia_ao_dano_critico", precision: 2, scale: 2
+    t.decimal "resistencia_a_queda", precision: 2, scale: 2
+    t.decimal "resistencia_ao_atordoamento", precision: 2, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "characters", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "base_character_id", null: false
-    t.bigint "user_id", null: false
-    t.string "name"
-    t.string "slug"
-    t.integer "class"
+    t.string "nome", null: false
+    t.string "slug", null: false
+    t.integer "gp_character", null: false
+    t.decimal "hp", precision: 10, default: "0"
+    t.decimal "mp", precision: 10, default: "0"
+    t.integer "ataque", default: 0
+    t.integer "ataque_magico", default: 0
+    t.integer "defesa", default: 0
+    t.decimal "amplificação_de_dano_fisico", precision: 2, scale: 2
+    t.decimal "amplificação_de_dano_magico", precision: 2, scale: 2
+    t.decimal "evasão", precision: 2, scale: 2
+    t.decimal "preecisão", precision: 2, scale: 2
+    t.decimal "esquiva", precision: 2, scale: 2, default: "0.0"
+    t.decimal "amplificação_de_tx", precision: 10
+    t.decimal "taxa_critica", precision: 2, scale: 2
+    t.decimal "dano_critico", precision: 3, scale: 2, default: "0.0"
+    t.decimal "roubo_de_hp", precision: 2, scale: 2
+    t.decimal "roubo_de_mp", precision: 2, scale: 2
+    t.decimal "resistencia_a_taxa_critica", precision: 2, scale: 2
+    t.decimal "resistencia_ao_dano_critico", precision: 2, scale: 2
+    t.decimal "resistencia_a_queda", precision: 2, scale: 2
+    t.decimal "resistencia_ao_atordoamento", precision: 2, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["base_character_id"], name: "index_characters_on_base_character_id"
-    t.index ["user_id"], name: "index_characters_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -83,5 +119,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_235758) do
   end
 
   add_foreign_key "characters", "base_characters"
-  add_foreign_key "characters", "users"
 end

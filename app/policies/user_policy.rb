@@ -1,17 +1,22 @@
 # frozen_string_literal: true
 
 class UserPolicy < ApplicationPolicy
-  def index?
-    user.master?
+  
+  def update?
+    user.master? || (user.id == record.id)
   end
 
   def destroy?
-    user.master?
+    user.master? || (user.id == record.id)
   end
 
   class Scope < Scope
     def resolve
-      scope
+      if user.mestre?
+        scope.all
+      elsif user.player?
+        scope.where(id: user.id)
+      end
     end
   end
 end

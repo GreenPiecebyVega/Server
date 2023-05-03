@@ -13,7 +13,7 @@ module Users
                 uniqueness: { case_sensitive: false }
       validates :username,
                 presence: true,
-                length: { minimum: 6, maximum: 12 },
+                length: { minimum: 6, maximum: 16 },
                 uniqueness: { case_sensitive: false },
                 username_convention: true
     end

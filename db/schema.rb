@@ -10,26 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_02_154136) do
-  create_table "allowlisted_jwts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "jti", null: false
-    t.string "aud", null: false
-    t.datetime "exp", null: false
-    t.string "remote_ip"
-    t.string "os_data"
-    t.string "browser_data"
-    t.string "device_data"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["jti"], name: "index_allowlisted_jwts_on_jti", unique: true
-    t.index ["user_id"], name: "index_allowlisted_jwts_on_user_id"
-  end
-
+ActiveRecord::Schema[7.0].define(version: 2023_05_02_235758) do
   create_table "base_characters", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "slug", null: false
-    t.string "class", null: false
+    t.integer "class", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -39,7 +24,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_154136) do
     t.bigint "user_id", null: false
     t.string "name"
     t.string "slug"
-    t.string "class"
+    t.integer "class"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["base_character_id"], name: "index_characters_on_base_character_id"
@@ -97,7 +82,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_154136) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  add_foreign_key "allowlisted_jwts", "users", on_delete: :cascade
   add_foreign_key "characters", "base_characters"
   add_foreign_key "characters", "users"
 end

@@ -1,6 +1,7 @@
 FROM ruby:3.2.2-alpine AS base
 
-ENV BUNDLER_VERSION=2.4.10
+ENV BUNDLER_VERSION 2.4.10
+ENV RAILS_VERSION 7.0.4.3
 
 RUN apk add --update --no-cache \
     vim \
@@ -28,7 +29,7 @@ RUN apk add --update --no-cache \
 
 # Enable use inside container
 RUN gem install bundler -v $BUNDLER_VERSION && \
-    gem install rails -v 7.0.4.3
+    gem install rails -v $RAILS_VERSION
 
 FROM base
 # ARGS #

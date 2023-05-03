@@ -37,7 +37,7 @@ pt_BR:
       updated: "Sua senha foi alterada com sucesso. Você está logado."
       updated_not_active: "Sua senha foi alterada com sucesso."
     registrations:
-      confirm: "Pronto! Enviamos um link de confirmação para seu seu e-mail."
+      failed: "Erro ao cadastrar o usuário."
       destroyed: "Sua conta foi cancelada com sucesso. Esperamos vê-lo novamente em breve."
       signed_up: "Login efetuado com sucesso. Se não foi autorizado, a confirmação será enviada por e-mail."
       signed_up_but_inactive: "Você foi cadastrado com sucesso. No entanto, não foi possível efetuar login, pois sua conta não foi ativada."

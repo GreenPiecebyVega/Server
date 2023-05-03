@@ -6,7 +6,6 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       ## Database authenticatable
       t.string :email,              null: false
       t.string :encrypted_password, null: false
-
       t.string :slug,               null: false
 
       ## Attrs

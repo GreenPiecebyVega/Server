@@ -6,7 +6,7 @@ class UserShowSerializer
   set_key_transform :camel_lower
 
   attributes :id,
-             :username,
              :email,
+             :username,
              :slug
 end

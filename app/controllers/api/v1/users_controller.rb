@@ -8,9 +8,9 @@ module Api
       # GET /api/v1/users/available
       def available
         free = if params[:email].present?
-                 !User.where(email: params[:email].downcase).exists?
+                 !User.where('email = ?', params[:email].downcase).exists?
                elsif params[:username].present?
-                 !User.where(username: params[:username].downcase).exists?
+                 !User.where('username = ?', params[:username].downcase).exists?
                else
                  true
                end
@@ -28,11 +28,9 @@ module Api
       # authenticate_user!
       # PUT /api/v1/users/#{id}
       def update
+        authorize current_user
         current_user.update(user_params)
-        render json: {
-          message: I18n.t('controllers.users.updated'),
-          user: current_user
-        }
+        render json: { message: I18n.t('activerecord.controllers.updated')}
       rescue StandardError => e
         render json: { error: I18n.t('api.oops') }, status: 500
       end

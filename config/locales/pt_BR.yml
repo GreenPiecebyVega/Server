@@ -1,4 +1,8 @@
 pt_BR:
+  api:
+    bad_request: "Requisição Malformada."
+    not_found: "Não encontrado."
+    oops: "Oops! O servidor está com problemas para processar sua requisição."
   activerecord:
     errors:
       not_found: 'Rota não encontrada.'
@@ -7,11 +11,14 @@ pt_BR:
         restrict_dependent_destroy:
           has_one: Não é possível excluir o registro pois existe um %{record} dependente
           has_many: Não é possível excluir o registro pois existem %{record} dependentes
+      controllers:
+        updated: "Atualizado(a) com sucesso."
+        criated: "Criado(a) com sucesso."
+        deleted: "Deletado(a) com sucesso."
       models:
         user:
           attributes:
             email:
-              blank: 'não pode ficar em branco'
               invalid: 'é inválido.'
             username:
               invalid: 'é inválida'

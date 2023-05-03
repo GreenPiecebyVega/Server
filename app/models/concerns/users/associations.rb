@@ -5,6 +5,7 @@ module Users
     extend ActiveSupport::Concern
 
     included do
+      has_many :characters, class_name: 'UserCharacter', dependent: :delete_all
     end
   end
 end

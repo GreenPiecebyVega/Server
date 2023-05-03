@@ -1,5 +1,5 @@
 class BaseCharacter < ApplicationRecord
   has_many :characters
   
-  enum class: %i[guerreiro mago combatente]
+  enum class: %i[fisica magica]
 end

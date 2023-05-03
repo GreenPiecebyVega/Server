@@ -1,5 +1,4 @@
 class Character < ApplicationRecord
-  belongs_to :user
   belongs_to :base_characters
   
   enum class: %i[guerreiro guardiao mago xanter duelista arqueiro]

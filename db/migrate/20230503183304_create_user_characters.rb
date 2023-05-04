@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class CreateCreateUserCharacters < ActiveRecord::Migration[7.0]
+class CreateUserCharacters < ActiveRecord::Migration[7.0]
   def change
-    create_table :create_user_characters do |t|
+    create_table :user_characters do |t|
       t.references :user, null: false, foreign_key: true, index: true
       t.references :character, null: false, foreign_key: true, index: true
 

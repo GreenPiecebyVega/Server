@@ -30,6 +30,14 @@ class User < ApplicationRecord
     @login || username || email
   end
 
+  def self.staf_member?
+    master? || gm?
+  end
+
+  def self.client?
+    player? || temporaria?
+  end
+
   # Head
   def self.master?
     perfil == 3
@@ -46,7 +54,7 @@ class User < ApplicationRecord
   end
 
   # Default
-  def self.gp_player?
+  def self.player?
     perfil.zero?
   end
 

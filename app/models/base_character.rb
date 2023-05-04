@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class BaseCharacter < ApplicationRecord
-  has_many :characters
-  
+  has_many :characters, dependent: :delete_all
+
   extend FriendlyId
   friendly_id :nome, use: [:slugged]
 

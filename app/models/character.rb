@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 class Character < ApplicationRecord
+  
+  include Characters::Scopes
+
   belongs_to :base_character
   has_many :user_characters, dependent: :delete_all
 

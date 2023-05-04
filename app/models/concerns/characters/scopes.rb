@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-class Character
+module Characters
   module Scopes
     extend ActiveSupport::Concern
-
     included do
       scope :guerreiro, -> { where(gp_character: 1) }
       scope :guardiao, -> { where(gp_character: 2) }

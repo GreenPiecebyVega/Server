@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_03_183304) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_04_160035) do
   create_table "base_characters", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "nome", null: false
     t.string "slug", null: false
@@ -67,11 +67,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_03_183304) do
     t.index ["base_character_id"], name: "index_characters_on_base_character_id"
   end
 
-  create_table "create_user_characters", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "user_characters", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "character_id", null: false
     t.string "nome", null: false
     t.string "slug", null: false
+    t.integer "lv", default: 1
     t.integer "hp", default: 0
     t.integer "mp", default: 0
     t.integer "ataque", default: 0
@@ -93,8 +94,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_03_183304) do
     t.decimal "resistencia_ao_atordoamento", precision: 2, scale: 2, default: "0.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["character_id"], name: "index_create_user_characters_on_character_id"
-    t.index ["user_id"], name: "index_create_user_characters_on_user_id"
+    t.index ["character_id"], name: "index_user_characters_on_character_id"
+    t.index ["user_id"], name: "index_user_characters_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -149,6 +150,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_03_183304) do
   end
 
   add_foreign_key "characters", "base_characters"
-  add_foreign_key "create_user_characters", "characters"
-  add_foreign_key "create_user_characters", "users"
+  add_foreign_key "user_characters", "characters"
+  add_foreign_key "user_characters", "users"
 end

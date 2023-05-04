@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class UserCharacterPolicy < ApplicationPolicy
+  
   def character_list?
-    user.master? || (user.id == record.user_id)
+    user.staf? || user.client?
   end
 
   def update?

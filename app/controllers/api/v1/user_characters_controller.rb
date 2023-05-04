@@ -6,7 +6,7 @@ module Api
       
       def character_list
         authorize UserCharacter
-        @user_characters = policy_scope(UserCharacter)
+        @user_characters = policy_scope(UserCharacter).order(lv: :desc)
         render json: { data: @user_characters }
       rescue StandardError => e
         render json: { error: I18n.t('api.oops') }, status: 500
@@ -57,19 +57,20 @@ module Api
           :user_id,
           :character_id,
           :nome,
+          :lv,
           :hp,
           :mp,
           :ataque,
           :ataque_magico,
           :defesa,
-          :preecisão,
-          :evasão,
+          :preecisao,
+          :evasao,
           :esquiva,
           :roubo_de_hp,
           :roubo_de_mp,
-          :amplificação_de_dano_fisico,
-          :amplificação_de_dano_magico,
-          :amplificação_de_tx,
+          :amplificacao_de_dano_fisico,
+          :amplificacao_de_dano_magico,
+          :amplificacao_de_tx,
           :taxa_critica,
           :dano_critico,
           :resistencia_a_queda,

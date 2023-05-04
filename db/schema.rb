@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_04_160035) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_04_190056) do
   create_table "base_characters", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "nome", null: false
     t.string "slug", null: false
@@ -99,6 +99,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_04_160035) do
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "jti", null: false
     t.string "email", null: false
     t.string "encrypted_password", null: false
     t.string "slug", null: false
@@ -142,6 +143,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_04_160035) do
     t.datetime "updated_at", null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["jti"], name: "index_users_on_jti", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["slug"], name: "index_users_on_slug", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true

@@ -1,11 +1,11 @@
 FROM ruby:3.2.2-alpine AS base
 
-ENV BUNDLER_VERSION 2.4.10
-ENV RAILS_VERSION 7.0.4.3
 ENV APP_ROOT greenpiece
 ENV BUNDLE_CACHE_PATH /greenpiece/vendor/bundle
 ENV BUNDLE_PATH /usr/local/bundle
 ENV BUNDLE_BIN /usr/local/bundle/bin
+
+# Bundler unauthorized acess to gems error
 # ENV USER developer_user
 # ENV GROUP developer
 # ENV USER_ID 1000
@@ -39,9 +39,6 @@ RUN apk add --update --no-cache \
     ruby-dev \
     mariadb-dev \
     mariadb-connector-c-dev
-
-RUN gem install bundler -v $BUNDLER_VERSION && \
-    gem install rails -v $RAILS_VERSION
 
 FROM base
 

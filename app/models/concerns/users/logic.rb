@@ -5,20 +5,6 @@ module Users
     extend ActiveSupport::Concern
 
     included do
-      def for_display
-        {
-          id:,
-          slug:,
-          username:,
-          email:
-        }
-      end
-
-      def for_others
-        {
-          username:
-        }
-      end
     end
   end
 end

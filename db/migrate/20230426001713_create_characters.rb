@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class CreateCharacters < ActiveRecord::Migration[7.0]
   def change
     create_table :characters do |t|
       t.references :base_character, null: false, foreign_key: true, index: true
-      
+
       t.string :nome, null: false
       t.string :slug, null: false
       t.integer :gp_character, null: false
@@ -15,7 +17,7 @@ class CreateCharacters < ActiveRecord::Migration[7.0]
 
       t.decimal :amplificação_de_dano_fisico, default: 0, precision: 2, scale: 2 # 99,99% ADF
       t.decimal :amplificação_de_dano_magico, default: 0, precision: 2, scale: 2 # 99,99% ADM
-      
+
       t.decimal :evasão, default: 0, precision: 2, scale: 2 # 99,99%
       t.decimal :preecisão, default: 0, precision: 2, scale: 2 # 99,99%
       t.decimal :esquiva, default: 0, precision: 2, scale: 2 # 99,99%

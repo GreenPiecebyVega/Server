@@ -1,68 +1,37 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
-  include ActionController::MimeResponds
   respond_to :json
-  
+
+  include ActionController::RequestForgeryProtection
+  protect_from_forgery with: :exception if proc { |gp| gp.request.format != 'application/json' }
+  protect_from_forgery with: :null_session if proc { |gp| gp.request.format == 'application/json' }
+
   include Pundit::Authorization
-
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-
+  
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :prevent_bot
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_in, keys: [:login])
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :username, :nome, :sobrenome,
-                                                       :data_nascimento, :sexo, :sexo_outro,
-                                                       :telefone, :perfil
-                                                      ])
-  end
-
-  ##################
-  # Helper methods #
-  ##################
-  # Return an options object for lists for jsonapi-serializer
-  def list_options(meta = {})
-    opts = { is_collection: true }
-    opts[:meta] = get_meta_data(meta)
-    opts[:params] = get_params_data
-    opts
-  end
-
-  # Return an options object for single objects for jsonapi-serializer
-  def show_options(meta = {})
-    opts = { is_collection: false }
-    opts[:meta] = get_meta_data(meta)
-    opts[:params] = get_params_data
-    opts
-  end
-
-  # Set any kind of meta data needed for the options
-  def get_meta_data(meta = {})
-    ret_meta = meta
-    if request.headers['auth_failure']
-      ret_meta[:authFailure] = true
-    else
-      if current_token.present?
-        ret_meta[:jwt] = current_token
-      end
-    end
-    ret_meta
-  end
-
-  # Set any kind of params data needed for the options
-  def get_params_data
-    if current_user.present?
-      { user: current_user }
-    else
-      {}
-    end
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[email username nome sobrenome
+                                                         data_nascimento sexo sexo_outro
+                                                         telefone perfil])
   end
 
   private
 
   def user_not_authorized
-    render json: { message: I18n.t('unauthorized') }, status: 404
-    return
+    render json: { message: I18n.t('api.unauthorized') }, status: 404
+    nil
+  end
+
+  def prevent_bot
+    return unless !devise_controller? || controller_name == 'registrations'
+    return unless current_user.present? && !current_user.master?
+    if (request.user_agent.blank? || request.user_agent.downcase.include?('headlesschrome')) && request.referer.blank?
+      sign_out current_user
+    end
   end
 end

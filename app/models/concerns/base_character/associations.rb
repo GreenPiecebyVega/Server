@@ -5,7 +5,7 @@ class BaseCharacter
     extend ActiveSupport::Concern
 
     included do
-      has_many :characters
+      has_many :characters, dependent: :delete_all
     end
   end
 end

@@ -12,9 +12,14 @@ pt_BR:
           has_one: Não é possível excluir o registro pois existe um %{record} dependente
           has_many: Não é possível excluir o registro pois existem %{record} dependentes
       controllers:
-        updated: "Atualizado(a) com sucesso."
-        criated: "Criado(a) com sucesso."
-        deleted: "Deletado(a) com sucesso."
+        user:
+          created: "Usuário Criado(a) com sucesso."
+          updated: "Usuário Atualizado(a) com sucesso."
+          deleted: "Usuário Deletado(a) com sucesso."
+        user_character:
+          created: "Personagem Criado(a) com sucesso."
+          updated: "Personagem Atualizado(a) com sucesso."
+          deleted: "Personagem Deletado(a) com sucesso."
       models:
         user:
           attributes:
@@ -32,6 +37,20 @@ pt_BR:
                 other: 'é muito curta (mínimo: %{count} caracteres)'
             current_password:
               invalid: 'é inválida'
+        base_character:
+          attributes:
+            gp_character_base:
+              fisica: 'Classe Mágica'
+              magica: 'Classe Física'
+        character:
+          attributes:
+            gp_character:
+              guerreiro: 'Guerreiro'
+              guardiao: 'Guardião'
+              mago: 'Mago'
+              xanter: 'Xanter'
+              duelista: 'Duelista'
+              arqueiro: 'Arqueiro'
   date:
     abbr_day_names:
     - dom

@@ -3,7 +3,7 @@
 module Api
   module V1
     class UsersController < ApplicationController
-      before_action :authenticate_user!, only: [:update]
+      before_action :authenticate_user!, only: %i[update show destroy]
 
       # GET /api/v1/users/available
       def available
@@ -19,8 +19,8 @@ module Api
 
       # GET /api/v1/users/#{slug}
       def show
-        user = User.friendly.find(params[:id])
-        render json: UserShowSerializer.new(user, show_options).serializable_hash.to_json
+        authorize @user
+        render json: UserShowSerializer.new(@user).serializable_hash.to_json
       rescue ActiveRecord::RecordNotFound
         render json: { error: I18n.t('api.not_found') }, status: 404
       end
@@ -28,14 +28,26 @@ module Api
       # authenticate_user!
       # PUT /api/v1/users/#{id}
       def update
-        authorize current_user
-        current_user.update(user_params)
-        render json: { message: I18n.t('activerecord.controllers.updated')}
+        authorize @user
+        @user.update(user_params)
+        render json: { message: I18n.t('activerecord.controllers.user.updated') }
+      rescue StandardError => e
+        render json: { error: I18n.t('api.oops') }, status: 500
+      end
+
+      def destroy
+        authorize @user
+        @user.destroy
+        render json: { message: I18n.t('activerecord.controllers.user.deleted') }
       rescue StandardError => e
         render json: { error: I18n.t('api.oops') }, status: 500
       end
 
       private
+
+      def set_user
+        @user = User.friendly.find(params[:id])
+      end
 
       def user_params
         params.require(:user).permit(

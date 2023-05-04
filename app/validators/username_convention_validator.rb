@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsernameConventionValidator < ActiveModel::EachValidator
   def validate_each(record, field, value)
     return if value.blank?

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RegistrationsController < Devise::RegistrationsController
   respond_to :json
 
@@ -5,6 +7,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def respond_with(resource, _opts = {})
     register_success && return if resource.persisted?
+
     register_failed
   end
 
@@ -13,7 +16,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def register_failed
-    render json: { 
+    render json: {
       message: I18n.t('devise.registrations.failed'),
       errors: resource.errors
     }

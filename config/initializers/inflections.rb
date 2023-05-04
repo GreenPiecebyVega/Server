@@ -54,7 +54,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   # Base Characters
   inflect.irregular('base_character', 'base_characters')
   inflect.irregular('BaseCharacter', 'BaseCharacters')
-  
+
   # Character
   inflect.irregular('character', 'characters')
   inflect.irregular('Character', 'Characters')

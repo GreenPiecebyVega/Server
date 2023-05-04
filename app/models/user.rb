@@ -22,6 +22,8 @@ class User < ApplicationRecord
 
   # Enums
   enum perfil: %i[player temporaria gm master]
+  scope :gp_staf, -> { where('perfil = ? OR perfil = ?', 2, 3) }
+  scope :clientes, -> { where('perfl = ?', 0) }
 
   # Devise override for logging in with username or email
   def login

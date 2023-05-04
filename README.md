@@ -29,7 +29,7 @@ docker exec -it greenpiecebackend-server-1 bundle exec sidekiq -C config/sidekiq
 
 ## Mailer Preview
 We are using letter_opening gem, we can preview e-mail beside sending them   
-Visible at 'tmp', 'mailers_preview'
+Visible at 'tmp', 'mailers_preview' if sidekiq running
 
 ## Developer Annotations
 ```console

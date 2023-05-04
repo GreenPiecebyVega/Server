@@ -7,16 +7,16 @@ Rails.application.routes.draw do
   ## Users ##
   ###########
   devise_for :users,
-              controllers: {
-                confirmations: 'confirmations',
-                passwords: 'passwords',
-                registrations: 'registrations',
-                sessions: 'sessions'
-              },
-              path_names: {
-                sign_in: 'signin',
-                sign_out: 'signout'
-              }
+             controllers: {
+               confirmations: 'confirmations',
+               passwords: 'passwords',
+               registrations: 'registrations',
+               sessions: 'sessions'
+             },
+             path_names: {
+               sign_in: 'signin',
+               sign_out: 'signout'
+             }
 
   ##########
   ## Ping ##
@@ -33,12 +33,13 @@ Rails.application.routes.draw do
   ##########
   namespace :api do
     namespace :v1 do
-      resources :posts, only: %i[create destroy index show update]
       resources :users, only: %i[show update] do
         collection do
           get :available
         end
       end
+
+      resources :user_characters, only: %i[character_list create update destroy]
     end
   end
 

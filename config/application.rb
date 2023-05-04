@@ -11,6 +11,8 @@ module GreenPieceBackend
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
+    
+    config.web_console.whitelisted_ips = ENV['YOU_CONTAINER_IP_FOR_WEB_CONSOLE']
 
     # Configuration for the application, engines, and railties goes here.
     config.autoload_paths << Rails.root.join('lib')
@@ -35,12 +37,12 @@ module GreenPieceBackend
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    config.middleware.use ActionDispatch::Flash
 
     # Error handler
     config.exceptions_app = routes
 
     # GP JOBS #
     config.active_job.queue_adapter = :sidekiq
-    config.action_mailer.deliver_later_queue_name = 'default'
   end
 end

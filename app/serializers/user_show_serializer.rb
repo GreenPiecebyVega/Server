@@ -1,12 +1,27 @@
 # frozen_string_literal: true
 
-class UserShowSerializer
-  include FastJsonapi::ObjectSerializer
+class UserShowSerializer < BaseSerializer
+  
+  # Request cache
+  cache_options store: Rails.cache, namespace: 'jsonapi-serializer', expires_in: 5.seconds
+  
+  # Objeto
+  set_type :user
 
-  set_key_transform :camel_lower
+  # Mensagem
+  attribute :message do |params|
+    params[:message]
+  end
 
+  # Data
   attributes :id,
+             :nome,
+             :sobrenome,
+             :slug,
              :email,
              :username,
-             :slug
+             :data_nascimento,
+             :telefone,
+             :sexo,
+             :sexo_outro
 end

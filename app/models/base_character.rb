@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class BaseCharacter < ApplicationRecord
   has_many :characters
   

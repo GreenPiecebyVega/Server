@@ -132,7 +132,7 @@ class User < ApplicationRecord
 
   # Make sure to send the devise emails via async
   def send_devise_notification(notification, *args)
-    devise_mailer.send(notification, self, *args).deliver_later
+    UserMailer.send(notification, self, *args).deliver_later
   end
 
   %i[qtd_gp_coin qtd_gp_cash bonus_xp bonus_rxp bonus_drop bonus_wxp bonus_gwxp bonus_ep bonus_crftxp

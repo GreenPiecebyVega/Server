@@ -42,7 +42,7 @@ services:
     command: bundle exec sidekiq -C config/sidekiq.yml 
     depends_on:
       - redis
-    ports: []
+    env_file: .env
 volumes:
   greenpiece:
   mysql:

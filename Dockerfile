@@ -1,28 +1,13 @@
-FROM ruby:3.2.2-alpine AS base
+FROM ruby:3.2.2-alpine AS greenpiece
 
-ENV APP_ROOT greenpiece
-ENV BUNDLE_CACHE_PATH /greenpiece/vendor/bundle
-ENV BUNDLE_PATH /usr/local/bundle
-ENV BUNDLE_BIN /usr/local/bundle/bin
-
-# Bundler unauthorized acess to gems error
-# ENV USER developer_user
-# ENV GROUP developer
-# ENV USER_ID 1000
-# ENV GROUP_ID 1001
-
-# RUN addgroup -g $GROUP_ID --system $GROUP && \
-#     adduser -u $USER_ID --gecos '' -G $GROUP --disabled-password $USER
-
-# USER $USER
-
+# dependencies
 RUN apk add --update --no-cache \
+    build-base \
     vim \
     gcc \
     g++ \
     git \
     libstdc++ \
-    libffi-dev \
     libc-dev \ 
     linux-headers \
     libxml2-dev \
@@ -37,17 +22,42 @@ RUN apk add --update --no-cache \
     yarn \
     bash \
     ruby-dev \
+    libffi \
     mariadb-dev \
-    mariadb-connector-c-dev
+    mariadb-connector-c-dev \
+    acl
 
-FROM base
+# Bundle
+ENV BUNDLER_VERSION 2.4.10
+ENV BUNDLE_CACHE_PATH /usr/local/bundle/cache
+ENV BUNDLE_PATH /usr/local/bundle
+ENV BUNDLE_BIN /usr/local/bundle/bin
 
-WORKDIR $APP_ROOT
+# APP USER
+ENV USER developer
+ENV GROUP development
+ENV USER_ID 1000
+ENV GROUP_ID 1001
 
-COPY Gemfile Gemfile.lock ./
+RUN addgroup -g $GROUP_ID --system $GROUP && \
+    adduser -u $USER_ID --gecos '' -G $GROUP --disabled-password $USER
 
-RUN bundle install
+# APP
+ENV app_directory /greenpiece
+RUN mkdir $app_directory
+WORKDIR $app_directory
 
-COPY . ./
+RUN setfacl -m u:$USER:rwx $app_directory
+    
+USER $USER
+
+COPY --chown=$USER_ID:$GROUP_ID Gemfile Gemfile.lock $app_directory/
+
+RUN bundle config build.nokogiri --use-system-libraries && \
+    bundle install
+
+COPY --chown=$USER_ID:$GROUP_ID . $app_directory/
+
+EXPOSE 3000
 
 ENTRYPOINT ["./entrypoints/docker-entrypoint.sh"]

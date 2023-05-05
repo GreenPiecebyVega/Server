@@ -4,27 +4,11 @@ services:
   #########
   mysql:
     image: mysql:8.0.28
-    env_file: .env  
     ports:
       - "3306:3306"
     volumes:
       - mysql:/var/lib/mysql
-  ######
-  # GP #
-  ######
-  server:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    depends_on:
-      - mysql
-    ports: 
-      - "3000:3000"
-    volumes:
-      - .:/greenpiece
     env_file: .env
-    links:
-      - "mysql"
   #########
   # REDIS #
   #########
@@ -36,13 +20,35 @@ services:
   # SIDEKIQ #
   ###########
   sidekiq:
+    build: .
+    command: bundle exec sidekiq -q default -q mailers
+    depends_on:
+      - mysql
+      - redis
+    volumes:
+      - .:/greenpiece
+    env_file:
+      - .env
+  ######
+  # GP #
+  ######
+  server:  
     build:
       context: .
       dockerfile: Dockerfile
-    command: bundle exec sidekiq -C config/sidekiq.yml 
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
     depends_on:
-      - redis
-    env_file: .env
+      - mysql
+      - sidekiq
+    volumes:
+      - .:/greenpiece
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+###########
+# VOLUMES #
+###########
 volumes:
   greenpiece:
   mysql:

@@ -1,5 +1,5 @@
 FROM ruby:3.2.2-alpine AS greenpiece
-
+ENV RAILS_ENV development
 # dependencies
 RUN apk add --update --no-cache \
     build-base \

@@ -22,6 +22,9 @@ gem 'redis'
 gem 'rest-client'
 gem 'rubocop', '~> 1.49', require: false
 gem 'sidekiq'
+gem 'sidekiq-scheduler'
+gem 'sidekiq-unique-jobs'
+gem 'sinatra', require: nil
 gem 'tzinfo-data'
 
 group :development do

@@ -22,11 +22,6 @@ docker exec -it greenpiecebackend-server-1 bash
 docker exec -it greenpiecebackend-server-1 rails db:migrate
 ```
 
-## Running sidekiq for debugging on container
-```console
-docker exec -it greenpiecebackend-server-1 bundle exec sidekiq -C config/sidekiq.yml
-```
-
 ## Mailer Preview
 We are using letter_opening gem, we can preview e-mail beside sending them   
 Visible at 'tmp', 'mailers_preview' if sidekiq running

@@ -43,6 +43,14 @@ Rails.application.routes.draw do
     end
   end
 
+
+  #############
+  ## SIDEKIQ ##
+  #############
+  authenticate :user, ->(user) { user.master? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   ############
   ## ERRORS ##
   ############

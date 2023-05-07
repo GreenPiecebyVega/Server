@@ -5,7 +5,7 @@ module Users
     extend ActiveSupport::Concern
 
     included do
-      validates :nome, :sobrenome, :data_nascimento, :sexo,
+      validates :name, :lastname, :data_nascimento, :sexo,
                 :telefone,
                 presence: true
       validates :email,

@@ -12,7 +12,7 @@ if Rails.env.development?
       'active_admin' => 'false',
       'additional_file_patterns' => [],
       'routes' => 'false',
-      'models' => 'true',
+      'models' => 'false',
       'position_in_routes' => 'before',
       'position_in_class' => 'before',
       'position_in_test' => 'before',

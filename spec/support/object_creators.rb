@@ -29,8 +29,8 @@ module ObjectCreators
       username: params[:username].present? ? (params[:username]).to_s : "testtest#{last_id + 1}",
       password: 'password',
       password_confirmation: 'password',
-      nome: 'vishnudev',
-      sobrenome: 'vishnudev',
+      name: 'vishnudev',
+      lastname: 'vishnudev',
       telefone: '5551997407755',
       data_nascimento: DateTime.now - 18.years
     )

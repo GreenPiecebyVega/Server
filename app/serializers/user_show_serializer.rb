@@ -15,8 +15,8 @@ class UserShowSerializer < BaseSerializer
 
   # Data
   attributes :id,
-             :nome,
-             :sobrenome,
+             :name,
+             :lastname,
              :slug,
              :email,
              :username,

@@ -12,6 +12,6 @@ FriendlyId.defaults do |config|
   config.reserved_words = %w[
     new edit index session login logout users admin
     stylesheets assets javascripts images greenpiece
-    vega master perfil vishnu policy script
+    vega master role vishnu policy script
   ]
 end

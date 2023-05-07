@@ -17,7 +17,7 @@
 #  gp_character_base           :integer          not null
 #  hp                          :integer          default(0)
 #  mp                          :integer          default(0)
-#  nome                        :string(255)      not null
+#  name                        :string(255)      not null
 #  preecisão                   :decimal(2, 2)    default(0.0)
 #  resistencia_a_queda         :decimal(2, 2)    default(0.0)
 #  resistencia_a_taxa_critica  :decimal(2, 2)    default(0.0)
@@ -31,10 +31,13 @@
 #  updated_at                  :datetime         not null
 #
 class BaseCharacter < ApplicationRecord
+  belongs_to :user
   has_many :characters, dependent: :delete_all
 
   extend FriendlyId
-  friendly_id :nome, use: [:slugged]
+  friendly_id :name, use: [:slugged]
 
   enum gp_character_base: %i[fisica magica]
+
+  validates :name, presence: true
 end

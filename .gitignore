@@ -7,7 +7,7 @@
 # Ignore bundler config.
 /.bundle
 .ruby-version
-
+schema.rb
 # Git just for now
 .gitattributes
 

@@ -17,7 +17,7 @@
 #  hp                          :integer          default(0)
 #  lv                          :integer          default(1)
 #  mp                          :integer          default(0)
-#  nome                        :string(255)      not null
+#  name                        :string(255)      not null
 #  preecisão                   :decimal(2, 2)    default(0.0)
 #  resistencia_a_queda         :decimal(2, 2)    default(0.0)
 #  resistencia_a_taxa_critica  :decimal(2, 2)    default(0.0)
@@ -43,6 +43,9 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class UserCharacter < ApplicationRecord
+  # Associations #
   belongs_to :user
   belongs_to :character
+  
+  has_one :inventory, class_name: 'UserCharacterInventory', foreign_key: :user_character_inventory_id, dependent: :destroy
 end

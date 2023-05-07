@@ -62,4 +62,8 @@ ActiveSupport::Inflector.inflections do |inflect|
   # User Characters
   inflect.irregular('user_character', 'user_characters')
   inflect.irregular('UserCharacter', 'UserCharacters')
+
+  # User Character's Inventory
+  inflect.irregular('user_character_inventory', 'user_characters_inventory')
+  inflect.irregular('UserCharacterInventory', 'UserCharactersInventory')
 end

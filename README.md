@@ -1,35 +1,26 @@
 # Green Piece by VegaSoft
 
-Starts docker   
+Install and Starts docker on ubuntu
 ```console
 sudo service docker start
 ```
-Build  
+# Building and starting development enviroment
 ```console
-docker compose build --no-cache
-```
-Up   
-```console
-docker compose up
+docker compose up --build
 ```
 Containers Bash   
 ```console
-docker exec -it greenpiecebackend-server-1 bash
+docker compose exec -it server bash
 ```
 
 ## Migrating
 ```console
-docker exec -it greenpiecebackend-server-1 rails db:migrate
-```
-
-## Running sidekiq for debugging on container
-```console
-docker exec -it greenpiecebackend-server-1 bundle exec sidekiq -C config/sidekiq.yml
+docker compose exec -it server rails db:migrate
 ```
 
 ## Mailer Preview
 We are using letter_opening gem, we can preview e-mail beside sending them   
-Visible at 'tmp', 'mailers_preview' if sidekiq running
+Visible at 'tmp', 'mailers_preview'
 
 ## Developer Annotations
 ```console

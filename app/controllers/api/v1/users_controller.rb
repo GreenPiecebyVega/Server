@@ -17,6 +17,7 @@ module Api
         render json: { data: free }
       end
 
+      # authenticate_user!
       # GET /api/v1/users/#{slug}
       def show
         authorize @user
@@ -35,6 +36,8 @@ module Api
         render json: { error: I18n.t('api.oops') }, status: 500
       end
 
+      # authenticate_user!
+      # DELETE /api/v1/users/#{id}
       def destroy
         authorize @user
         @user.destroy
@@ -52,8 +55,8 @@ module Api
       def user_params
         params.require(:user).permit(
           :username,
-          :nome,
-          :sobrenome,
+          :name,
+          :lastname,
           :data_nascimento,
           :telefone,
           :sexo,

@@ -10,73 +10,57 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_04_190056) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_07_144343) do
   create_table "base_characters", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "nome", null: false
+    t.bigint "user_id", null: false
+    t.string "name", null: false
     t.string "slug", null: false
     t.integer "gp_character_base", null: false
-    t.integer "hp", default: 0
-    t.integer "mp", default: 0
-    t.integer "ataque", default: 0
-    t.integer "ataque_magico", default: 0
-    t.integer "defesa", default: 0
-    t.decimal "amplificação_de_dano_fisico", precision: 2, scale: 2, default: "0.0"
-    t.decimal "amplificação_de_dano_magico", precision: 2, scale: 2, default: "0.0"
-    t.decimal "evasão", precision: 2, scale: 2, default: "0.0"
-    t.decimal "preecisão", precision: 2, scale: 2, default: "0.0"
-    t.decimal "esquiva", precision: 2, scale: 2, default: "0.0"
-    t.decimal "amplificação_de_tx", precision: 2, scale: 2, default: "0.0"
-    t.decimal "taxa_critica", precision: 2, scale: 2, default: "0.0"
-    t.decimal "dano_critico", precision: 3, scale: 2, default: "0.0"
-    t.decimal "roubo_de_hp", precision: 2, scale: 2, default: "0.0"
-    t.decimal "roubo_de_mp", precision: 2, scale: 2, default: "0.0"
-    t.decimal "resistencia_a_taxa_critica", precision: 2, scale: 2, default: "0.0"
-    t.decimal "resistencia_ao_dano_critico", precision: 2, scale: 2, default: "0.0"
-    t.decimal "resistencia_a_queda", precision: 2, scale: 2, default: "0.0"
-    t.decimal "resistencia_ao_atordoamento", precision: 2, default: "0"
+    t.boolean "is_active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_base_characters_on_user_id"
   end
 
   create_table "characters", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
     t.bigint "base_character_id", null: false
-    t.string "nome", null: false
+    t.string "name", null: false
+    t.string "name_abreviation", null: false
     t.string "slug", null: false
     t.integer "gp_character", null: false
-    t.integer "hp", default: 0
-    t.integer "mp", default: 0
-    t.integer "ataque", default: 0
-    t.integer "ataque_magico", default: 0
-    t.integer "defesa", default: 0
-    t.decimal "amplificação_de_dano_fisico", precision: 2, scale: 2, default: "0.0"
-    t.decimal "amplificação_de_dano_magico", precision: 2, scale: 2, default: "0.0"
-    t.decimal "evasão", precision: 2, scale: 2, default: "0.0"
-    t.decimal "preecisão", precision: 2, scale: 2, default: "0.0"
-    t.decimal "esquiva", precision: 2, scale: 2, default: "0.0"
-    t.decimal "amplificação_de_tx", precision: 2, scale: 2, default: "0.0"
-    t.decimal "taxa_critica", precision: 2, scale: 2, default: "0.0"
-    t.decimal "dano_critico", precision: 3, scale: 2, default: "0.0"
-    t.decimal "roubo_de_hp", precision: 2, scale: 2, default: "0.0"
-    t.decimal "roubo_de_mp", precision: 2, scale: 2, default: "0.0"
-    t.decimal "resistencia_a_taxa_critica", precision: 2, scale: 2, default: "0.0"
-    t.decimal "resistencia_ao_dano_critico", precision: 2, scale: 2, default: "0.0"
-    t.decimal "resistencia_a_queda", precision: 2, scale: 2, default: "0.0"
-    t.decimal "resistencia_ao_atordoamento", precision: 2, default: "0"
+    t.boolean "is_active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["base_character_id"], name: "index_characters_on_base_character_id"
+    t.index ["user_id"], name: "index_characters_on_user_id"
   end
 
   create_table "user_characters", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "character_id", null: false
-    t.string "nome", null: false
+    t.string "nickname", null: false
     t.string "slug", null: false
     t.integer "lv", default: 1
+    t.integer "energy_points", default: 0
+    t.decimal "experience", precision: 20, scale: 2, default: "0.0"
+    t.decimal "group_experience", precision: 20, scale: 2, default: "0.0"
+    t.decimal "pet_experience", precision: 20, scale: 2, default: "0.0"
+    t.decimal "ruby_experience", precision: 20, scale: 2, default: "0.0"
+    t.decimal "war_experience", precision: 20, scale: 2, default: "0.0"
+    t.decimal "guild_war_experience", precision: 20, scale: 2, default: "0.0"
+    t.integer "hability_points", default: 0
+    t.integer "strength", default: 0
+    t.integer "wisdom", default: 0
+    t.integer "devotion", default: 0
+    t.integer "tenacity", default: 0
+    t.integer "charisma", default: 0
     t.integer "hp", default: 0
     t.integer "mp", default: 0
     t.integer "ataque", default: 0
     t.integer "ataque_magico", default: 0
+    t.integer "adicional_damage", default: 0
+    t.integer "real_damage", default: 0
     t.integer "defesa", default: 0
     t.decimal "amplificação_de_dano_fisico", precision: 2, scale: 2, default: "0.0"
     t.decimal "amplificação_de_dano_magico", precision: 2, scale: 2, default: "0.0"
@@ -98,47 +82,58 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_04_190056) do
     t.index ["user_id"], name: "index_user_characters_on_user_id"
   end
 
+  create_table "user_characters_inventory", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "user_character_id", null: false
+    t.decimal "gp_coin", precision: 10
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_character_id"], name: "index_user_characters_inventory_on_user_character_id"
+    t.index ["user_id"], name: "index_user_characters_inventory_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "jti", null: false
     t.string "email", null: false
     t.string "encrypted_password", null: false
+    t.string "jti", null: false
     t.string "slug", null: false
+    t.integer "account_type", default: 1
     t.string "username", null: false
-    t.string "nome", null: false
-    t.string "sobrenome", null: false
+    t.string "name", null: false
+    t.string "lastname", null: false
     t.string "telefone", null: false
     t.date "data_nascimento", null: false
     t.integer "sexo", default: 0
     t.string "sexo_outro"
-    t.decimal "qtd_gp_coin", precision: 10, scale: 2, default: "0.0"
-    t.decimal "qtd_gp_cash", precision: 4, scale: 2, default: "0.0"
-    t.decimal "bonus_xp", precision: 3, scale: 2, default: "0.0"
-    t.decimal "bonus_rxp", precision: 3, scale: 2, default: "0.0"
+    t.decimal "gp_cash", precision: 4, scale: 2, default: "0.0"
+    t.decimal "bonus_experience", precision: 3, scale: 2, default: "0.0"
+    t.decimal "bonus_ruby_experience", precision: 3, scale: 2, default: "0.0"
     t.decimal "bonus_drop", precision: 3, scale: 2, default: "0.0"
-    t.decimal "bonus_wxp", precision: 3, scale: 2, default: "0.0"
-    t.decimal "bonus_gwxp", precision: 3, scale: 2, default: "0.0"
-    t.decimal "bonus_crftxp", precision: 3, scale: 2, default: "0.0"
-    t.decimal "bonus_petxp", precision: 3, scale: 2, default: "0.0"
-    t.decimal "bonus_ep", precision: 3, scale: 2, default: "0.0"
-    t.boolean "esta_online", default: false
-    t.boolean "esta_ativo", default: false
+    t.decimal "bonus_war_experience", precision: 3, scale: 2, default: "0.0"
+    t.decimal "bonus_guild_war_experience", precision: 3, scale: 2, default: "0.0"
+    t.decimal "bonus_craft_experience", precision: 3, scale: 2, default: "0.0"
+    t.decimal "bonus_pet_experience", precision: 3, scale: 2, default: "0.0"
+    t.decimal "bonus_energy_recovery", precision: 3, scale: 2, default: "0.0"
+    t.boolean "is_online", default: false
+    t.integer "is_online_from"
+    t.integer "role", default: 0
     t.date "data_expiracao"
-    t.integer "perfil", default: 0
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
+    t.datetime "last_sign_in_at"
     t.string "last_sign_in_ip"
+    t.string "unconfirmed_email"
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string "unconfirmed_email"
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
+    t.boolean "is_active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
@@ -149,7 +144,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_04_190056) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "base_characters", "users"
   add_foreign_key "characters", "base_characters"
+  add_foreign_key "characters", "users"
   add_foreign_key "user_characters", "characters"
   add_foreign_key "user_characters", "users"
+  add_foreign_key "user_characters_inventory", "user_characters"
+  add_foreign_key "user_characters_inventory", "users"
 end

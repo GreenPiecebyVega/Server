@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class UserCharacterPolicy < ApplicationPolicy
-  
   def character_list?
     user.staf? || user.client?
   end

@@ -2,7 +2,7 @@
 
 # app/helpers/user_helper.rb
 module ApplicationHelper
-  def error_response class_errors
+  def error_response(class_errors)
     {
       data: {
         errors: class_errors

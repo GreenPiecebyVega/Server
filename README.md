@@ -17,6 +17,10 @@ docker compose exec -it server bash
 ```console
 docker compose exec -it server rails db:migrate
 ```
+## Docker permission @denied?
+```console
+docker rm $(docker ps -a -q)
+```
 
 ## Mailer Preview
 We are using letter_opening gem, we can preview e-mail beside sending them   

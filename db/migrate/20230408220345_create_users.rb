@@ -22,7 +22,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.date :data_nascimento, null: false
       t.integer :sexo,         default: 0
       t.string :sexo_outro,    default: nil
-      
+
       #####################
       #      GP Cash      #
       #####################
@@ -37,11 +37,11 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.decimal :bonus_craft_experience, default: 0, precision: 3, scale: 2
       t.decimal :bonus_pet_experience, default: 0, precision: 3, scale: 2
       t.decimal :bonus_energy_recovery, default: 0, precision: 3, scale: 2
-      
+
       # Controladores #
       t.boolean :is_online, default: false
       t.integer :is_online_from, default: nil
-      
+
       t.integer :role, default: 0
       t.date :data_expiracao, default: nil
 
@@ -69,7 +69,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.boolean :is_active, default: true
       t.timestamps null: false
     end
-    
+
     # INDEX'S #
     add_index :users, :email,                unique: true
     add_index :users, :jti,                  unique: true

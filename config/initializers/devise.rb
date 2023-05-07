@@ -228,7 +228,7 @@ Devise.setup do |config|
     manager.failure_app = DeviseCustomFailure
   end
 
-  # ==> Mailer Configuration    
+  # ==> Mailer Configuration
   config.mailer_sender = 'Green Piece MMORPG <no-reply@vegasoft.com>'
 
   # ==> Configuration for :registerable

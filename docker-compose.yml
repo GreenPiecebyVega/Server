@@ -14,8 +14,8 @@ services:
   #########
   redis:
     image: redis:6.2.6-alpine
-    volumes:
-      - redis:/data
+    # volumes:
+    #   - redis:/data
     env_file: .env
   ###########
   # SIDEKIQ #
@@ -47,10 +47,11 @@ services:
       - "3000:3000"
     env_file:
       - .env
+    links:
+      - mysql
 ###########
 # VOLUMES #
 ###########
 volumes:
   greenpiece:
   mysql:
-  redis:

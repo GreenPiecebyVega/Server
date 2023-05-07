@@ -3,7 +3,6 @@
 class CreateUserCharacters < ActiveRecord::Migration[7.0]
   def change
     create_table :user_characters do |t|
-      
       t.references :user, null: false, foreign_key: true, index: true
       t.references :character, null: false, foreign_key: true, index: true
 
@@ -21,7 +20,7 @@ class CreateUserCharacters < ActiveRecord::Migration[7.0]
       t.decimal :pet_experience, default: 0, precision: 20, scale: 2
 
       t.decimal :ruby_experience, default: 0, precision: 20, scale: 2
-      
+
       t.decimal :war_experience, default: 0, precision: 20, scale: 2
       t.decimal :guild_war_experience, default: 0, precision: 20, scale: 2
 
@@ -34,7 +33,7 @@ class CreateUserCharacters < ActiveRecord::Migration[7.0]
       t.integer :devotion, default: 0
       t.integer :tenacity, default: 0
       t.integer :charisma, default: 0
-      
+
       ########################
       # ATRIBUTOS DE BATALHA #
       ########################

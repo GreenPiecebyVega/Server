@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class UserCharactersController < ApplicationController
       before_action :authenticate_user!
       before_action :set_user_character, only: %i[update destroy]
-      
+
       def character_list
         authorize UserCharacter
         @user_characters = policy_scope(UserCharacter).order(lv: :desc)
@@ -16,7 +18,7 @@ module Api
         authorize UserCharacter
         @user_characters = UserCharacter.new(user_characters_params)
         if @user_character.save
-          render json: { message: I18n.t('activerecord.controllers.user_character.created')}
+          render json: { message: I18n.t('activerecord.controllers.user_character.created') }
         else
           render json: error_response(@user_character), status: 401
         end
@@ -27,7 +29,7 @@ module Api
       def update
         authorize @user_character
         if @user_character.update(user_characters_params)
-          render json: { message: I18n.t('activerecord.controllers.user_character.updated')}
+          render json: { message: I18n.t('activerecord.controllers.user_character.updated') }
         else
           render json: error_response(@user_character.errors), status: 401
         end
@@ -38,7 +40,7 @@ module Api
       def destroy
         authorize @user_character
         if @user_character.destroy
-          render json: { message: I18n.t('activerecord.controllers.user_character.deleted')}
+          render json: { message: I18n.t('activerecord.controllers.user_character.deleted') }
         else
           render json: error_response(@user_character.errors), status: 401
         end

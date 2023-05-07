@@ -24,8 +24,7 @@ RUN apk add --update --no-cache \
     ruby-dev \
     libffi \
     mariadb-dev \
-    mariadb-connector-c-dev \
-    acl
+    mariadb-connector-c-dev
 
 # Bundle
 ENV BUNDLER_VERSION 2.4.10
@@ -47,16 +46,21 @@ ENV app_directory /greenpiece
 RUN mkdir $app_directory
 WORKDIR $app_directory
 
-RUN setfacl -m u:$USER:rwx $app_directory
-    
+RUN chown -R $USER_ID:$GROUP_ID $BUNDLE_PATH
+
 USER $USER
 
-COPY --chown=$USER_ID:$GROUP_ID Gemfile Gemfile.lock $app_directory/
+COPY Gemfile Gemfile.lock $app_directory/
 
 RUN bundle config build.nokogiri --use-system-libraries && \
     bundle install
 
-COPY --chown=$USER_ID:$GROUP_ID . $app_directory/
+COPY . $app_directory/
+
+USER root
+
+RUN chown -R $USER_ID:$GROUP_ID $app_directory
+RUN chown -R $USER_ID:$GROUP_ID $BUNDLE_PATH
 
 EXPOSE 3000
 

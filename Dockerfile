@@ -1,5 +1,7 @@
 FROM ruby:3.2.2-alpine AS greenpiece
+
 ENV RAILS_ENV development
+
 # dependencies
 RUN apk add --update --no-cache \
     build-base \
@@ -45,8 +47,6 @@ RUN addgroup -g $GROUP_ID --system $GROUP && \
 ENV app_directory /greenpiece
 RUN mkdir $app_directory
 WORKDIR $app_directory
-
-RUN chown -R $USER_ID:$GROUP_ID $BUNDLE_PATH
 
 USER root
 

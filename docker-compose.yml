@@ -14,18 +14,16 @@ services:
   #########
   redis:
     image: redis:6.2.6-alpine
-    # volumes:
-    #   - redis:/data
     env_file: .env
   ###########
   # SIDEKIQ #
   ###########
   sidekiq:
     build: .
-    command: bundle exec sidekiq -q default -q mailers
     depends_on:
       - mysql
       - redis
+    command: bundle exec sidekiq -C config/sidekiq.yml
     volumes:
       - .:/greenpiece
     env_file:
@@ -47,8 +45,6 @@ services:
       - "3000:3000"
     env_file:
       - .env
-    links:
-      - mysql
 ###########
 # VOLUMES #
 ###########

@@ -4,7 +4,7 @@ Install and Starts docker on ubuntu
 ```console
 sudo service docker start
 ```
-# Building and starting development enviroment
+Building and starting development enviroment
 ```console
 docker compose up --build
 ```
@@ -12,14 +12,9 @@ Containers Bash
 ```console
 docker compose exec -it server bash
 ```
-
-## Migrating
+Migrating
 ```console
 docker compose exec -it server rails db:migrate
-```
-## Docker permission @denied?
-```console
-docker rm $(docker ps -a -q)
 ```
 
 ## Mailer Preview
@@ -86,3 +81,4 @@ annotate --delete
 ```console
   git ls-files -m | xargs ls -1 2>/dev/null | grep '\.rb$' | xargs rubocop -a
 ```
+* be happy

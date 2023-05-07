@@ -48,6 +48,11 @@ WORKDIR $app_directory
 
 RUN chown -R $USER_ID:$GROUP_ID $BUNDLE_PATH
 
+USER root
+
+RUN chown -R $USER_ID:$GROUP_ID $app_directory
+RUN chown -R $USER_ID:$GROUP_ID $BUNDLE_PATH
+
 USER $USER
 
 COPY Gemfile Gemfile.lock $app_directory/
@@ -56,11 +61,6 @@ RUN bundle config build.nokogiri --use-system-libraries && \
     bundle install
 
 COPY . $app_directory/
-
-USER root
-
-RUN chown -R $USER_ID:$GROUP_ID $app_directory
-RUN chown -R $USER_ID:$GROUP_ID $BUNDLE_PATH
 
 EXPOSE 3000
 

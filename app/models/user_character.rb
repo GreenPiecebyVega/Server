@@ -49,4 +49,16 @@ class UserCharacter < ApplicationRecord
     taxa_critica = BigDecimal('05.00')
     dano_critico = BigDecimal('20.00')
   end
+
+  %i[
+    hp mp ataque defesa ataque_magico adicional_damage real_damage amplificação_de_dano_fisico
+    amplificação_de_dano_magico evasao precisao esquiva amplificação_de_tx taxa_critica dano_critico
+    roubo_de_hp roubo_de_mp resistencia_a_taxa_critica resistencia_ao_dano_critico resistencia_a_queda
+    resistencia_ao_atordoamento experience group_experience pet_experience ruby_experience war_experience
+    guild_war_experience
+  ].each do |method|
+    define_method "#{method}=" do |value|
+      write_attribute method, (value.to_s.match(/,/) ? value.gsub('.', '').gsub(',', '.') : value)
+    end
+  end
 end

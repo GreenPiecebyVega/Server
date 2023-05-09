@@ -51,6 +51,8 @@ RUN mkdir $app_directory
 USER root
 
 RUN setfacl -m u:$USER:rwx $app_directory
+RUN setfacl -m u:$USER:rwx $BUNDLE_PATH
+
 RUN chown -R $USER_ID:$GROUP_ID $app_directory
 RUN chown -R $USER_ID:$GROUP_ID $BUNDLE_PATH
 

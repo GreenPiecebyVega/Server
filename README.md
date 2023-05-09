@@ -70,15 +70,4 @@ annotate --delete
   expect(response).to have_http_status(200)
 ```
 
-* Rubocop just on modified files through git
-```console
-  git ls-files -m | xargs ls -1 2>/dev/null | grep '\.rb$'
-```
-```console
-  git ls-files -m | xargs ls -1 2>/dev/null | grep '\.erb$'
-```
-* Adding | xargs rubocop -a
-```console
-  git ls-files -m | xargs ls -1 2>/dev/null | grep '\.rb$' | xargs rubocop -a
-```
 * be happy

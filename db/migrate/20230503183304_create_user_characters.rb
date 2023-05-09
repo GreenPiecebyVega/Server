@@ -41,9 +41,9 @@ class CreateUserCharacters < ActiveRecord::Migration[7.0]
       t.decimal :mp, default: 0, precision: 4, scale: 2 # 9.999,99%
       t.decimal :ataque, default: 0, precision: 4, scale: 2 # 9.999,99%
       t.decimal :ataque_magico, default: 0, precision: 4, scale: 2 # 9.999,99%
+      t.decimal :defesa, default: 0, precision: 4, scale: 2 # 9.999,99%
       t.decimal :adicional_damage, default: 0, precision: 3, scale: 2 # 999,99%
       t.decimal :real_damage, default: 0, precision: 3, scale: 2 # 999,99%
-      t.decimal :defesa, default: 0, precision: 4, scale: 2 # 9.999,99%
 
       t.decimal :amplificação_de_dano_fisico, default: 0, precision: 2, scale: 2 # 99,99%
       t.decimal :amplificação_de_dano_magico, default: 0, precision: 2, scale: 2 # 99,99%

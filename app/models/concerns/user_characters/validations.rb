@@ -11,7 +11,10 @@ module UserCharacters
                 presence: true,
                 length: { minimum: 6 },
                 uniqueness: { case_sensitive: false }
-
+    
+      validates_numericality_of :hability_points, less_than_or_equal_to: 500
+      validates_numericality_of :strength, :tenacity, :wisdom, :devotion, 
+                                less_than_or_equal_to: 500
       validate :nickname_format
 
       private
@@ -21,6 +24,7 @@ module UserCharacters
         return I18n.t('models.user_character.nickname_format') unless
           nickname =~ /^[[:alnum:]]+$/ &&
           nickname.ascii_only?
+        end
       end
     end
   end

@@ -37,6 +37,10 @@ pt_BR:
                 other: 'é muito curta (mínimo: %{count} caracteres)'
             current_password:
               invalid: 'é inválida'
+        user_character:
+          attributes:
+            nickname: 'Nome do personagem'
+            nickname_format: 'Nome do personagem aceita apenas letras e números.'
         base_character:
           attributes:
             gp_character_base:

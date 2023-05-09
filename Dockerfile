@@ -26,7 +26,8 @@ RUN apk add --update --no-cache \
     ruby-dev \
     libffi \
     mariadb-dev \
-    mariadb-connector-c-dev
+    mariadb-connector-c-dev \
+    acl
 
 # Bundle
 ENV BUNDLER_VERSION 2.4.10
@@ -46,13 +47,14 @@ RUN addgroup -g $GROUP_ID --system $GROUP && \
 # APP
 ENV app_directory /greenpiece
 RUN mkdir $app_directory
-WORKDIR $app_directory
 
 USER root
 
+RUN setfacl -m u:$USER:rwx $app_directory
 RUN chown -R $USER_ID:$GROUP_ID $app_directory
 RUN chown -R $USER_ID:$GROUP_ID $BUNDLE_PATH
 
+WORKDIR $app_directory
 USER $USER
 
 COPY Gemfile Gemfile.lock $app_directory/

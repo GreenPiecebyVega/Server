@@ -37,13 +37,13 @@ class CreateUserCharacters < ActiveRecord::Migration[7.0]
       ########################
       # ATRIBUTOS DE BATALHA #
       ########################
-      t.integer :hp, default: 0
-      t.integer :mp, default: 0
-      t.integer :ataque, default: 0
-      t.integer :ataque_magico, default: 0
-      t.integer :adicional_damage, default: 0
-      t.integer :real_damage, default: 0
-      t.integer :defesa, default: 0
+      t.decimal :hp, default: 0, precision: 4, scale: 2 # 9.999,99%
+      t.decimal :mp, default: 0, precision: 4, scale: 2 # 9.999,99%
+      t.decimal :ataque, default: 0, precision: 4, scale: 2 # 9.999,99%
+      t.decimal :ataque_magico, default: 0, precision: 4, scale: 2 # 9.999,99%
+      t.decimal :adicional_damage, default: 0, precision: 3, scale: 2 # 999,99%
+      t.decimal :real_damage, default: 0, precision: 3, scale: 2 # 999,99%
+      t.decimal :defesa, default: 0, precision: 4, scale: 2 # 9.999,99%
 
       t.decimal :amplificação_de_dano_fisico, default: 0, precision: 2, scale: 2 # 99,99%
       t.decimal :amplificação_de_dano_magico, default: 0, precision: 2, scale: 2 # 99,99%

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Character < ApplicationRecord
   belongs_to :user
   belongs_to :base_character
@@ -16,8 +17,6 @@ class Character < ApplicationRecord
   scope :duelista, -> { where(gp_character: 5) }
   scope :arqueiro, -> { where(gp_character: 6) }
 
-  validates :name,
-            :name_abreviation,
-            :gp_character,
+  validates :name, :name_abreviation, :gp_character,
             presence: true
 end

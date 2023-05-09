@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -57,21 +55,21 @@ ActiveRecord::Schema[7.0].define(version: 20_230_507_144_343) do
     t.integer 'devotion', default: 0
     t.integer 'tenacity', default: 0
     t.integer 'charisma', default: 0
-    t.integer 'hp', default: 0
-    t.integer 'mp', default: 0
-    t.integer 'ataque', default: 0
-    t.integer 'ataque_magico', default: 0
-    t.integer 'adicional_damage', default: 0
-    t.integer 'real_damage', default: 0
-    t.integer 'defesa', default: 0
+    t.decimal 'hp', precision: 4, scale: 2, default: '0.0'
+    t.decimal 'mp', precision: 4, scale: 2, default: '0.0'
+    t.decimal 'ataque', precision: 4, scale: 2, default: '0.0'
+    t.decimal 'ataque_magico', precision: 4, scale: 2, default: '0.0'
+    t.decimal 'adicional_damage', precision: 3, scale: 2, default: '0.0'
+    t.decimal 'real_damage', precision: 3, scale: 2, default: '0.0'
+    t.decimal 'defesa', precision: 4, scale: 2, default: '0.0'
     t.decimal 'amplificação_de_dano_fisico', precision: 2, scale: 2, default: '0.0'
     t.decimal 'amplificação_de_dano_magico', precision: 2, scale: 2, default: '0.0'
     t.decimal 'evasão', precision: 2, scale: 2, default: '0.0'
     t.decimal 'preecisão', precision: 2, scale: 2, default: '0.0'
     t.decimal 'esquiva', precision: 2, scale: 2, default: '0.0'
     t.decimal 'amplificação_de_tx', precision: 2, scale: 2, default: '0.0'
-    t.decimal 'taxa_critica', precision: 2, scale: 2, default: '0.0'
-    t.decimal 'dano_critico', precision: 3, scale: 2, default: '0.0'
+    t.decimal 'taxa_critica', precision: 2, scale: 2, null: false
+    t.decimal 'dano_critico', precision: 3, scale: 2, null: false
     t.decimal 'roubo_de_hp', precision: 2, scale: 2, default: '0.0'
     t.decimal 'roubo_de_mp', precision: 2, scale: 2, default: '0.0'
     t.decimal 'resistencia_a_taxa_critica', precision: 2, scale: 2, default: '0.0'

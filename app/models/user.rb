@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class User < ApplicationRecord
   # Writers
   attr_writer :login
@@ -25,39 +26,24 @@ class User < ApplicationRecord
   enum account_type: %i[free premium]
 
   scope :gp_staf, -> { where('role = ? OR role = ?', 2, 3) }
-  scope :clientes, -> { where('perfl = ?', 0) }
+  scope :clientes, -> { where('role = ?', 0) }
 
   # Devise override for logging in with username or email
   def login
     @login || username || email
   end
 
-  def self.staf_member?
+  def staf_member?
     master? || gm?
   end
 
-  def self.client?
+  def client?
     player? || temporaria?
   end
 
-  # Head
-  def self.master?
-    role == 3
-  end
-
-  # Game Master
-  def self.gm?
-    role == 2
-  end
-
   # Conta Temporária
-  def self.temporaria?
+  def temporaria?
     role == 1 && data_expiracao.present?
-  end
-
-  # Default
-  def self.player?
-    role.zero?
   end
 
   def full_name

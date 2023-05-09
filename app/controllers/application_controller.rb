@@ -4,8 +4,8 @@ class ApplicationController < ActionController::API
   respond_to :json
 
   include ActionController::RequestForgeryProtection
-  protect_from_forgery with: :exception if proc { |gp| gp.request.format != 'application/json' }
-  protect_from_forgery with: :null_session if proc { |gp| gp.request.format == 'application/json' }
+
+  protect_from_forgery with: :null_session
 
   include Pundit::Authorization
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized

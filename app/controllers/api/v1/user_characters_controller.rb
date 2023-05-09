@@ -6,7 +6,7 @@ module Api
       before_action :authenticate_user!
       before_action :set_user_character, only: %i[update destroy]
 
-      def character_list
+      def index
         authorize UserCharacter
         @user_characters = policy_scope(UserCharacter).order(lv: :desc)
         render json: { data: @user_characters }
@@ -60,6 +60,19 @@ module Api
           :character_id,
           :name,
           :lv,
+          :energy_points,
+          :experience,
+          :group_experience,
+          :pet_experience,
+          :ruby_experience,
+          :war_experience,
+          :guild_war_experience,
+          :hability_points,
+          :strength,
+          :wisdom,
+          :devotion,
+          :tenacity,
+          :charisma,
           :hp,
           :mp,
           :ataque,

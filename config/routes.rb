@@ -39,7 +39,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :user_characters, path: 'user-characters', only: %i[character_list create update destroy]
+      resources :user_characters, path: 'user/characters'
     end
   end
 

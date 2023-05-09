@@ -2,7 +2,7 @@ FROM ruby:3.2.2-alpine AS greenpiece
 
 ENV RAILS_ENV development
 
-# dependencies
+# Dependencies
 RUN apk add --update --no-cache \
     build-base \
     vim \
@@ -27,7 +27,14 @@ RUN apk add --update --no-cache \
     libffi \
     mariadb-dev \
     mariadb-connector-c-dev \
-    acl
+    acl \
+    tzdata
+
+RUN cp /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
+ENV TZ America/Sao_Paulo
+ENV LANG pt_BR.UTF-8
+ENV LANGUAGE pt_BR.UTF-8
+ENV LC_ALL pt_BR.UTF-8
 
 # Bundle
 ENV BUNDLER_VERSION 2.4.10
@@ -65,7 +72,5 @@ RUN bundle config build.nokogiri --use-system-libraries && \
     bundle install
 
 COPY . $app_directory/
-
-EXPOSE 3000
 
 ENTRYPOINT ["./entrypoints/docker-entrypoint.sh"]

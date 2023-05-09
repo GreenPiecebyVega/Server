@@ -128,8 +128,6 @@ GEM
     erubi (1.12.0)
     et-orbi (1.2.7)
       tzinfo
-    friendly_id (5.4.2)
-      activerecord (>= 4.0.0)
     fugit (1.8.1)
       et-orbi (~> 1, >= 1.2.7)
       raabro (~> 1.4)
@@ -322,8 +320,6 @@ GEM
     timeout (0.3.2)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    tzinfo-data (1.2023.3)
-      tzinfo (>= 1.0.0)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8.2)
@@ -364,7 +360,6 @@ DEPENDENCIES
   devise
   devise-jwt
   dotenv-rails
-  friendly_id (~> 5.4.0)
   jbuilder
   jsonapi-serializer
   letter_opener
@@ -389,7 +384,6 @@ DEPENDENCIES
   sinatra
   spring
   spring-commands-rspec
-  tzinfo-data
   web-console (~> 4.2)
   webdrivers
 

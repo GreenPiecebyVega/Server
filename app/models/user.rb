@@ -18,9 +18,6 @@ class User < ApplicationRecord
          :validatable,
          :jwt_authenticatable, jwt_revocation_strategy: self
 
-  extend FriendlyId
-  friendly_id :username, use: [:slugged]
-
   # Enums
   enum role: %i[player temporaria gm master]
   enum account_type: %i[free premium]

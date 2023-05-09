@@ -9,7 +9,6 @@ gem 'bootsnap', require: false
 gem 'devise'
 gem 'devise-jwt'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
-gem 'friendly_id', '~> 5.4.0'
 gem 'jbuilder'
 gem 'jsonapi-serializer'
 gem 'mysql2', '~> 0.5'
@@ -25,7 +24,6 @@ gem 'sidekiq'
 gem 'sidekiq-scheduler'
 gem 'sidekiq-unique-jobs'
 gem 'sinatra', require: nil
-gem 'tzinfo-data'
 
 group :development do
   gem 'annotate'

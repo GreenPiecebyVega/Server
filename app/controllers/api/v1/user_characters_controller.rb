@@ -51,7 +51,7 @@ module Api
       private
 
       def set_user_character
-        @user_character = UserCharacter.friendly.find(params[:id])
+        @user_character = UserCharacter.find(params[:id])
       end
 
       def user_characters_params

@@ -3,15 +3,14 @@
 class ApplicationController < ActionController::API
   respond_to :json
 
-  include ActionController::RequestForgeryProtection
-
   protect_from_forgery with: :null_session
 
   include Pundit::Authorization
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :prevent_bot
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_in, keys: [:login])

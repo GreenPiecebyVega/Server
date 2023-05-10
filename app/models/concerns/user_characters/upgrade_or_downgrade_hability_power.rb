@@ -8,7 +8,7 @@
 #
 # 190 levels x 3 pts de habilidade = 570 de hailidade
 #
-# Habilidades: strength tenacity devotion wisdom: Aceitam ao máximo 500 pontos cada habilidade, max:
+# Habilidades: strength tenacity devotion wisdom: Aceitam ao máximo 500 pontos cada habilidade.
 
 module UserCharacters
   module UpgradeOrDowngradeHabilityPower

@@ -6,7 +6,7 @@ sudo service docker start
 ```
 Building and starting development enviroment
 ```console
-docker compose up --build
+docker compose up -d --build
 ```
 Containers Bash   
 ```console

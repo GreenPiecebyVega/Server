@@ -4,9 +4,14 @@ class ApplicationController < ActionController::API
   # The whole application respond_to json and is protected against forgery
   include ActionController::RequestForgeryProtection
   respond_to :json
-  protect_from_forgery with: :null_session
+  protect_from_forgery with: :null_session, prepend: true
+
+  # In summary, the before_action :authenticate_user! method in your Controller will retrieve 
+  # the user's ID from the JWT included in the request headers and set the current_user variable to the 
+  # corresponding User object.
+  before_action :authenticate_user!
   
-  # Utilizado para o scope de usuário recuperado pelo jwt
+  # Utilizado para o scope de usuário recuperado pelo devise-jwt
   include Pundit::Authorization
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   

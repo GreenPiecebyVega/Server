@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
-  # Application responds respond_to json and is protected against forgery
+  # The whole application respond_to json and is protected against forgery
   include ActionController::RequestForgeryProtection
   respond_to :json
   protect_from_forgery with: :null_session
@@ -11,7 +11,6 @@ class ApplicationController < ActionController::API
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   
   before_action :sign_out_bot
-
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected

@@ -36,7 +36,6 @@ Devise.setup do |config|
   # ==> Navigation configuration
   config.navigational_formats = []
   config.sign_out_via = :delete
-  config.skip_session_storage = [:http_auth]
 
   # ==> Mailer Configuration
   config.mailer_sender = 'Green Piece MMORPG <no-reply@vegasoft.com>'

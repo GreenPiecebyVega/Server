@@ -3,8 +3,7 @@
 module Api
   module V1
     class UsersController < ApplicationController
-      before_action :authenticate_user!, only: %i[update show destroy]
-
+      
       # GET /api/v1/users/available
       def available
         free = if params[:email].present?
@@ -17,8 +16,7 @@ module Api
         render json: { data: free }
       end
 
-      # authenticate_user!
-      # GET /api/v1/users/#{slug}
+      # GET /api/v1/users/#{id}
       def show
         authorize @user
         render json: UserShowSerializer.new(@user).serializable_hash.to_json
@@ -26,7 +24,6 @@ module Api
         render json: { error: I18n.t('api.not_found') }, status: 404
       end
 
-      # authenticate_user!
       # PUT /api/v1/users/#{id}
       def update
         authorize @user
@@ -35,8 +32,7 @@ module Api
       rescue StandardError => e
         render json: { error: I18n.t('api.oops') }, status: 500
       end
-
-      # authenticate_user!
+      
       # DELETE /api/v1/users/#{id}
       def destroy
         authorize @user
@@ -54,6 +50,7 @@ module Api
 
       def user_params
         params.require(:user).permit(
+          :email,
           :username,
           :name,
           :lastname,

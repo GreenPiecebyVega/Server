@@ -3,7 +3,6 @@
 module Api
   module V1
     class UserCharactersController < ApplicationController
-      before_action :authenticate_user!
       before_action :set_user_character, only: %i[update destroy]
 
       def index

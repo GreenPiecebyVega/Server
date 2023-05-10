@@ -14,7 +14,6 @@ class User < ApplicationRecord
          :registerable,
          :recoverable,
          :trackable,
-         :rememberable,
          :validatable,
          :jwt_authenticatable, jwt_revocation_strategy: self
 
@@ -38,7 +37,6 @@ class User < ApplicationRecord
     player? || temporaria?
   end
 
-  # Conta Temporária
   def temporaria?
     role == 1 && data_expiracao.present?
   end

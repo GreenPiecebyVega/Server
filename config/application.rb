@@ -3,8 +3,7 @@
 require_relative 'boot'
 require 'rails/all'
 
-# Require the gems listed in Gemfile, including any gems
-# you've limited to :test, :development, or :production.
+# Require the gems listed in Gemfile
 Bundler.require(*Rails.groups)
 
 module GreenPieceBackend
@@ -17,7 +16,7 @@ module GreenPieceBackend
     # Configuration for the application, engines, and railties goes here.
     config.autoload_paths << Rails.root.join('lib')
 
-    # Locale pt-BR
+    # Locale pt_BR
     config.i18n.default_locale            = :pt_BR
     config.i18n.available_locales         = %i[pt_BR]
     config.time_zone                      = 'Brasilia'
@@ -37,16 +36,11 @@ module GreenPieceBackend
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
-    config.middleware.use ActionDispatch::Flash
 
-    # Error handler
+    # Error Handler #
     config.exceptions_app = routes
 
     # GP JOBS #
     config.active_job.queue_adapter = :sidekiq
-
-    config.session_store :cookie_store, key: '_interslice_session'
-    config.middleware.use ActionDispatch::Cookies
-    config.middleware.use config.session_store, config.session_options
   end
 end

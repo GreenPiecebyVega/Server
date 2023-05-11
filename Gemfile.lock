@@ -68,9 +68,6 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.4)
       public_suffix (>= 2.0.2, < 6.0)
-    annotate (3.2.0)
-      activerecord (>= 3.2, < 8.0)
-      rake (>= 10.4, < 14.0)
     ast (2.4.2)
     awesome_print (1.9.2)
     bcrypt (3.1.18)
@@ -332,7 +329,6 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  annotate
   awesome_print
   bootsnap
   database_cleaner-active_record

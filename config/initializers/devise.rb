@@ -8,13 +8,13 @@ Devise.setup do |config|
   # ==> Configuration for any authentication mechanism
   config.authentication_keys = [:login]
   config.case_insensitive_keys = [:login]
-  
+
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Send a notification to the original email when the user's email is changed.
   config.send_email_changed_notification = true
   config.send_password_change_notification = true
-  
+
   config.reconfirmable = true
 
   # ==> Configuration for :validatable
@@ -55,7 +55,7 @@ Devise.setup do |config|
   # ==> Warden configuration
   config.warden do |manager|
     manager.failure_app = DeviseCustomFailure
-    
+
     # ActionDispatch::Request::Session::DisabledSessionError: Your application has sessions disabled #
     # Yeah it's an api only
     manager.scope_defaults :user, store: false

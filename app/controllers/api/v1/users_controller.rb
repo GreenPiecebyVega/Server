@@ -3,7 +3,6 @@
 module Api
   module V1
     class UsersController < ApplicationController
-      
       # GET /api/v1/users/available
       def available
         free = if params[:email].present?
@@ -14,32 +13,6 @@ module Api
                  true
                end
         render json: { data: free }
-      end
-
-      # GET /api/v1/users/#{id}
-      def show
-        authorize @user
-        render json: UserShowSerializer.new(@user).serializable_hash.to_json
-      rescue ActiveRecord::RecordNotFound
-        render json: { error: I18n.t('api.not_found') }, status: 404
-      end
-
-      # PUT /api/v1/users/#{id}
-      def update
-        authorize @user
-        @user.update(user_params)
-        render json: { message: I18n.t('activerecord.controllers.user.updated') }
-      rescue StandardError => e
-        render json: { error: I18n.t('api.oops') }, status: 500
-      end
-      
-      # DELETE /api/v1/users/#{id}
-      def destroy
-        authorize @user
-        @user.destroy
-        render json: { message: I18n.t('activerecord.controllers.user.deleted') }
-      rescue StandardError => e
-        render json: { error: I18n.t('api.oops') }, status: 500
       end
 
       private

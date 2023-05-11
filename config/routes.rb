@@ -6,18 +6,24 @@ Rails.application.routes.draw do
   ###########
   ## Users ##
   ###########
-  devise_for :users,
-             controllers: {
-               confirmations: 'confirmations',
-               passwords: 'passwords',
-               registrations: 'registrations',
-               sessions: 'sessions'
-             },
-             path_names: {
-               sign_in: 'signin',
-               sign_out: 'signout'
-             }
-
+  match '/users/signin', to: 'errors#not_found', via: :get
+  match '/users/password/new', to: 'errors#not_found', via: :get
+  match '/users/password/edit', to: 'errors#not_found', via: :get
+  match '/users/cancel', to: 'errors#not_found', via: :get
+  match '/users/sign_up', to: 'errors#not_found', via: :get
+  match '/users/edit', to: 'errors#not_found', via: :get
+  match '/users/confirmation/new', to: 'errors#not_found', via: :get
+  # get /users/confirmation enabled for now on future will redirect to frontend
+  devise_for :users, controllers: {
+                       confirmations: 'confirmations',
+                       passwords: 'passwords',
+                       registrations: 'registrations',
+                       sessions: 'sessions'
+                     },
+                     path_names: {
+                       sign_in: 'signin',
+                       sign_out: 'signout'
+                     }
   ##########
   ## Ping ##
   ##########

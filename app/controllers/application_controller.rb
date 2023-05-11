@@ -1,21 +1,18 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
-  # The whole application respond_to json and is protected against forgery
-  include ActionController::RequestForgeryProtection
-
-  include ActionController::MimeResponds
   respond_to :json
 
+  include ActionController::RequestForgeryProtection
   protect_from_forgery with: :null_session, prepend: true
-  
+
   # Utilizado para o scope de usuário recuperado pelo devise-jwt
   include Pundit::Authorization
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-  
+
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :sign_out_bot
-  
+
   protected
 
   def configure_permitted_parameters
@@ -33,6 +30,7 @@ class ApplicationController < ActionController::API
   def sign_out_bot
     return unless !devise_controller? || controller_name == 'registrations'
     return unless current_user.present? && !current_user.master?
+
     if (request.user_agent.blank? || request.user_agent.downcase.include?('headlesschrome')) && request.referer.blank?
       sign_out current_user
     end

@@ -69,7 +69,7 @@ USER $USER
 COPY Gemfile Gemfile.lock $app_directory/
 
 RUN bundle config build.nokogiri --use-system-libraries && \
-    bundle install
+    bundle check || bundle install
 
 COPY . $app_directory/
 

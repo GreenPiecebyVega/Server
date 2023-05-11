@@ -38,16 +38,15 @@ group :development do
 end
 
 group :development, :test do
-  gem 'awesome_print'
-  gem 'capybara', '>= 2.15'
-  gem 'database_cleaner-active_record'
   gem 'pry'
   gem 'pry-rails'
-  gem 'rexml'
+  gem 'awesome_print'
+  gem 'faker'
+  
   gem 'rspec-rails', '~> 6.0.0'
-  gem 'selenium-webdriver'
   gem 'simplecov', require: false
+  gem 'database_cleaner-active_record'
+  
   gem 'spring'
   gem 'spring-commands-rspec'
-  gem 'webdrivers'
 end

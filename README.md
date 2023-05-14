@@ -24,9 +24,6 @@ Seeding Defaults
 ```console
 docker compose exec -it server rails db:seed
 ```
-## Json API
-[jsonapi-rails](https://jsonapi-rb.org/guides/getting_started/rails.html)   
-The principle is simple: you declare elements of the JSON API resource and optionally specify their values.
 
 ## Mailer Preview
 We are using letter_opening gem, we can preview e-mail beside sending them   

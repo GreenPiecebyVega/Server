@@ -68,4 +68,6 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
+
+  config.debug_exception_response_format = :api
 end

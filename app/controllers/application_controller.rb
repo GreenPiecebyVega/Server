@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
   include ActionController::RequestForgeryProtection
   protect_from_forgery with: :null_session, prepend: true
 
-  # Utilizado para o scope de usuário recuperado pelo devise-jwt
+  # Utilizado para o scope de usuário recuperado pelo jwt
   include Pundit::Authorization
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 

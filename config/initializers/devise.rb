@@ -34,7 +34,7 @@ Devise.setup do |config|
   config.reset_password_within = 1.hour
 
   # ==> Navigation configuration
-  config.navigational_formats = [:json]
+  config.navigational_formats = []
   config.sign_out_via = :delete
 
   # ==> Mailer Configuration
@@ -55,7 +55,6 @@ Devise.setup do |config|
   # ==> Warden configuration
   config.warden do |manager|
     manager.failure_app = DeviseCustomFailure
-
     # ActionDispatch::Request::Session::DisabledSessionError: Your application has sessions disabled #
     # Yeah it's an api only
     manager.scope_defaults :user, store: false

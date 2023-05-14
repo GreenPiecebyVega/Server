@@ -1,8 +1,20 @@
 # frozen_string_literal: true
 
 require 'sidekiq/web'
+# Configure Sidekiq-specific session middleware
+Sidekiq::Web.use ActionDispatch::Cookies
+Sidekiq::Web.use ActionDispatch::Session::CookieStore, key: "_interslice_session"
 
 Rails.application.routes.draw do
+  #############
+  ## SIDEKIQ ##
+  #############
+  # https://github.com/sidekiq/sidekiq/issues/4061
+  Sidekiq::Web.use Rack::Auth::Basic do |username, password|
+    username == 'username' && password == 'password'
+  end
+  mount Sidekiq::Web => "/sidekiq"
+
   ###########
   ## Users ##
   ###########
@@ -14,15 +26,14 @@ Rails.application.routes.draw do
   match '/users/edit', to: 'errors#not_found', via: :get
   match '/users/confirmation/new', to: 'errors#not_found', via: :get
   # get /users/confirmation enabled for now on future will redirect to frontend
-  devise_for :users, controllers: {
-                       confirmations: 'confirmations',
-                       passwords: 'passwords',
-                       registrations: 'registrations',
-                       sessions: 'sessions'
-                     },
+  devise_for :users, controllers: { 
+                      confirmations: 'users/confirmations',
+                      passwords: 'users/passwords',
+                      registrations: 'users/registrations',
+                      sessions: 'users/sessions' },
                      path_names: {
-                       sign_in: 'signin',
-                       sign_out: 'signout'
+                      sign_in: 'signin',
+                      sign_out: 'signout'
                      }
   ##########
   ## Ping ##
@@ -39,21 +50,13 @@ Rails.application.routes.draw do
   ##########
   namespace :api do
     namespace :v1 do
-      resources :users, only: %i[show update] do
+      resources :users, only: [:update] do
         collection do
           get :available
         end
       end
-
-      resources :user_characters, path: 'user/characters'
+      resources :user_characters, path: 'user/characters', only: %i[create update delete]
     end
-  end
-
-  #############
-  ## SIDEKIQ ##
-  #############
-  authenticate :user, ->(user) { user.master? } do
-    mount Sidekiq::Web => '/sidekiq'
   end
 
   ############

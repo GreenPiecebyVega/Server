@@ -11,14 +11,12 @@ module GreenPieceBackend
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
-    config.web_console.whitelisted_ips = ENV['YOU_CONTAINER_IP_FOR_WEB_CONSOLE']
-
     # Configuration for the application, engines, and railties goes here.
     config.autoload_paths << Rails.root.join('lib')
 
     # Locale pt_BR
     config.i18n.default_locale            = :pt_BR
-    config.i18n.available_locales         = %i[pt_BR]
+    config.i18n.available_locales         = %i[pt_BR en]
     config.time_zone                      = 'Brasilia'
     config.active_record.default_timezone = :local
 
@@ -26,7 +24,7 @@ module GreenPieceBackend
     config.generators do |g|
       g.test_framework :rspec
       g.view_specs false
-      g.helper_specs true
+      g.helper_specs false
       g.routing_specs true
       g.controller_specs true
       g.request_specs true

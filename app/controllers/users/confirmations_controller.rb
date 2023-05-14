@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-class ConfirmationsController < Devise::ConfirmationsController
+class Users::ConfirmationsController < Devise::ConfirmationsController
   # POST /resource/confirmation
   def create
     self.resource = resource_class.send_confirmation_instructions(resource_params)
     yield resource if block_given?
 
     if successfully_sent?(resource)
-      render json: { message: I18n.t('devise.confirmations.resent') }, status: 200
+      render json: { message: I18n.t('devise.confirmations.resent') }, status: :ok
     else
-      render json: resource.errors, status: 401
+      render json: resource.errors, status: :unauthorized
     end
   end
 
@@ -19,9 +19,9 @@ class ConfirmationsController < Devise::ConfirmationsController
     yield resource if block_given?
 
     if resource.errors.empty?
-      render json: { message: I18n.t('devise.confirmations.success') }, status: 200
+      render json: { message: I18n.t('devise.confirmations.success') }, status: :ok
     else
-      render json: resource.errors, status: 401
+      render json: resource.errors, status: :unauthorized
     end
   end
 end

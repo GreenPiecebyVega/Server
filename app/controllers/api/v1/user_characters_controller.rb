@@ -3,14 +3,22 @@
 module Api
   module V1
     class UserCharactersController < ApplicationController
+      before_action :authenticate_user!
       before_action :set_user_character, only: %i[update destroy]
 
       def index
         authorize UserCharacter
-        @user_characters = policy_scope(UserCharacter).order(lv: :desc)
-        render json: { data: @user_characters }
+        scoped_user_characters = policy_scope(UserCharacter)
+        begin
+          render json: scoped_user_characters, each_serializer: UserCharacterSerializer,
+                                               methods: [:character_list_response],
+                                               message: '',
+                                               status: :success
+        rescue ActiveModel::Serializer::Error => e
+          render json: error: e.message, status: :unprocessable_entity
+        end
       rescue StandardError => e
-        render json: { error: I18n.t('api.oops') }, status: 500
+        render json: { error: I18n.t('api.oops') }, status: :internal_server_error
       end
 
       def create
@@ -57,7 +65,7 @@ module Api
         params.require(:user_character).permit(
           :user_id,
           :character_id,
-          :name,
+          :nickname,
           :lv,
           :energy_points,
           :experience,

@@ -19,14 +19,20 @@ pt_BR:
     mailer:
       confirmation_instructions:
         subject: "Instruções de confirmação"
+        btn_confirm_my_account: "Confirmar Conta"
+        title: "Bem vindo"
+        text: "Vocẽ pode confirmar sua conta através do link abaixo."
       reset_password_instructions:
         subject: "Instruções de troca de senha"
       unlock_instructions:
         subject: "Instruções de desbloqueio"
       email_changed:
         subject: "E-mail alterado"
+        esta_sendo_alterado_msg: "Estamos entrando em contato para informar que seu e-mail está sendo alterado para"
+        foi_alterado_msg: "Estamos entrando em contato para informar que seu e-mail foi alterado para"
       password_change:
         subject: "Senha alterada"
+        text: "Estamos entrando em contato para notificar que sua senhafoi alterada para"
     omniauth_callbacks:
       failure: "Não foi possível autenticá-lo como %{kind} porque %{reason}."
       success: "Autenticado com sucesso com uma conta de %{kind}."

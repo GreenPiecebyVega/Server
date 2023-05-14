@@ -2,7 +2,7 @@
 
 class UserMailer < Devise::Mailer
   def confirmation_instructions(record, token, opts = {})
-    headers['Custom-header'] = 'Bar'
+    # headers['Custom-header'] = 'Bar'
     super
   end
 
@@ -27,9 +27,5 @@ class UserMailer < Devise::Mailer
 
   def password_change(record, opts = {})
     devise_mail(record, :password_change, opts)
-  end
-
-  def deliver_later
-    Devise::Mailer.delay(queue: 'mailers').send
   end
 end

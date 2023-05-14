@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class RegistrationsController < Devise::RegistrationsController
+class Users::RegistrationsController < Devise::RegistrationsController
   respond_to :json
 
   private
@@ -12,13 +12,18 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def register_success
-    render json: { message: I18n.t('devise.registrations.signed_up_but_unconfirmed') }
+    render json: { 
+      code: 200,
+      message: I18n.t('devise.registrations.signed_up_but_unconfirmed'),
+      data: nil
+    }, 
+      status: :ok
   end
 
   def register_failed
     render json: {
       message: I18n.t('devise.registrations.failed'),
       errors: resource.errors
-    }
+    }, status: :unauthorized
   end
 end

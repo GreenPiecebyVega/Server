@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  # Writers
+  # write
   attr_writer :login
 
   # Concerns
@@ -10,12 +10,12 @@ class User < ApplicationRecord
   include Users::Validations
   include Devise::JWT::RevocationStrategies::JTIMatcher
   devise :database_authenticatable,
+         :jwt_authenticatable,
          :confirmable,
          :registerable,
          :recoverable,
          :trackable,
-         :validatable,
-         :jwt_authenticatable, jwt_revocation_strategy: self
+         :validatable, jwt_revocation_strategy: self
 
   # Enums
   enum role: %i[player temporaria gm master]

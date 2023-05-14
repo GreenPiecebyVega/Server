@@ -1,9 +1,5 @@
 # Green Piece by VegaSoft
 
-Install and Starts docker on ubuntu
-```console
-sudo service docker start
-```
 Building and starting development enviroment
 ```console
 docker compose up -d --build
@@ -12,22 +8,33 @@ Containers Bash
 ```console
 docker compose exec -it server bash
 ```
+
+Generating Serializers
+```console
+docker compose exec -it server rails g serializer SingularModelName
+```
+
 Migrating
 ```console
 docker compose exec -it server rails db:migrate
 ```
+Seeding Defaults
+- base_characters
+- characters
+```console
+docker compose exec -it server rails db:seed
+```
+## Json API
+[jsonapi-rails](https://jsonapi-rb.org/guides/getting_started/rails.html)   
+The principle is simple: you declare elements of the JSON API resource and optionally specify their values.
 
 ## Mailer Preview
 We are using letter_opening gem, we can preview e-mail beside sending them   
 Visible at 'tmp', 'mailers_preview'
 
-## Developer Annotations
-```console
-annotate
-```   
-```console
-annotate --delete 
-```
+## Todo
+- Adicionar bloqueio de personagem has_one
+- Adicionar bloqueio de conta has_one
 
 ## GP Conventional Docs
 1. **Ruby**
@@ -41,6 +48,9 @@ annotate --delete
   [Usage](https://docs.rubocop.org/rubocop/usage/basic_usage.html)   
 
 4. **Rspec**
+  ```console
+  docker compose exec -it server rspec
+  ```
   [Boas Práticas](https://www.betterspecs.org)  
   Rspec is composed of multiple libraries [rspec-core](https://rubydoc.info/gems/rspec-core/), [rspec-expectations](https://rubydoc.info/gems/rspec-expectations) e [rspec-mocks](https://rubydoc.info/gems/rspec-mocks)   
   [Documentation](https://relishapp.com/rspec/docs)  
@@ -63,11 +73,11 @@ annotate --delete
   [Documentation](https://github.com/punditcommunity/pundit-matchers#matchers)
 
 ### Use binding.pry for debugging
-* Here the application test will stop and u will have acess to the response, by exit, the test will continue
+* Multi location debug in one execution
 ```console
   get current_usuario.root_path
   binding.pry
   expect(response).to have_http_status(200)
 ```
 
-* be happy
+* by Vega

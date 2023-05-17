@@ -6,8 +6,9 @@ FactoryBot.define do
     # Attr's Obrigatórios
     name { Faker::Name.male_first_name }
     lastname { Faker::Name.last_name }
-    username { 'VISHNUD3V' }
+    username { "username#{SecureRandom.hex(4)}" }
     password { 'VISHNUD3V' }
+    password_confirmation { password }
     email { Faker::Internet.email(name: SecureRandom.hex(6), separators: nil, domain: 'gmail.com') }
     data_nascimento { Date.today - 18.years }
     sexo { 'masculino' }

@@ -7,7 +7,7 @@ class Users::SessionsController < Devise::SessionsController
 
   private
 
-  def respond_with(resource, _options = {})
+  def respond_with(_resource, _options = {})
     render json: {
       code: 200,
       message: I18n.t('devise.sessions.signed_in'),

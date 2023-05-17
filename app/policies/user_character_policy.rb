@@ -2,7 +2,11 @@
 
 class UserCharacterPolicy < ApplicationPolicy
   def index?
-    user.staf_member? || user.client?
+    true
+  end
+
+  def create?
+    user.characters.count < 6
   end
 
   def update?
@@ -10,12 +14,12 @@ class UserCharacterPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.master? || (user.id == record.user_id && record.lv < 100)
+    user.master? || (user.id == record.user_id)
   end
 
   class Scope < Scope
     def resolve
-      if user.mestre?
+      if user.master?
         scope.all
       else
         scope.where(user_id: user.id).order(lv: :desc)

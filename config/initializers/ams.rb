@@ -1,2 +1,3 @@
-ActiveModelSerializers.config.adapter = :gp_api_adapter
-ActiveModelSerializers.config.keytransform = :underscore
+ActiveModelSerializers.config.adapter = :json_api
+# Like C++ attributes
+ActiveModelSerializers.config.key_transform = :underscore

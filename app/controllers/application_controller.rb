@@ -15,6 +15,14 @@ class ApplicationController < ActionController::API
 
   protected
 
+  def current_ip_address
+    request.env['HTTP_X_REAL_IP'] || request.env['REMOTE_ADDR']
+  end
+
+  def user_not_authorized
+    render json: { message: I18n.t('api.unauthorized') }, status: 401
+  end
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_in, keys: [:login])
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[email username name lastname
@@ -22,17 +30,13 @@ class ApplicationController < ActionController::API
                                                          telefone role])
   end
 
-  def user_not_authorized
-    render json: { message: I18n.t('api.unauthorized') }, status: 404
-    nil
-  end
-
   def sign_out_bot
     return unless !devise_controller? || controller_name == 'registrations'
     return unless current_user.present? && !current_user.master?
 
-    if (request.user_agent.blank? || request.user_agent.downcase.include?('headlesschrome')) && request.referer.blank?
-      sign_out current_user
+    if (request.user_agent.blank? || request.user_agent.downcase.include?('headlesschrome')) && 
+      request.referer.blank? && Rails.env == 'production'
+      render json: { message: I18n.t('api.oops') }, status: :internal_server_error
     end
   end
 end

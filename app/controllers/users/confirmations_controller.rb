@@ -9,7 +9,9 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     if successfully_sent?(resource)
       render json: { message: I18n.t('devise.confirmations.resent') }, status: :ok
     else
-      render json: resource.errors, status: :unauthorized
+      render json: resource, 
+             serializer: ActiveModel::Serializer::ErrorSerializer, 
+             status: :ok
     end
   end
 
@@ -21,7 +23,9 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     if resource.errors.empty?
       render json: { message: I18n.t('devise.confirmations.success') }, status: :ok
     else
-      render json: resource.errors, status: :unauthorized
+      render json: resource, 
+             serializer: ActiveModel::Serializer::ErrorSerializer, 
+             status: :ok
     end
   end
 end

@@ -48,8 +48,8 @@ class CreateUserCharacters < ActiveRecord::Migration[7.0]
       t.decimal :amplificação_de_dano_fisico, default: 0, precision: 2, scale: 2 # 99,99%
       t.decimal :amplificação_de_dano_magico, default: 0, precision: 2, scale: 2 # 99,99%
 
-      t.decimal :evasão, default: 0, precision: 2, scale: 2 # 99,99%
-      t.decimal :preecisão, default: 0, precision: 2, scale: 2 # 99,99%
+      t.decimal :evasao, default: 0, precision: 2, scale: 2 # 99,99%
+      t.decimal :precisao, default: 0, precision: 2, scale: 2 # 99,99%
       t.decimal :esquiva, default: 0, precision: 2, scale: 2 # 99,99%
 
       t.decimal :amplificação_de_tx, default: 0, precision: 2, scale: 2 # 99,99%

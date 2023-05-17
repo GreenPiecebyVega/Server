@@ -14,7 +14,7 @@ RSpec.describe 'POST /users/signin', type: :request do
       }
     }
   end
-  
+
   context 'when login credentials are correct but user has not confirmed e-mail.' do
     before do
       post user_session_path, params: user_payload
@@ -25,17 +25,15 @@ RSpec.describe 'POST /users/signin', type: :request do
     end
 
     it 'returns I18n.t("devise.failure.unconfirmed")' do
-      expect(response.body).to include(I18n.t("devise.failure.unconfirmed"))
+      expect(response.body).to include(I18n.t('devise.failure.unconfirmed'))
     end
   end
 
   context 'when login credentials are correct and user already has confirm the Account.' do
     before do
-      # confirm the user account
-      get user_confirmation_path(confirmation_token: user.confirmation_token)
-      post user_session_path, params: user_payload
+      confirm_and_sign_user(user, user_payload)
     end
-    
+
     it 'returns JTW token in authorization header' do
       expect(response.headers['Authorization']).to be_present
     end
@@ -47,7 +45,7 @@ RSpec.describe 'POST /users/signin', type: :request do
     end
 
     it 'returns I18n.t("devise.sessions.signed_in")' do
-      expect(response.body).to include(I18n.t("devise.sessions.signed_in"))
+      expect(response.body).to include(I18n.t('devise.sessions.signed_in'))
     end
   end
 end

@@ -11,7 +11,7 @@ class UserPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if user.mestre?
+      if user.master?
         scope.all
       elsif user.player?
         scope.where(id: user.id)

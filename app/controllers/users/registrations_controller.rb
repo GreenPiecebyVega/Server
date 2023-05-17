@@ -12,18 +12,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def register_success
-    render json: { 
-      code: 200,
-      message: I18n.t('devise.registrations.signed_up_but_unconfirmed'),
-      data: nil
-    }, 
-      status: :ok
+    render json: { message: I18n.t('devise.registrations.signed_up_but_unconfirmed')}, status: :ok
   end
 
   def register_failed
-    render json: {
-      message: I18n.t('devise.registrations.failed'),
-      errors: resource.errors
-    }, status: :unauthorized
+    render json: resource, 
+           serializer: ActiveModel::Serializer::ErrorSerializer, 
+           status: :ok
   end
 end

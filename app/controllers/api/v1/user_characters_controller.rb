@@ -3,56 +3,68 @@
 module Api
   module V1
     class UserCharactersController < ApplicationController
-      before_action :authenticate_user!
       before_action :set_user_character, only: %i[update destroy]
+      before_action :authenticate_user!
 
+      api :GET, '/user/characters', 'Lista dos Personagens'
       def index
         authorize UserCharacter
         scoped_user_characters = policy_scope(UserCharacter)
-        begin
-          render json: scoped_user_characters, each_serializer: UserCharacterSerializer,
-                                               methods: [:character_list_response],
-                                               message: '',
-                                               status: :success
-        rescue ActiveModel::Serializer::Error => e
-          render json: error: e.message, status: :unprocessable_entity
+        
+        if scoped_user_characters.count.positive?
+          render json: scoped_user_characters, 
+                 each_serializer: UserCharacterSerializer, 
+                 status: :ok
+        else
+          render json: { message: 'data_not_found' }, status: :ok
         end
       rescue StandardError => e
-        render json: { error: I18n.t('api.oops') }, status: :internal_server_error
+        render json: { message: I18n.t('api.oops') }, status: :internal_server_error
       end
 
+      api :POST, '/user/characters', 'Cria Personagem'
       def create
         authorize UserCharacter
-        @user_characters = UserCharacter.new(user_characters_params)
-        if @user_character.save
-          render json: { message: I18n.t('activerecord.controllers.user_character.created') }
+        user_character = UserCharacter.new(user_characters_params)
+
+        if user_character.save
+          render json: user_character, status: :ok
         else
-          render json: error_response(@user_character), status: 401
+          render json: user_character, 
+                 serializer: ActiveModel::Serializer::ErrorSerializer, 
+                 status: :ok
         end
       rescue StandardError => e
-        render json: { error: I18n.t('api.oops') }, status: 500
+        render json: { message: I18n.t('api.oops') }, status: :internal_server_error
       end
-
+      
+      api :PUT, '/user/characters/:id', 'Atualiza Personagem'
       def update
         authorize @user_character
+
         if @user_character.update(user_characters_params)
-          render json: { message: I18n.t('activerecord.controllers.user_character.updated') }
+          render json: @user_character, status: :ok
         else
-          render json: error_response(@user_character.errors), status: 401
+          render json: @user_character, 
+                 serializer: ActiveModel::Serializer::ErrorSerializer, 
+                 status: :ok
         end
       rescue StandardError => e
-        render json: { error: I18n.t('api.oops') }, status: 500
+        render json: { message: I18n.t('api.oops') }, status: 500
       end
 
+      api :DELETE, '/user/characters/:id', 'Delete Personagem'
       def destroy
         authorize @user_character
         if @user_character.destroy
-          render json: { message: I18n.t('activerecord.controllers.user_character.deleted') }
+          render json: { message: I18n.t('messages.user_character.deleted') }, status: :ok
         else
-          render json: error_response(@user_character.errors), status: 401
+          render json: @user_character,
+                 serializer: ActiveModel::Serializer::ErrorSerializer,
+                 status: :ok
         end
       rescue StandardError => e
-        render json: { error: I18n.t('api.oops') }, status: 500
+        render json: { message: I18n.t('api.oops') }, status: 500
       end
 
       private

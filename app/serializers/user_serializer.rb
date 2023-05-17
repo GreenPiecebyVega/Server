@@ -1,7 +1,3 @@
-class UserSerializer < ApplicationSerializer
-  type :user
-
+class UserSerializer < ActiveModel::Serializer
   attributes :id
-
-  has_many :characters
 end

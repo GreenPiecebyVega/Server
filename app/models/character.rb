@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Character < ApplicationRecord
+  belongs_to :base_character
   has_many :user_characters, dependent: :delete_all
 
   enum gp_character: %i[guerreiro guardiao mago xanter duelista arqueiro]

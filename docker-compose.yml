@@ -3,6 +3,7 @@ services:
   # MYSQL #
   #########
   mysql:
+    container_name: mysql
     image: mysql:8.0.28
     ports:
       - "3306:3306"
@@ -13,12 +14,14 @@ services:
   # REDIS #
   #########
   redis:
+    container_name: redis
     image: redis:6.2.6-alpine
     env_file: .env
   ###########
   # SIDEKIQ #
   ###########
   sidekiq:
+    container_name: sidekiq
     build: .
     depends_on:
       - mysql
@@ -32,6 +35,9 @@ services:
   # GP #
   ######
   server:
+    container_name: server
+    tty: true
+    stdin_open: true
     build:
       context: .
       dockerfile: Dockerfile
@@ -45,6 +51,8 @@ services:
       - "3000:3000"
     env_file:
       - .env
+    links:
+      - mysql
 ###########
 # VOLUMES #
 ###########

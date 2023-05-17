@@ -5,25 +5,22 @@ module UserCharacters
     extend ActiveSupport::Concern
 
     included do
-      validates :character_id, presence: true
-
-      validates :nickname,
-                presence: true,
-                length: { minimum: 6 },
-                uniqueness: { case_sensitive: false }
-
-      validates :telefone, presence: true, length: { minimum: 10 }, uniqueness: { case_sensitive: false }
+      validates :nickname, presence: true,
+                           length: { minimum: 6 },
+                           uniqueness: { case_sensitive: false }
 
       validates_numericality_of :hability_points, less_than_or_equal_to: Integer('500')
-      validates_numericality_of :strength, :tenacity, :wisdom, :devotion,
-                                less_than_or_equal_to: Integer('500')
+      validates_numericality_of :strength, :tenacity, :wisdom, :devotion, less_than_or_equal_to: Integer('500')
+
       validate :nickname_format
 
       private
 
       def nickname_format
-        return I18n.t('models.user_character.nickname_format') unless nickname =~ /^[[:alnum:]]+$/ &&
-                                                                      nickname.ascii_only?
+        if !(self.nickname =~ /^[[:alnum:]]+$/ && self.nickname.ascii_only? && self.nickname =~ /^[\S]+$/)
+          errors.add(:nickname, I18n.t('activerecord.errors.models.user_character.nickname_format'))
+          throw :abort
+        end
       end
     end
   end

@@ -73,6 +73,9 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.4)
       public_suffix (>= 2.0.2, < 6.0)
+    apipie-rails (1.0.0)
+      actionpack (>= 5.0)
+      activesupport (>= 5.0)
     ast (2.4.2)
     awesome_print (1.9.2)
     bcrypt (3.1.18)
@@ -92,6 +95,9 @@ GEM
       activerecord (>= 5.a)
       database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
+    database_cleaner-redis (2.0.0)
+      database_cleaner-core (~> 2.0.0)
+      redis
     date (3.3.3)
     devise (4.9.2)
       bcrypt (~> 3.0)
@@ -334,9 +340,11 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers (~> 0.10.0)
+  apipie-rails
   awesome_print
   bootsnap
   database_cleaner-active_record
+  database_cleaner-redis
   devise
   devise-jwt
   dotenv-rails
@@ -355,7 +363,7 @@ DEPENDENCIES
   rest-client
   rspec-rails (~> 6.0.0)
   rubocop (~> 1.49)
-  shoulda-matchers
+  shoulda-matchers (~> 5.0)
   sidekiq
   sidekiq-scheduler
   sidekiq-unique-jobs

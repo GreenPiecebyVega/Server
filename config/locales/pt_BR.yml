@@ -3,6 +3,13 @@ pt_BR:
     bad_request: "Requisição Malformada."
     not_found: "Não encontrado."
     oops: "Oops! O servidor está com problemas para processar sua requisição."
+    unauthorized: "Não Autorizado"
+    btn_create_personagem: 'Criar Personagem'
+  messages:
+    user:
+      deleted: "Usuário(a) Deletado(a) com sucesso."
+    user_character:
+      deleted: "Personagem Deletado(a) com sucesso."
   activerecord:
     errors:
       not_found: 'Rota não encontrada.'
@@ -11,15 +18,6 @@ pt_BR:
         restrict_dependent_destroy:
           has_one: Não é possível excluir o registro pois existe um %{record} dependente
           has_many: Não é possível excluir o registro pois existem %{record} dependentes
-      controllers:
-        user:
-          created: "Usuário Criado(a) com sucesso."
-          updated: "Usuário Atualizado(a) com sucesso."
-          deleted: "Usuário Deletado(a) com sucesso."
-        user_character:
-          created: "Personagem Criado(a) com sucesso."
-          updated: "Personagem Atualizado(a) com sucesso."
-          deleted: "Personagem Deletado(a) com sucesso."
       models:
         user:
           attributes:
@@ -38,9 +36,11 @@ pt_BR:
             current_password:
               invalid: 'é inválida'
         user_character:
+          nickname_format: 'Nome do personagem aceita apenas letras e números sem espaços.'
           attributes:
             nickname: 'Nome do personagem'
-            nickname_format: 'Nome do personagem aceita apenas letras e números.'
+          messages:
+            cant_destroy: 'O personagem não pode ser deletado depois de alcançar o level 100.'
         base_character:
           attributes:
             gp_character_base:

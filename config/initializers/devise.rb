@@ -43,6 +43,10 @@ Devise.setup do |config|
   # ==> Devise JWT
   config.jwt do |jwt|
     jwt.secret = ENV['DEVISE_JWT_SECRET_KEY']
+
+    jwt.request_formats = {
+      user: %i[nil json]
+    }
     jwt.dispatch_requests = [
       ['POST', %r{users/signin}]
     ]

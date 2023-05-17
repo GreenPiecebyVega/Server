@@ -1,4 +1,4 @@
-# Green Piece by VegaSoft
+# Green Piece by VegaSoft :brazil:	
 
 Building and starting development enviroment
 ```console
@@ -10,6 +10,9 @@ docker compose exec -it server bash
 ```
 
 Generating Serializers
+[Gem Doc's](https://github.com/rails-api/active_model_serializers/tree/v0.10.6/docs)   
+[Getting Started](https://github.com/rails-api/active_model_serializers/blob/v0.10.6/docs/general/getting_started.md)   
+[Errors](https://github.com/rails-api/active_model_serializers/blob/v0.10.6/docs/jsonapi/errors.md)   
 ```console
 docker compose exec -it server rails g serializer SingularModelName
 ```
@@ -23,6 +26,7 @@ Seeding Defaults
 - characters
 ```console
 docker compose exec -it server rails db:seed
+docker compose exec -it server rails db:seed RAILS_ENV=test
 ```
 
 ## Mailer Preview
@@ -33,7 +37,7 @@ Visible at 'tmp', 'mailers_preview'
 - Adicionar bloqueio de personagem has_one
 - Adicionar bloqueio de conta has_one
 
-## GP Conventional Docs
+## GP Conventional Docs :recycle:	
 1. **Ruby**
   [Official Style Guide](https://rubystyle.guide/)
 
@@ -56,7 +60,7 @@ Visible at 'tmp', 'mailers_preview'
 5. **Rspec Rails**
   [Documentation](https://rubydoc.info/gems/rspec-rails/RSpec/Rails)
   [Matchers](https://rubydoc.info/gems/rspec-rails/RSpec/Rails/Matchers)
-* É altamente recomendável utilizar requests para testes de controllers não só porque verbos htps estarão disponíveis como também testes específicos de renderizações de views.
+  * É altamente recomendável utilizar requests para testes de controllers não só porque verbos htps estarão disponíveis como também testes específicos de renderizações de views.
   
 6. **Factories**
   [Boas Práticas](https://www.betterspecs.org/#factories)   
@@ -69,7 +73,11 @@ Visible at 'tmp', 'mailers_preview'
 8. **Pundit Matchers**
   [Documentation](https://github.com/punditcommunity/pundit-matchers#matchers)
 
-### Use binding.pry for debugging
+### Use binding.pry for debugging with docker
+To be able to use pry i have to:
+```console
+docker attach server
+```
 * Multi location debug in one execution
 ```console
   get current_usuario.root_path
@@ -77,4 +85,9 @@ Visible at 'tmp', 'mailers_preview'
   expect(response).to have_http_status(200)
 ```
 
-* by Vega
+### Docker cheatset
+```console
+docker compose run server env
+```
+
+* Made with :heart:. Todos os direitos reservados. Copyright © Vega Soft :star:.

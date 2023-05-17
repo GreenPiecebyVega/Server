@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'spec_helper'
+
 ENV['RAILS_ENV'] ||= 'test'
 
 require File.expand_path('../config/environment', __dir__)
@@ -8,13 +10,11 @@ require File.expand_path('../config/environment', __dir__)
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 
 require 'factory_bot_rails'
-require 'spec_helper'
 require 'rspec/rails'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 # require 'devise'
 # require 'devise/jwt/test_helpers'
-#
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
@@ -26,11 +26,8 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
+  config.include UserHelpers
   config.include Devise::Test::IntegrationHelpers, type: :request
-  config.use_transactional_fixtures = false
-
-  # You can uncomment this line to turn off ActiveRecord support entirely.
-  # config.use_active_record = false
 
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
@@ -44,5 +41,23 @@ RSpec.configure do |config|
       with.test_framework :rspec
       with.library :rails
     end
+  end
+
+  keep_tables = %w[base_characters characters]
+  config.before(:suite) do
+    DatabaseCleaner[:redis].db = ENV['REDIS_URL_SIDEKIQ']
+    DatabaseCleaner[:redis].strategy = :deletion
+    DatabaseCleaner[:redis].clean_with(:deletion)
+
+    DatabaseCleaner[:active_record].strategy = DatabaseCleaner::ActiveRecord::Deletion.new(except: ["base_characters", "characters"])
+    DatabaseCleaner[:active_record].clean_with(:transaction)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.append_after(:each) do
+    DatabaseCleaner.clean
   end
 end

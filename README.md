@@ -90,4 +90,4 @@ docker attach server
 docker compose run server env
 ```
 
-* Made with :heart:. Todos os direitos reservados. Copyright © Vega Soft :star:.
+Made with :heart:. Todos os direitos reservados. Copyright © Vega Soft :star:.

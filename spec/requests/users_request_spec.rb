@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'api/v1/users', type: :request do
+RSpec.describe 'Users', type: :request do
   context 'available' do
     it 'Returns a status of 200 with no params' do
       get '/api/v1/users/available'

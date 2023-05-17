@@ -3,7 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Pings', type: :request do
-  it 'Returns a status of 200' do
+  
+  it 'returns a status of 200' do
     get '/ping/'
     expect(response).to have_http_status(200)
   end

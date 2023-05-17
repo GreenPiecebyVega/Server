@@ -38,7 +38,7 @@ RSpec.describe 'UserCharacters', type: :request do
       confirm_and_sign_user(user, user_payload)
     end
 
-    it 'responds successfuly' do
+    it 'creates the character successfuly' do
       jwt = get_jwt
       payload = { 
         user_character: { 
@@ -73,7 +73,7 @@ RSpec.describe 'UserCharacters', type: :request do
       confirm_and_sign_user(user, user_payload)
     end
 
-    it 'responds successfuly' do
+    it 'updates the character successfuly' do
       jwt = get_jwt
       character = create(:user_character, :guerreiro, user: user)
       payload = {
@@ -102,12 +102,12 @@ RSpec.describe 'UserCharacters', type: :request do
     end
   end
 
-  context 'update' do
+  context 'destroy' do
     before do
       confirm_and_sign_user(user, user_payload)
     end
 
-    it 'responds successfuly' do
+    it 'destroys the character successfuly' do
       jwt = get_jwt
       character = create(:user_character, :guerreiro, user: user)
       delete "/api/v1/user/characters/#{character.id}", headers: { 'Authorization': "Bearer #{jwt}" }

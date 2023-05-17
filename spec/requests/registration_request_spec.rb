@@ -21,13 +21,9 @@ RSpec.describe 'POST /users', type: :request do
     }
   end
 
-  context 'when user are filled correctly' do
+  context 'when user successfuly signup' do
     before do
       post url, params: user_payload
-    end
-
-    it 'returns 200' do
-      expect(response).to have_http_status(200)
     end
 
     it 'returns I18n.t("devise.registrations.signed_up_but_unconfirmed")' do

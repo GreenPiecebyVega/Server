@@ -38,7 +38,9 @@ group :development, :test do
   gem 'faker'
   gem 'pry'
   gem 'pry-rails'
+end
 
+group :test do
   gem 'database_cleaner-active_record'
   gem 'database_cleaner-redis'
   gem 'factory_bot_rails', require: false

@@ -56,8 +56,6 @@ RSpec.describe 'UserCharacters', type: :request do
       jwt = get_jwt
       payload = { 
         user_character: { 
-          user_id: 'abc',
-          character_id: 70,
           nickname: ''
         }
       }

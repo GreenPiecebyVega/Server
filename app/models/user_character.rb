@@ -8,7 +8,8 @@ class UserCharacter < ApplicationRecord
   belongs_to :character
   has_one :inventory, class_name: 'UserCharacterInventory', dependent: :destroy
 
-  before_commit :set_user_character_defaults, if: -> { self.new_record? }
+  before_validation :set_user_character_defaults, on: :create
+
   # ref: upgrade_or_downgrade_hability_power.rb
   before_save :upgrade_or_downgrade_hability_power, if: :has_hability_points_changes?
   before_destroy :can_destroy?, prepend: true
@@ -17,7 +18,7 @@ class UserCharacter < ApplicationRecord
 
   # [fisica magica]
   def base_class
-    character.base_character.gp_character_base
+    character.base_character.gp_character_base if character.present?
   end
 
   # [guerreiro guardiao mago xanter duelista arqueiro]
@@ -34,11 +35,7 @@ class UserCharacter < ApplicationRecord
       upgrade_or_downgrade_devotion(3, :upgrade)
     end
     self.hability_points = 0
-    # set's attr's defaults
-    self.taxa_critica = BigDecimal('5.00')
-    self.dano_critico = BigDecimal('20.00')
-
-    self.build_inventory && self.inventory.save
+    self.build_inventory
   end
 
   def can_destroy?

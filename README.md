@@ -4,9 +4,11 @@ Building and starting development enviroment
 ```console
 docker compose up -d --build
 ```
+
 Containers Bash   
 ```console
-docker compose exec -it server bash
+docker compose exec server bash
+docker compose exec server_test bash
 ```
 
 Generating Serializers
@@ -14,19 +16,19 @@ Generating Serializers
 [Getting Started](https://github.com/rails-api/active_model_serializers/blob/v0.10.6/docs/general/getting_started.md)   
 [Errors](https://github.com/rails-api/active_model_serializers/blob/v0.10.6/docs/jsonapi/errors.md)   
 ```console
-docker compose exec -it server rails g serializer SingularModelName
+docker compose exec server rails g serializer SingularModelName
 ```
 
 Migrating
 ```console
-docker compose exec -it server rails db:migrate
+docker compose exec server rails db:migrate
 ```
 Seeding Defaults
 - base_characters
 - characters
 ```console
-docker compose exec -it server rails db:seed
-docker compose exec -it server rails db:seed RAILS_ENV=test
+docker compose exec server rails db:seed
+docker compose exec server_test rails db:seed
 ```
 
 ## Mailer Preview
@@ -50,7 +52,7 @@ Visible at 'tmp', 'mailers_preview'
 
 4. **Rspec**
   ```console
-  docker compose exec -it server rspec
+  docker compose exec server rspec
   ```
   [Boas Práticas](https://www.betterspecs.org)  
   Rspec is composed of multiple libraries [rspec-core](https://rubydoc.info/gems/rspec-core/), [rspec-expectations](https://rubydoc.info/gems/rspec-expectations) e [rspec-mocks](https://rubydoc.info/gems/rspec-mocks)   
@@ -73,8 +75,8 @@ Visible at 'tmp', 'mailers_preview'
 8. **Pundit Matchers**
   [Documentation](https://github.com/punditcommunity/pundit-matchers#matchers)
 
-### Use binding.pry for debugging with docker
-To be able to use pry i have to:
+### Use binding.pry for debugging with docker without respec
+To be able to use pry we have to:
 ```console
 docker attach server
 ```
@@ -88,6 +90,7 @@ docker attach server
 ### Docker cheatset
 ```console
 docker compose run server env
+docker compose run server_test env
 ```
 
 Made with :heart:. Todos os direitos reservados. Copyright © Vega Soft :star:.

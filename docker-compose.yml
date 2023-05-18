@@ -51,6 +51,23 @@ services:
       - "3000:3000"
     env_file:
       - .env
+  server_test:
+    container_name: server-test
+    tty: true
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bundle exec rails s -p 3001 -b '0.0.0.0' -P tmp/pids/server-test.pid
+    depends_on:
+      - mysql
+      - sidekiq
+    volumes:
+      - .:/greenpiece
+    ports:
+      - "3001:3001"
+    env_file:
+      - .envtest
 ###########
 # VOLUMES #
 ###########

@@ -7,6 +7,7 @@ Sidekiq::Web.use ActionDispatch::Session::CookieStore, key: '_interslice_session
 
 Rails.application.routes.draw do
   root to: 'apipie/apipies#index'
+
   #############
   ## SIDEKIQ ##
   #############
@@ -52,7 +53,7 @@ Rails.application.routes.draw do
   ##########
   ## Ping ##
   ##########
-  # Ping to ensure server is up
+  # Ping to ensure server is up #
   resources :ping, only: [:index] do
     collection do
       get :auth

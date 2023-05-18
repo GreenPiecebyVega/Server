@@ -9,9 +9,8 @@ class UserCharacter < ApplicationRecord
   has_one :inventory, class_name: 'UserCharacterInventory', dependent: :destroy
 
   before_validation :set_user_character_defaults, on: :create
+  before_validation :upgrade_or_downgrade_hability_power, if: :has_hability_points_changes?
 
-  # ref: upgrade_or_downgrade_hability_power.rb
-  before_save :upgrade_or_downgrade_hability_power, if: :has_hability_points_changes?
   before_destroy :can_destroy?, prepend: true
 
   private

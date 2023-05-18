@@ -44,7 +44,7 @@ RSpec.describe 'UserCharacters', type: :request do
         user_character: { 
           user_id: user.id,
           character_id: 1,
-          nickname: 'nicknssame'
+          nickname: 'greenpiecebyvega'
         }
       }
       post '/api/v1/user/characters', params: payload, headers: { 'Authorization': "Bearer #{jwt}" }

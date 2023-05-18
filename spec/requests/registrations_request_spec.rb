@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'POST /users', type: :request do
+RSpec.describe 'Resgistrations', type: :request do
   # Subject
   let(:url) { '/users' }
   let(:user_payload) do

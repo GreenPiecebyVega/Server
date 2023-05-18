@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'POST /users/signin', type: :request do
+RSpec.describe 'Sessions', type: :request do
   # Subject
   let(:user) { create(:user, :player, :free) }
   let(:url) { '/users/signin' }

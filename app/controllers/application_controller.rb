@@ -37,6 +37,7 @@ class ApplicationController < ActionController::API
     if (request.user_agent.blank? || request.user_agent.downcase.include?('headlesschrome')) && 
       request.referer.blank? && Rails.env == 'production'
       render json: { message: I18n.t('api.oops') }, status: :internal_server_error
+      # block user here besides rendering json
     end
   end
 end

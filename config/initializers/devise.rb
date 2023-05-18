@@ -50,9 +50,6 @@ Devise.setup do |config|
     jwt.dispatch_requests = [
       ['POST', %r{users/signin}]
     ]
-    jwt.revocation_requests = [
-      ['DELETE', %r{users/signout}]
-    ]
     jwt.expiration_time = 14.days.to_i
   end
 
@@ -60,7 +57,6 @@ Devise.setup do |config|
   config.warden do |manager|
     manager.failure_app = DeviseCustomFailure
     # ActionDispatch::Request::Session::DisabledSessionError: Your application has sessions disabled #
-    # Yeah it's an api only
     manager.scope_defaults :user, store: false
   end
 end

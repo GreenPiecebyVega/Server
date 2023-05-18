@@ -58,7 +58,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: bundle exec rails s -p 3001 -b '0.0.0.0' -P tmp/pids/server-test.pid
+    command: bundle exec rails s -p 3001 -b '0.0.0.0' -P tmp/pids/server_test.pid
     depends_on:
       - mysql
       - sidekiq

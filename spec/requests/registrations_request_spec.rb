@@ -22,12 +22,20 @@ RSpec.describe 'Resgistrations', type: :request do
   end
 
   context 'when user successfuly signup' do
-    before do
-      post url, params: user_payload
-    end
-
     it 'returns I18n.t("devise.registrations.signed_up_but_unconfirmed")' do
+      post url, params: user_payload
       expect(response.body).to include(I18n.t('devise.registrations.signed_up_but_unconfirmed'))
+    end
+  end
+
+  context 'when user can not singup' do
+    before do
+      user_payload[:user][:name] = nil
+    end
+    it 'responds with class errors successfuly' do
+      post url, params: user_payload
+      parsed = JSON.parse(response.body, object_class: OpenStruct)      
+      expect(parsed.errors.count).to be >= 1
     end
   end
 end

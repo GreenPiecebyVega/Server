@@ -15,11 +15,12 @@ RSpec.describe 'Sessions', type: :request do
     }
   end
 
-  context 'when user has not confirmed e-mail.' do
+  context 'loggin attempt when has not confirmed e-mail yet.' do
     before do
       post user_session_path, params: user_payload
     end
-    it 'returns I18n.t("devise.failure.unconfirmed")' do
+
+    it 'responds with I18n.t(devise.failure.unconfirmed)' do
       expect(response.body).to include(I18n.t('devise.failure.unconfirmed'))
     end
   end
@@ -27,6 +28,10 @@ RSpec.describe 'Sessions', type: :request do
   context 'when login is correct and confirmed' do
     before do
       confirm_and_sign_user(user, user_payload)
+    end
+
+    it 'returns I18n.t(devise.sessions.signed_in)' do
+      expect(response.body).to include(I18n.t('devise.sessions.signed_in'))
     end
 
     it 'returns valid JWT token' do

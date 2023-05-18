@@ -34,7 +34,7 @@ Rails.application.routes.draw do
                        registrations: 'users/registrations',
                        sessions: 'users/sessions'
                      },
-                     path_names: { sign_in: 'signin', sign_out: 'signout' }
+                     path_names: { sign_in: 'signin' }
   ##########
   ## APIs ##
   ##########

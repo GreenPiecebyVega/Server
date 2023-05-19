@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Sessions', type: :request do
   # Subject
   let(:user) { create(:user, :player, :free) }
-  let(:url) { '/users/signin' }
+  let(:url) { '/api/v1/users/signin' }
   let(:user_payload) do
     {
       user: {
@@ -21,7 +21,8 @@ RSpec.describe 'Sessions', type: :request do
     end
 
     it 'responds with I18n.t(devise.failure.unconfirmed)' do
-      expect(response.body).to include(I18n.t('devise.failure.unconfirmed'))
+      parsed = JSON.parse(response.body, object_class: OpenStruct)
+      expect(parsed.message).to include(I18n.t('devise.failure.unconfirmed'))
     end
   end
 
@@ -31,7 +32,8 @@ RSpec.describe 'Sessions', type: :request do
     end
 
     it 'returns I18n.t(devise.sessions.signed_in)' do
-      expect(response.body).to include(I18n.t('devise.sessions.signed_in'))
+      parsed = JSON.parse(response.body, object_class: OpenStruct)      
+      expect(parsed.message).to include(I18n.t('devise.sessions.signed_in'))
     end
 
     it 'returns valid JWT token' do

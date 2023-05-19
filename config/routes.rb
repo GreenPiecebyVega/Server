@@ -20,27 +20,26 @@ Rails.application.routes.draw do
   ###########
   ## Users ##
   ###########
-  match '/users/signin', to: 'errors#not_found', via: :get
-  match '/users/password/new', to: 'errors#not_found', via: :get
-  match '/users/password/edit', to: 'errors#not_found', via: :get
-  match '/users/cancel', to: 'errors#not_found', via: :get
-  match '/users/sign_up', to: 'errors#not_found', via: :get
-  match '/users/edit', to: 'errors#not_found', via: :get
-  match '/users/confirmation/new', to: 'errors#not_found', via: :get
-  # get /users/confirmation enabled for now on future will redirect to frontend
-  devise_for :users, controllers: {
-                       confirmations: 'users/confirmations',
-                       passwords: 'users/passwords',
-                       registrations: 'users/registrations',
-                       sessions: 'users/sessions'
-                     },
-                     path_names: { sign_in: 'signin' }
+  devise_for :users, skip: :all
+  devise_scope :user do
+    # Registrations
+    post 'api/v1/users', to: 'users/registrations#create', as: :user_registration
+    put 'api/v1/users', to: 'users#update', as: :user_update
+    # Sessions
+    post 'api/v1/users/signin', to: 'users/sessions#create', as: :user_session
+    # Passwords
+    post 'api/v1/users/password', to: 'users/passwords#create', as: :user_password
+    put 'api/v1/users/password', to: 'users/passwords#update', as: :update_user_password
+    # Confirmations
+    post 'api/v1/users/confirmation', to: 'users/confirmations#create', as: :user_confirmation
+    get 'api/v1/users/confirmation', to: 'users/confirmations#show'
+  end
   ##########
   ## APIs ##
   ##########
   namespace :api do
     namespace :v1 do
-      resources :users, only: [:update] do
+      resources :users do
         collection do
           get :available
         end

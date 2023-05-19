@@ -109,7 +109,7 @@ RSpec.describe 'UserCharacters', type: :request do
       jwt = get_jwt
       character = create(:user_character, :guerreiro, user: user)
       delete "/api/v1/user/characters/#{character.id}", headers: { 'Authorization': "Bearer #{jwt}" }
-      parsed = JSON.parse(response.body, object_class: OpenStruct)
+      parsed = JSON.parse(response.body, object_class: OpenStruct)      
       expect(parsed.message).to include(I18n.t('messages.user_character.deleted'))
     end
 

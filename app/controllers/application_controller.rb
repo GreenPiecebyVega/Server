@@ -20,7 +20,7 @@ class ApplicationController < ActionController::API
   end
 
   def user_not_authorized
-    render json: { message: I18n.t('api.unauthorized') }, status: 401
+    render json: { message: I18n.t('api.unauthorized') }, status: :unauthorized
   end
 
   def configure_permitted_parameters

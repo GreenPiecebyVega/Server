@@ -48,7 +48,7 @@ Devise.setup do |config|
       user: %i[nil json]
     }
     jwt.dispatch_requests = [
-      ['POST', %r{users/signin}]
+      ['POST', %r{api/v1/users/signin}]
     ]
     jwt.expiration_time = 14.days.to_i
   end

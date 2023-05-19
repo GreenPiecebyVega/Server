@@ -12,7 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def register_success
-    render json: { message: I18n.t('devise.registrations.signed_up_but_unconfirmed')}, status: :ok
+    render json: { message: I18n.t('devise.registrations.signed_up_but_unconfirmed') }, status: :ok
   end
 
   def register_failed

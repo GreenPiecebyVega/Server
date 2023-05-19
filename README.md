@@ -52,7 +52,7 @@ Visible at 'tmp', 'mailers_preview'
 
 4. **Rspec**
   ```console
-  docker compose exec server rspec
+  docker compose exec server_test rspec
   ```
   [Boas Práticas](https://www.betterspecs.org)  
   Rspec is composed of multiple libraries [rspec-core](https://rubydoc.info/gems/rspec-core/), [rspec-expectations](https://rubydoc.info/gems/rspec-expectations) e [rspec-mocks](https://rubydoc.info/gems/rspec-mocks)   

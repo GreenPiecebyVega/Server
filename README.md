@@ -19,18 +19,6 @@ Generating Serializers
 docker compose exec server rails g serializer SingularModelName
 ```
 
-Migrating
-```console
-docker compose exec server rails db:migrate
-```
-Seeding Defaults
-- base_characters
-- characters
-```console
-docker compose exec server rails db:seed
-docker compose exec server_test rails db:seed
-```
-
 ## Mailer Preview
 We are using letter_opening gem, we can preview e-mail beside sending them   
 Visible at 'tmp', 'mailers_preview'

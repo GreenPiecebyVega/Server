@@ -3,7 +3,9 @@
 module Api
   module V1
     class UsersController < ApplicationController
-      # GET /api/v1/users/available
+      before_action :set_user, only: %i[update]
+
+      api :PUT, 'users/available', 'Busca por email ou username disponível.'
       def available
         free = if params[:email].present?
                  !User.where('email = ?', params[:email].downcase).exists?
@@ -13,6 +15,17 @@ module Api
                  true
                end
         render json: { data: free }
+      end
+
+      api :PUT, '/users', 'Atualiza informações Usuário/Account'
+      def update
+        authorize @user
+
+        if @user.update?
+
+        else
+          unprocessable_entity
+        end
       end
 
       private

@@ -17,10 +17,10 @@ module UserCharacters
       private
 
       def nickname_format
-        if !(self.nickname =~ /^[[:alnum:]]+$/ && self.nickname.ascii_only? && self.nickname =~ /^[\S]+$/)
-          errors.add(:nickname, I18n.t('activerecord.errors.models.user_character.nickname_format'))
-          throw :abort
-        end
+        return if nickname =~ /^[[:alnum:]]+$/ && nickname.ascii_only? && nickname =~ /^\S+$/
+
+        errors.add(:nickname, I18n.t('activerecord.errors.models.user_character.nickname_format'))
+        throw :abort
       end
     end
   end

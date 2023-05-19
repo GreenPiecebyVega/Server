@@ -22,18 +22,24 @@ Rails.application.routes.draw do
   ###########
   devise_for :users, skip: :all
   devise_scope :user do
+    # UserController
+    put 'api/v1/users', to: 'users#update', as: :user_update
+
     # Registrations
     post 'api/v1/users', to: 'users/registrations#create', as: :user_registration
-    put 'api/v1/users', to: 'users#update', as: :user_update
     # Sessions
     post 'api/v1/users/signin', to: 'users/sessions#create', as: :user_session
     # Passwords
     post 'api/v1/users/password', to: 'users/passwords#create', as: :user_password
-    put 'api/v1/users/password', to: 'users/passwords#update', as: :update_user_password
+    patch 'api/v1/users/password', to: 'users/passwords#update', as: :update_user_password
     # Confirmations
     post 'api/v1/users/confirmation', to: 'users/confirmations#create', as: :user_confirmation
-    get 'api/v1/users/confirmation', to: 'users/confirmations#show'
+    get 'api/v1/users/confirmation', to: 'users/confirmations#show', as: :user_confirmation_show
+    # Unlocks
+    post 'api/v1/users/unlock', to: 'users/unlocks#create', as: :user_unlock
+    get 'api/v1/users/unlock', to: 'users/unlocks#show', as: :unlock_user
   end
+
   ##########
   ## APIs ##
   ##########
@@ -44,7 +50,6 @@ Rails.application.routes.draw do
           get :available
         end
       end
-
       resources :user_characters, path: 'user/characters', only: %i[index create update destroy]
     end
   end

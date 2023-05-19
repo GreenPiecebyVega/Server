@@ -10,13 +10,13 @@ module Api
       def index
         authorize UserCharacter
         scoped_user_characters = policy_scope(UserCharacter)
-        
+
         if scoped_user_characters.count.positive?
-          render json: scoped_user_characters, 
-                 each_serializer: UserCharacterSerializer, 
+          render json: scoped_user_characters,
+                 each_serializer: UserCharacterSerializer,
                  status: :ok
         else
-          render json: { message: 'data_not_found' }, status: :ok
+          render json: { message: 'data_not_found' }, status: :unprocessable_entity
         end
       rescue StandardError => e
         render json: { message: I18n.t('api.oops') }, status: :internal_server_error
@@ -30,14 +30,14 @@ module Api
         if user_character.save
           render json: user_character, status: :ok
         else
-          render json: user_character, 
-                 serializer: ActiveModel::Serializer::ErrorSerializer, 
-                 status: :ok
+          render json: user_character,
+                 serializer: ActiveModel::Serializer::ErrorSerializer,
+                 status: :unprocessable_entity
         end
       rescue StandardError => e
         render json: { message: I18n.t('api.oops') }, status: :internal_server_error
       end
-      
+
       api :PUT, '/user/characters/:id', 'Atualiza Personagem'
       def update
         authorize @user_character
@@ -45,9 +45,9 @@ module Api
         if @user_character.update(user_characters_params)
           render json: @user_character, status: :ok
         else
-          render json: @user_character, 
-                 serializer: ActiveModel::Serializer::ErrorSerializer, 
-                 status: :ok
+          render json: @user_character,
+                 serializer: ActiveModel::Serializer::ErrorSerializer,
+                 status: :unprocessable_entity
         end
       rescue StandardError => e
         render json: { message: I18n.t('api.oops') }, status: 500
@@ -61,7 +61,7 @@ module Api
         else
           render json: @user_character,
                  serializer: ActiveModel::Serializer::ErrorSerializer,
-                 status: :ok
+                 status: :unprocessable_entity
         end
       rescue StandardError => e
         render json: { message: I18n.t('api.oops') }, status: 500

@@ -2,11 +2,6 @@
 
 class UserMailer < Devise::Mailer
   def confirmation_instructions(record, token, opts = {})
-    # headers['Custom-header'] = 'Bar'
-    super
-  end
-
-  def confirmation_instructions(record, token, opts = {})
     @token = token
     devise_mail(record, :confirmation_instructions, opts)
   end

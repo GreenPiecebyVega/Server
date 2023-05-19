@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require "shoulda/matchers"
+
+require 'shoulda/matchers'
 require 'simplecov'
 
 SimpleCov.start do

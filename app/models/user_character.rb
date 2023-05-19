@@ -31,24 +31,24 @@ class UserCharacter < ApplicationRecord
     when 'fisica'
       upgrade_or_downgrade_strength(3, :upgrade)
     else 'magica'
-      upgrade_or_downgrade_devotion(3, :upgrade)
+         upgrade_or_downgrade_devotion(3, :upgrade)
     end
     self.hability_points = 0
-    self.build_inventory
+    build_inventory
   end
 
   def can_destroy?
-    if self.lv >= 100
-      errors.add(:lv, I18n.t('activerecord.errors.models.user_character.messages.cant_destroy'))
-      throw :abort
-    end
+    return unless lv >= 100
+
+    errors.add(:lv, I18n.t('activerecord.errors.models.user_character.messages.cant_destroy'))
+    throw :abort
   end
-  
+
   %i[hp mp ataque defesa ataque_magico adicional_damage real_damage amplificação_de_dano_fisico
-    amplificação_de_dano_magico evasao precisao esquiva amplificação_de_tx taxa_critica dano_critico
-    roubo_de_hp roubo_de_mp resistencia_a_taxa_critica resistencia_ao_dano_critico resistencia_a_queda
-    resistencia_ao_atordoamento experience group_experience pet_experience ruby_experience war_experience
-    guild_war_experience].each do |method|
+     amplificação_de_dano_magico evasao precisao esquiva amplificação_de_tx taxa_critica dano_critico
+     roubo_de_hp roubo_de_mp resistencia_a_taxa_critica resistencia_ao_dano_critico resistencia_a_queda
+     resistencia_ao_atordoamento experience group_experience pet_experience ruby_experience war_experience
+     guild_war_experience].each do |method|
     define_method "#{method}=" do |value|
       write_attribute method, (value.to_s.match(/,/) ? value.gsub('.', '').gsub(',', '.') : value)
     end

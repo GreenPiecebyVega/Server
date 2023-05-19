@@ -9,7 +9,8 @@ class User < ApplicationRecord
   include Users::Logic
   include Users::Validations
   include Devise::JWT::RevocationStrategies::JTIMatcher
-  devise :database_authenticatable,
+  devise :lockable,
+         :database_authenticatable,
          :jwt_authenticatable,
          :confirmable,
          :registerable,

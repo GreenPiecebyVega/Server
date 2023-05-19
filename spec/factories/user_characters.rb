@@ -3,7 +3,6 @@
 FactoryBot.define do
   # Account Characters
   factory :user_character do
-    
     association :user, factory: :user
 
     nickname { "nickname#{SecureRandom.hex(4)}" }

@@ -49,7 +49,8 @@ RSpec.configure do |config|
     DatabaseCleaner[:redis].strategy = :deletion
     DatabaseCleaner[:redis].clean_with(:deletion)
 
-    DatabaseCleaner[:active_record].strategy = DatabaseCleaner::ActiveRecord::Deletion.new(except: ["base_characters", "characters"])
+    DatabaseCleaner[:active_record].strategy = DatabaseCleaner::ActiveRecord::Deletion.new(except: %w[base_characters
+                                                                                                      characters])
     DatabaseCleaner[:active_record].clean_with(:transaction)
   end
 

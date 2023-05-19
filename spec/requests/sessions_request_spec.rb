@@ -32,7 +32,7 @@ RSpec.describe 'Sessions', type: :request do
     end
 
     it 'returns I18n.t(devise.sessions.signed_in)' do
-      parsed = JSON.parse(response.body, object_class: OpenStruct)      
+      parsed = JSON.parse(response.body, object_class: OpenStruct)
       expect(parsed.message).to include(I18n.t('devise.sessions.signed_in'))
     end
 

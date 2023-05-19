@@ -25,13 +25,13 @@ module UserCharacters
       ##################################
       def upgrade_or_downgrade_hability_power
         hability_who_was_changed = if will_save_change_to_strength?
-                                    :strength
+                                     :strength
                                    elsif will_save_change_to_wisdom?
-                                    :wisdom
+                                     :wisdom
                                    elsif will_save_change_to_devotion?
-                                    :devotion
+                                     :devotion
                                    else
-                                    :tenacity
+                                     :tenacity
                                    end
 
         case hability_who_was_changed
@@ -45,7 +45,7 @@ module UserCharacters
             amount_of_hability_points = strength_in_database - strength
             upgrade_or_downgrade_strength(amount_of_hability_points, :downgrade)
           end
-        
+
         # WIS #
         when :wisdom
           if wisdom > wisdom_in_database
@@ -55,7 +55,7 @@ module UserCharacters
             amount_of_hability_points = wisdom_in_database - wisdom
             upgrade_or_downgrade_wisdom(amount_of_hability_points, :downgrade)
           end
-        
+
         # DEV #
         when :devotion
           if devotion > devotion_in_database
@@ -65,16 +65,16 @@ module UserCharacters
             amount_of_hability_points = devotion_in_database - devotion
             upgrade_or_downgrade_devotion(amount_of_hability_points, :downgrade)
           end
-        
+
         # TEN #
         else :tenacity
-          if tenacity > tenacity_in_database
-            amount_of_hability_points = tenacity - tenacity_in_database
-            upgrade_or_downgrade_tenacity(amount_of_hability_points, :upgrade)
-          else
-            amount_of_hability_points = tenacity_in_database - tenacity
-            upgrade_or_downgrade_tenacity(amount_of_hability_points, :downgrade)
-          end
+             if tenacity > tenacity_in_database
+               amount_of_hability_points = tenacity - tenacity_in_database
+               upgrade_or_downgrade_tenacity(amount_of_hability_points, :upgrade)
+             else
+               amount_of_hability_points = tenacity_in_database - tenacity
+               upgrade_or_downgrade_tenacity(amount_of_hability_points, :downgrade)
+             end
         end
       end
 
@@ -119,7 +119,7 @@ module UserCharacters
           self.defesa          += temp_defesa
           self.precisao        += temp_precisao
           self.evasao          += temp_evasao
-          
+
           self.tenacity        += amount_of_hability_points
           self.hability_points -= amount_of_hability_points
         else
@@ -128,7 +128,7 @@ module UserCharacters
           self.defesa          -= temp_defesa
           self.precisao        -= temp_precisao
           self.evasao          -= temp_evasao
-          
+
           self.tenacity        -= amount_of_hability_points
           self.hability_points += amount_of_hability_points
         end

@@ -30,21 +30,20 @@ gem 'bootsnap', require: false
 
 group :development, :test do
   gem 'apipie-rails'
-  gem 'letter_opener'
-  gem 'rubocop', '~> 1.49', require: false
-  gem 'spring'
-  gem 'spring-commands-rspec'
   gem 'awesome_print'
   gem 'faker'
+  gem 'letter_opener'
   gem 'pry'
   gem 'pry-rails'
+  gem 'spring'
+  gem 'spring-commands-rspec'
 end
 
 group :test do
   gem 'database_cleaner-active_record'
   gem 'database_cleaner-redis'
   gem 'factory_bot_rails', require: false
-  gem 'shoulda-matchers', '~> 5.0'
   gem 'rspec-rails', '~> 6.0.0'
+  gem 'shoulda-matchers', '~> 5.0'
   gem 'simplecov', require: false
 end

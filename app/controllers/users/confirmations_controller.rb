@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Users::ConfirmationsController < Devise::ConfirmationsController
-  # POST /resource/confirmation
   api :POST, '/users/confirmation', 'Reenvia o token confirmation_token'
   def create
     self.resource = resource_class.send_confirmation_instructions(resource_params)
@@ -10,13 +9,12 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     if successfully_sent?(resource)
       render json: { message: I18n.t('devise.confirmations.resent') }, status: :ok
     else
-      render json: resource, 
-             serializer: ActiveModel::Serializer::ErrorSerializer, 
-             status: :ok
+      render json: resource,
+             serializer: ActiveModel::Serializer::ErrorSerializer,
+             status: :unprocessable_entity
     end
   end
 
-  # GET /resource/confirmation?confirmation_token=abcdef
   api :GET, '/users/confirmation/:confirmation_token', 'Confirma usuario pelo confirmation_token'
   def show
     self.resource = resource_class.confirm_by_token(params[:confirmation_token])
@@ -25,8 +23,8 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     if resource.errors.empty?
       render json: { message: I18n.t('devise.confirmations.success') }, status: :ok
     else
-      render json: resource, 
-             serializer: ActiveModel::Serializer::ErrorSerializer, 
+      render json: resource,
+             serializer: ActiveModel::Serializer::ErrorSerializer,
              status: :ok
     end
   end

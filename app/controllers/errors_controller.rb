@@ -6,6 +6,6 @@ class ErrorsController < ApplicationController
   end
 
   def internal_server_error
-    render json: { message: I18n.t('activerecord.erros.internal_server_error') }, status: :internal_server_error
+    render json: { message: I18n.t('activerecord.errors.internal_server_error') }, status: :internal_server_error
   end
 end

@@ -1,19 +1,25 @@
 # frozen_string_literal: true
 
 require 'sidekiq/web'
-# Configure Sidekiq-specific session middleware
+# sidekiq-specific session middleware
 Sidekiq::Web.use ActionDispatch::Cookies
 Sidekiq::Web.use ActionDispatch::Session::CookieStore, key: '_interslice_session'
 
 Rails.application.routes.draw do
-  root to: 'apipie/apipies#index'
+  if Rails.env.development?
+    root to: 'apipie/apipies#index'
+  end
 
   #############
   ## SIDEKIQ ##
   #############
-  # https://github.com/sidekiq/sidekiq/issues/4061 #
   Sidekiq::Web.use Rack::Auth::Basic do |username, password|
-    username == 'username' && password == 'password'
+    if rails.env.development?
+      username == 'developer' && password == 'developer'
+    else
+      # ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(username), ::Digest::SHA256.hexdigest(Rails.application.credentials.dig(:sidekiqweb, :username))) &&
+      # ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(password), ::Digest::SHA256.hexdigest(Rails.application.credentials.dig(:sidekiqweb, :password)))
+    end
   end
   mount Sidekiq::Web => '/sidekiq'
 

@@ -13,6 +13,7 @@ pt_BR:
   activerecord:
     errors:
       not_found: 'Rota não encontrada.'
+      internal_server_error: 'O Servidor não pode completar sua requisição.'
       messages:
         record_invalid: 'A validação falhou: %{errors}'
         restrict_dependent_destroy:

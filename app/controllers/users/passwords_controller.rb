@@ -24,7 +24,7 @@ class Users::PasswordsController < Devise::PasswordsController
 
     if resource.errors.empty?
       resource.unlock_access! if unlockable?(resource)
-      render json: { message: I18n.t('devise.passwordss.updated') }, status: :ok
+      render json: { message: I18n.t('devise.passwords.updated') }, status: :ok
     else
       set_minimum_password_length
       render json: resource,

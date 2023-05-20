@@ -3,8 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Resgistrations', type: :request do
-  # Subject
-  let(:url) { '/api/v1/users' }
   let(:user_payload) do
     {
       user: {
@@ -21,9 +19,9 @@ RSpec.describe 'Resgistrations', type: :request do
     }
   end
 
-  context 'when user successfuly signup' do
+  context 'create' do
     it 'returns I18n.t("devise.registrations.signed_up_but_unconfirmed")' do
-      post url, params: user_payload
+      post user_registration_path, params: user_payload
       parsed = JSON.parse(response.body, object_class: OpenStruct)
       expect(parsed.message).to include(I18n.t('devise.registrations.signed_up_but_unconfirmed'))
     end
@@ -34,7 +32,7 @@ RSpec.describe 'Resgistrations', type: :request do
       user_payload[:user][:name] = nil
     end
     it 'responds with class errors successfuly' do
-      post url, params: user_payload
+      post user_registration_path, params: user_payload
       parsed = JSON.parse(response.body, object_class: OpenStruct)
       expect(parsed.errors.count).to be >= 1
     end

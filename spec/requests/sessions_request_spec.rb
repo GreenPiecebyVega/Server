@@ -5,7 +5,6 @@ require 'rails_helper'
 RSpec.describe 'Sessions', type: :request do
   # Subject
   let(:user) { create(:user, :player, :free) }
-  let(:url) { '/api/v1/users/signin' }
   let(:user_payload) do
     {
       user: {
@@ -28,7 +27,7 @@ RSpec.describe 'Sessions', type: :request do
 
   context 'when login is correct and confirmed' do
     before do
-      confirm_and_sign_user(user, user_payload)
+      confirm_and_sigin(user)
     end
 
     it 'returns I18n.t(devise.sessions.signed_in)' do

@@ -2,32 +2,24 @@ require 'rails_helper'
 
 RSpec.describe 'UserCharacters', type: :request do
   let(:user) { create(:user, :player, :free) }
-  let(:user_payload) do
-    {
-      user: {
-        login: user.email,
-        password: user.password
-      }
-    }
-  end
 
   context 'index' do
     before do
-      confirm_and_sign_user(user, user_payload)
+      confirm_and_sigin(user)
     end
 
     it 'returns the user character list' do
       jwt = get_jwt
       user1 = create(:user_character, :guerreiro, user: user)
       user2 = create(:user_character, :mago, user: user)
-      get '/api/v1/user/characters', headers: { 'Authorization': "Bearer #{jwt}" }
+      get api_v1_user_characters_path, headers: { 'Authorization': "Bearer #{jwt}" }
       parsed = JSON.parse(response.body, object_class: OpenStruct)
       expect(parsed.data.count).to be(2)
     end
 
     it 'responds with class errors successfuly' do
       jwt = get_jwt
-      get '/api/v1/user/characters', headers: { 'Authorization': "Bearer #{jwt}" }
+      get api_v1_user_characters_path, headers: { 'Authorization': "Bearer #{jwt}" }
       parsed = JSON.parse(response.body, object_class: OpenStruct)
       expect(parsed.message).to include('data_not_found')
     end
@@ -35,7 +27,7 @@ RSpec.describe 'UserCharacters', type: :request do
 
   context 'create' do
     before do
-      confirm_and_sign_user(user, user_payload)
+      confirm_and_sigin(user)
     end
 
     it 'creates the character successfuly' do
@@ -47,7 +39,7 @@ RSpec.describe 'UserCharacters', type: :request do
           nickname: 'greenpiecebyvega'
         }
       }
-      post '/api/v1/user/characters', params: payload, headers: { 'Authorization': "Bearer #{jwt}" }
+      post api_v1_user_characters_path, params: payload, headers: { 'Authorization': "Bearer #{jwt}" }
       parsed = JSON.parse(response.body, object_class: OpenStruct)
       expect(user.character_ids).to include(parsed.data.id.to_i)
     end
@@ -59,7 +51,7 @@ RSpec.describe 'UserCharacters', type: :request do
           nickname: ''
         }
       }
-      post '/api/v1/user/characters', params: payload, headers: { 'Authorization': "Bearer #{jwt}" }
+      post api_v1_user_characters_path, params: payload, headers: { 'Authorization': "Bearer #{jwt}" }
       parsed = JSON.parse(response.body, object_class: OpenStruct)
       expect(parsed.errors.count).to be > 1
     end
@@ -67,7 +59,7 @@ RSpec.describe 'UserCharacters', type: :request do
 
   context 'update' do
     before do
-      confirm_and_sign_user(user, user_payload)
+      confirm_and_sigin(user)
     end
 
     it 'updates the character successfuly' do
@@ -101,7 +93,7 @@ RSpec.describe 'UserCharacters', type: :request do
 
   context 'destroy' do
     before do
-      confirm_and_sign_user(user, user_payload)
+      confirm_and_sigin(user)
     end
 
     it 'destroys the character successfuly' do

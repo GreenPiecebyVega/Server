@@ -23,10 +23,6 @@ docker compose exec server rails g serializer SingularModelName
 We are using letter_opening gem, we can preview e-mail beside sending them   
 Visible at 'tmp', 'mailers_preview'
 
-## Todo
-- Adicionar bloqueio de personagem has_one
-- Adicionar bloqueio de conta has_one
-
 ## GP Conventional Docs :recycle:	
 1. **Ruby**
   [Official Style Guide](https://rubystyle.guide/)
@@ -82,3 +78,10 @@ docker compose run server_test env
 ```
 
 Made with :heart:. Todos os direitos reservados. Copyright © Vega Soft :star:.
+
+## Todo
+- Adicionar bloqueio de personagem has_one
+- Adicionar bloqueio de conta has_one
+- retirar bonus premium de user e passar para a praemium table.
+- Adicionar premium table { category {:diamante, :gold} data_expiracao: datetime }, belongs_to :user and user has_one: premium and add a callback on before_create user also add a 3 days premium.
+- Adicionar titles tables { :title, :description, subject: { :war, :turibuluns(dungeons), :general, :pvp, :pvm}}, belongs_to :user_character and user_character has_many titles

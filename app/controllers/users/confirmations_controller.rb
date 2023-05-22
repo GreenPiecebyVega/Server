@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Users::ConfirmationsController < Devise::ConfirmationsController
+  respond_to :json
+  
   api :POST, '/users/confirmation', 'Reenvia o token confirmation_token'
   def create
     self.resource = resource_class.send_confirmation_instructions(resource_params)

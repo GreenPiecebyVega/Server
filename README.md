@@ -77,7 +77,7 @@ docker compose run server env
 docker compose run server_test env
 ```
 
-Made with :heart:. Todos os direitos reservados. Copyright © Vega Soft :star:.
+Made with :heart:. Todos os direitos reservados. Green Piece ID:929641795 Copyright © Vega Soft :star:.
 
 ## Todo
 - Adicionar bloqueio de personagem has_one

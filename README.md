@@ -23,7 +23,7 @@ docker compose exec server rails g serializer SingularModelName
 We are using letter_opening gem, we can preview e-mail beside sending them   
 Visible at 'tmp', 'mailers_preview'
 
-## GP Conventional Docs :recycle:	
+## Snf Conventional Docs :recycle:	
 1. **Ruby**
   [Official Style Guide](https://rubystyle.guide/)
 

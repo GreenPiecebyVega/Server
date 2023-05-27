@@ -13,7 +13,10 @@ else
     rm -f tmp/pids/server_test.pid
   fi
 
-  bundle exec rake db:migrate 2>/dev/null || bundle exec rake db:setup
-  rails db:seed
+  if [ "$1" = "server" ]; then
+    bundle exec rake db:migrate 2>/dev/null || bundle exec rake db:setup
+    rails db:seed  
+  fi
+  
   exec "$@"
 fi

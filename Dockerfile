@@ -1,7 +1,5 @@
 FROM ruby:3.2.2-alpine AS greenpiece
 
-ENV RAILS_ENV development
-
 # Dependencies
 RUN apk add --update --no-cache \
     build-base \
@@ -42,6 +40,9 @@ ENV BUNDLE_CACHE_PATH /usr/local/bundle/cache
 ENV BUNDLE_PATH /usr/local/bundle
 ENV BUNDLE_BIN /usr/local/bundle/bin
 
+# Install Bundler
+RUN gem install bundler -v "$BUNDLER_VERSION"
+
 # APP USER
 ENV USER developer
 ENV GROUP development
@@ -51,26 +52,31 @@ ENV GROUP_ID 1001
 RUN addgroup -g $GROUP_ID --system $GROUP && \
     adduser -u $USER_ID --gecos '' -G $GROUP --disabled-password $USER
 
-# APP
-ENV app_directory /greenpiece
-RUN mkdir $app_directory
+# Set the app directory
+ENV APP_DIRECTORY /greenpiece
+RUN mkdir $APP_DIRECTORY
 
+# Switch to root user for permission changes
 USER root
 
-RUN setfacl -m u:$USER:rwx $app_directory
+# Grant permissions to the user
+RUN setfacl -m u:$USER:rwx $APP_DIRECTORY
 RUN setfacl -m u:$USER:rwx $BUNDLE_PATH
 
-RUN chown -R $USER_ID:$GROUP_ID $app_directory
-RUN chown -R $USER_ID:$GROUP_ID $BUNDLE_PATH
+# Change ownership of directories
+RUN chown -R $USER:$GROUP $APP_DIRECTORY
+RUN chown -R $USER:$GROUP $BUNDLE_PATH
 
-WORKDIR $app_directory
+# Set the working directory
+WORKDIR $APP_DIRECTORY
+
+# Switch back to the regular user
 USER $USER
 
-COPY Gemfile Gemfile.lock $app_directory/
+COPY --chown=$USER Gemfile Gemfile.lock $APP_DIRECTORY/
 
-RUN bundle config build.nokogiri --use-system-libraries && \
-    bundle check || bundle install
+RUN bundle check || bundle install
 
-COPY . $app_directory/
+COPY . $APP_DIRECTORY/
 
 ENTRYPOINT ["./entrypoints/docker-entrypoint.sh"]

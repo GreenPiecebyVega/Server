@@ -14,9 +14,9 @@ else
   fi
 
   if [ "$1" = "server" ]; then
-    bundle exec rake db:migrate 2>/dev/null || bundle exec rake db:setup
-    rails db:seed  
+    bundle exec rake db:migrate 2>/dev/null || bundle exec rake db:setup  
   fi
   
+  rails db:seed
   exec "$@"
 fi

@@ -15,8 +15,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       clean_up_passwords resource
       set_minimum_password_length
       render json: resource,
-           serializer: ActiveModel::Serializer::ErrorSerializer,
-           status: :unprocessable_entity
+             serializer: ActiveModel::Serializer::ErrorSerializer,
+             status: :unprocessable_entity
     end
   end
 end

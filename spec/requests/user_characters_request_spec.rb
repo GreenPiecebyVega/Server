@@ -10,8 +10,8 @@ RSpec.describe 'UserCharacters', type: :request do
 
     it 'returns the user character list' do
       jwt = get_jwt
-      user1 = create(:user_character, :guerreiro, user: user)
-      user2 = create(:user_character, :mago, user: user)
+      user1 = create(:user_character, :guerreiro, user:)
+      user2 = create(:user_character, :mago, user:)
       get api_v1_user_characters_path, headers: { 'Authorization': "Bearer #{jwt}" }
       parsed = JSON.parse(response.body, object_class: OpenStruct)
       expect(parsed.data.count).to be(2)

@@ -10,6 +10,7 @@ services:
     volumes:
       - mysql:/var/lib/mysql
     env_file: .env
+  
   #########
   # REDIS #
   #########
@@ -17,6 +18,7 @@ services:
     container_name: redis
     image: redis:6.2.6-alpine
     env_file: .env
+  
   ###########
   # SIDEKIQ #
   ###########
@@ -31,6 +33,7 @@ services:
       - .:/greenpiece
     env_file:
       - .env
+
   ######
   # GP #
   ######
@@ -51,8 +54,12 @@ services:
       - "3000:3000"
     env_file:
       - .env
-  server_test:
-    container_name: server-test
+  
+  #######
+  # TDD #
+  #######
+  tdd:
+    container_name: tdd
     tty: true
     stdin_open: true
     build:
@@ -68,6 +75,7 @@ services:
       - "3001:3001"
     env_file:
       - .envtest
+
 ###########
 # VOLUMES #
 ###########

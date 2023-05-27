@@ -11,7 +11,7 @@ module UserHelpers
   end
 
   def confirm_user_by_token(confirmation_token)
-    get user_confirmation_path(confirmation_token: confirmation_token)
+    get user_confirmation_path(confirmation_token:)
   end
 
   def get_jwt

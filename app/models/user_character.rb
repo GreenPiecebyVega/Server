@@ -31,7 +31,7 @@ class UserCharacter < ApplicationRecord
     when 'fisica'
       upgrade_or_downgrade_strength(3, :upgrade)
     else 'magica'
-      upgrade_or_downgrade_devotion(3, :upgrade)
+         upgrade_or_downgrade_devotion(3, :upgrade)
     end
     self.hability_points = 0
     build_inventory

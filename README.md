@@ -1,7 +1,9 @@
 # Green Piece by VegaSoft :brazil:
 
 Windows users has to set before cloning the project
+```console
 git config --global core.autocrlf input
+```
 
 Quick Start
 ```console

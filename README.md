@@ -8,7 +8,7 @@ docker compose up -d --build
 Containers Bash   
 ```console
 docker compose exec server bash
-docker compose exec server_test bash
+docker compose exec tdd bash
 ```
 
 ## Generating Serializers
@@ -36,7 +36,7 @@ Visible at 'tmp', 'mailers_preview'
 
 4. **Rspec**
   ```console
-  docker compose exec server_test rspec
+  docker compose exec tdd rspec
   ```
   [Boas Práticas](https://www.betterspecs.org)  
   Rspec is composed of multiple libraries [rspec-core](https://rubydoc.info/gems/rspec-core/), [rspec-expectations](https://rubydoc.info/gems/rspec-expectations) e [rspec-mocks](https://rubydoc.info/gems/rspec-mocks)   
@@ -74,7 +74,7 @@ docker attach server
 ### Docker cheatset
 ```console
 docker compose exec server env
-docker compose exec server_test env
+docker compose exec tdd env
 ```
 
 Made with :heart:. Todos os direitos reservados. Green Piece ID:929641795 Copyright © Vega Soft :star:.

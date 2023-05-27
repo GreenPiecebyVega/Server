@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   ## SIDEKIQ ##
   #############
   Sidekiq::Web.use Rack::Auth::Basic do |username, password|
-    if rails.env.development?
+    if Rails.env.development?
       username == 'developer' && password == 'developer'
     else
       # ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(username), ::Digest::SHA256.hexdigest(Rails.application.credentials.dig(:sidekiqweb, :username))) &&

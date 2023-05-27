@@ -15,7 +15,13 @@ Containers Bash
 docker compose exec server bash
 docker compose exec tdd bash
 ```
+API Documentation   
+http://localhost:3000/
 
+BackgroundJobs Dashboard   
+username: developer   
+password: developer   
+http://localhost:3000/sidekiq
 ## Generating Serializers
 [Gem Doc's](https://github.com/rails-api/active_model_serializers/tree/v0.10.6/docs)   
 [Getting Started](https://github.com/rails-api/active_model_serializers/blob/v0.10.6/docs/general/getting_started.md)   

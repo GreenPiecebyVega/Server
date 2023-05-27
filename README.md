@@ -1,6 +1,6 @@
-# Green Piece by VegaSoft :brazil:	
+# Green Piece by VegaSoft :brazil:
 
-Building and starting development enviroment
+Quick Start
 ```console
 docker compose up -d --build
 ```
@@ -11,7 +11,7 @@ docker compose exec server bash
 docker compose exec server_test bash
 ```
 
-Generating Serializers
+## Generating Serializers
 [Gem Doc's](https://github.com/rails-api/active_model_serializers/tree/v0.10.6/docs)   
 [Getting Started](https://github.com/rails-api/active_model_serializers/blob/v0.10.6/docs/general/getting_started.md)   
 [Errors](https://github.com/rails-api/active_model_serializers/blob/v0.10.6/docs/jsonapi/errors.md)   
@@ -59,7 +59,7 @@ Visible at 'tmp', 'mailers_preview'
 8. **Pundit Matchers**
   [Documentation](https://github.com/punditcommunity/pundit-matchers#matchers)
 
-### Use binding.pry for debugging with docker without respec
+### Use binding.pry for debugging on development
 To be able to use pry we have to:
 ```console
 docker attach server
@@ -73,8 +73,8 @@ docker attach server
 
 ### Docker cheatset
 ```console
-docker compose run server env
-docker compose run server_test env
+docker compose exec server env
+docker compose exec server_test env
 ```
 
 Made with :heart:. Todos os direitos reservados. Green Piece ID:929641795 Copyright © Vega Soft :star:.

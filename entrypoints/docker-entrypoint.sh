@@ -1,22 +1,11 @@
 #!/bin/bash
 set -e
 
-if [ "$1" = "sidekiq" ]; then
-  bundle exec sidekiq
+if [ "$1" == "bundle" ] && [[ ! "$@" == *"sidekiq"* ]]; then
+  bundle exec rake db:create 2>/dev/null
+  bundle exec rake db:migrate 2>/dev/null
+  bundle exec rake db:seed
+  exec "$@"
 else
-
-  if [ -f tmp/pids/server.pid ]; then
-    rm -f tmp/pids/server.pid
-  fi
-
-  if [ -f tmp/pids/server_test.pid ]; then
-    rm -f tmp/pids/server_test.pid
-  fi
-
-  if [ "$1" = "server" ]; then
-    bundle exec rake db:migrate 2>/dev/null || bundle exec rake db:setup  
-  fi
-  
-  rails db:seed
   exec "$@"
 fi

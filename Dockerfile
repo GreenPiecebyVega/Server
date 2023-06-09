@@ -1,3 +1,5 @@
+# In terms of functionality, Ubuntu may provide more features, options and documentation for development and deployment. If security is paramount, Alpine may have a smaller attack surface and more security features.
+# If performance is a priority, Alpine might be a better choice due to its faster speed.
 FROM ruby:3.2.2-alpine AS greenpiece
 
 # Dependencies

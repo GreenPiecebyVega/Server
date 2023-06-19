@@ -6,7 +6,7 @@ class UserCharacter < ApplicationRecord
 
   belongs_to :user_game_mode
   belongs_to :character
-  
+
   has_one :inventory, class_name: 'UserCharacterInventory', dependent: :destroy
 
   has_many :bans, class_name: 'UserCharacterBan', dependent: :delete_all
@@ -35,8 +35,6 @@ class UserCharacter < ApplicationRecord
     throw :abort
   end
 
-  private
-
   def set_user_character_defaults
     ##########
     # MMORPG #
@@ -47,7 +45,7 @@ class UserCharacter < ApplicationRecord
       when 'fisica'
         upgrade_or_downgrade_strength(3, :upgrade)
       else 'magica'
-        upgrade_or_downgrade_devotion(3, :upgrade)
+           upgrade_or_downgrade_devotion(3, :upgrade)
       end
       self.hability_points = 0
     ########

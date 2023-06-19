@@ -3,15 +3,15 @@
 class User < ApplicationRecord
   # write
   attr_writer :login
-  
+
   # Identifies and manages a user on a Game Mode(Moba or MMORPG)
   has_and_belongs_to_many :game_modes, join_table: 'users_game_modes'
-  
+
   has_many :bans, class_name: 'UserBan', dependent: :destroy
 
   # Concerns
   include Users::Validations
-  
+
   include Devise::JWT::RevocationStrategies::JTIMatcher
   devise :lockable,
          :database_authenticatable,
@@ -74,7 +74,7 @@ class User < ApplicationRecord
     game_modes = GameMode.all
     game_modes.each do |obj|
       self.game_modes << obj
-      self.save
+      save
     end
   end
 end

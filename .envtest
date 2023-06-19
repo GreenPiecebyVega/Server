@@ -2,8 +2,6 @@
 # GREEN PIECE #
 ###############
 APP_NAME=greenpiece
-USER=developer
-GROUP=development
 
 #########
 # MYSQL #

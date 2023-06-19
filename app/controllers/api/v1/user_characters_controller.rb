@@ -11,7 +11,7 @@ module Api
         authorize UserCharacter
         scoped_user_characters = policy_scope(UserCharacter)
 
-        if scoped_user_characters.count.positive?
+        if scoped_user_characters.present? && scoped_user_characters.count.positive?
           render json: scoped_user_characters,
                  each_serializer: UserCharacterSerializer,
                  status: :ok
@@ -53,7 +53,7 @@ module Api
         render json: { message: I18n.t('api.oops') }, status: 500
       end
 
-      api :DELETE, '/user/characters/:id', 'Delete Personagem'
+      api :DELETE, '/user/characters/:id', 'Deleta Personagem'
       def destroy
         authorize @user_character
         if @user_character.destroy
@@ -64,7 +64,7 @@ module Api
                  status: :unprocessable_entity
         end
       rescue StandardError => e
-        render json: { message: I18n.t('api.oops') }, status: 500
+        render json: { message: e }, status: 500
       end
 
       private
@@ -75,7 +75,7 @@ module Api
 
       def user_characters_params
         params.require(:user_character).permit(
-          :user_id,
+          :user_game_mode_id,
           :character_id,
           :nickname,
           :lv,

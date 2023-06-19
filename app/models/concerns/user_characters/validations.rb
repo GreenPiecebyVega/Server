@@ -5,12 +5,14 @@ module UserCharacters
     extend ActiveSupport::Concern
 
     included do
+      # Associations #
+      validates :user_game_mode_id, :character_id, presence: true
+      # Attr's #
       validates :nickname, presence: true,
                            length: { minimum: 6 },
                            uniqueness: { case_sensitive: false }
 
-      validates_numericality_of :hability_points, less_than_or_equal_to: Integer('500')
-      validates_numericality_of :strength, :tenacity, :wisdom, :devotion, less_than_or_equal_to: Integer('500')
+      validates_numericality_of :hability_points, less_than_or_equal_to: Integer('570')
 
       validate :nickname_format
 

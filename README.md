@@ -1,6 +1,6 @@
 # Green Piece by VegaSoft :brazil:
 
-Windows users has to set before cloning the project
+Windows users has to set git autocrlf to input before **cloning the project**
 ```console
 git config --global core.autocrlf input
 ```
@@ -91,8 +91,6 @@ docker compose exec tdd env
 Made with :heart:. Todos os direitos reservados. Green Piece ID:929641795 Copyright © Vega Soft :star:.
 
 ## Todo
-- Adicionar bloqueio de personagem has_one
-- Adicionar bloqueio de conta has_one
-- retirar bonus premium de user e passar para a praemium table.
-- Adicionar premium table { category {:diamante, :gold} data_expiracao: datetime }, belongs_to :user and user has_one: premium and add a callback on before_create user also add a 3 days premium.
+- retirar bonus premium de user e passar para a praemium table.   
+- Adicionar premium table { category {:diamante, :gold} data_expiracao: datetime }, belongs_to :user and user has_one: premium and add a callback on before_create user also add a 3 days premium.   
 - Adicionar titles tables { :title, :description, subject: { :war, :turibuluns(dungeons), :general, :pvp, :pvm}}, belongs_to :user_character and user_character has_many titles

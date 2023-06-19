@@ -47,23 +47,39 @@ ActiveSupport::Inflector.inflections do |inflect|
   # Incontáveis
   inflect.uncountable %w[tórax tênis ônibus lápis fênix]
 
-  # User
+  # Game Mode #
+  inflect.irregular('game_mode', 'game_modes')
+  inflect.irregular('GameMode', 'GameModes')
+
+  # User #
   inflect.irregular('user', 'users')
   inflect.irregular('User', 'Users')
 
-  # Base Characters
+  # User Game Mode #
+  inflect.irregular('user_game_mode', 'users_game_modes')
+  inflect.irregular('UserGameMode', 'UsersGameModes')
+
+  # User Bans #
+  inflect.irregular('user_ban', 'user_bans')
+  inflect.irregular('UserBan', 'UserBans')
+
+  # Base Characters #
   inflect.irregular('base_character', 'base_characters')
   inflect.irregular('BaseCharacter', 'BaseCharacters')
 
-  # Character
+  # Character #
   inflect.irregular('character', 'characters')
   inflect.irregular('Character', 'Characters')
 
-  # User Characters
+  # User Game Mode Characters #
   inflect.irregular('user_character', 'user_characters')
   inflect.irregular('UserCharacter', 'UserCharacters')
 
-  # User Character's Inventory
+  # User User Game Mode Characters Bans #
+  inflect.irregular('user_character_ban', 'user_character_bans')
+  inflect.irregular('UserCharacterBan', 'UserCharacterBans')
+
+  # Character Inventory #
   inflect.irregular('user_character_inventory', 'user_characters_inventory')
   inflect.irregular('UserCharacterInventory', 'UserCharactersInventory')
 end

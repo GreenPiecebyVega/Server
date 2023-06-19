@@ -1,6 +1,8 @@
-# In terms of functionality, Ubuntu may provide more features, options and documentation for development and deployment. If security is paramount, Alpine may have a smaller attack surface and more security features.
+# In terms of functionality, Ubuntu may provide more features, options and documentation 
+# for development and deployment. If security is paramount, 
+# Alpine may have a smaller attack surface and more security features.
 # If performance is a priority, Alpine might be a better choice due to its faster speed.
-FROM ruby:3.2.2-alpine AS greenpiece
+FROM ruby:3.2.2-alpine AS greenpiece_development
 
 # Dependencies
 RUN apk add --update --no-cache \
@@ -75,10 +77,10 @@ WORKDIR $APP_DIRECTORY
 # Switch back to the regular user
 USER $USER
 
-COPY --chown=$USER Gemfile Gemfile.lock $APP_DIRECTORY/
+COPY --chown=$USER:$GROUP Gemfile Gemfile.lock $APP_DIRECTORY/
 
 RUN bundle check || bundle install
 
-COPY . $APP_DIRECTORY/
+COPY --chown=$USER:$GROUP . $APP_DIRECTORY/
 
 ENTRYPOINT ["./entrypoints/docker-entrypoint.sh"]

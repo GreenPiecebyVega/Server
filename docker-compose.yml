@@ -40,6 +40,8 @@ services:
   # GP #
   ######
   server:
+    user: developer:development
+    image: greenpiece-server
     container_name: server
     tty: true
     stdin_open: true
@@ -58,11 +60,13 @@ services:
     env_file:
       - .env
   
-  #######
-  # TDD #
-  #######
+  ###########################
+  # Test Driven Development #
+  ###########################
   tdd:
+    user: developer:development
     container_name: tdd
+    image: greenpiece-tdd-server
     tty: true
     stdin_open: true
     build:

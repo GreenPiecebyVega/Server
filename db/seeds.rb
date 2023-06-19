@@ -1,6 +1,21 @@
 # frozen_string_literal: true
 
 ###################
+#    Game Mode    #
+###################
+game_modes = [
+  [id: 1, name: 'Warmium Armis Rose', category: 'moba', is_active: true],
+  [id: 2, name: 'Green Piece', category: 'mmorpg', is_active: false]
+]
+game_modes.each do |gm|
+  game_mode           = GameMode.find_or_initialize_by(id: gm.first[:id])
+  game_mode.name      = gm.first[:name]
+  game_mode.category  = gm.first[:category]
+  game_mode.is_active = gm.first[:is_active]
+  game_mode.save!
+end
+
+###################
 # Base Characters #
 ###################
 base_characters = [

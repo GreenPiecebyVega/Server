@@ -33,7 +33,6 @@ FactoryBot.define do
     ###############
     # Traits Role #
     ###############
-    # create(:usuario, :player, :premium)
     trait :free do
       account_type { 'free' }
     end

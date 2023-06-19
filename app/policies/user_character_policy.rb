@@ -2,19 +2,19 @@
 
 class UserCharacterPolicy < ApplicationPolicy
   def index?
-    true
+    user.master? || user.player?
   end
 
   def create?
-    user.characters.count < 6
+    user.master? || user.player?
   end
 
   def update?
-    user.master? || (user.id == record.user_id)
+    user.master? || (user.id == record.user_game_mode.user_id)
   end
 
   def destroy?
-    user.master? || (user.id == record.user_id)
+    user.master? || (user.id == record.user_game_mode.user_id)
   end
 
   class Scope < Scope
@@ -22,7 +22,9 @@ class UserCharacterPolicy < ApplicationPolicy
       if user.master?
         scope.all
       else
-        scope.where(user_id: user.id).order(lv: :desc)
+        scope.includes(:user_game_mode)
+             .where(user_game_mode: { user_id: user.id })
+             .order(lv: :desc)
       end
     end
   end

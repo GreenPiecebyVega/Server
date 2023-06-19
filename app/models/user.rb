@@ -3,11 +3,15 @@
 class User < ApplicationRecord
   # write
   attr_writer :login
+  
+  # Identifies and manages a user on a Game Mode(Moba or MMORPG)
+  has_and_belongs_to_many :game_modes, join_table: 'users_game_modes'
+  
+  has_many :bans, class_name: 'UserBan', dependent: :destroy
 
   # Concerns
-  include Users::Associations
-  include Users::Logic
   include Users::Validations
+  
   include Devise::JWT::RevocationStrategies::JTIMatcher
   devise :lockable,
          :database_authenticatable,
@@ -19,11 +23,13 @@ class User < ApplicationRecord
          :validatable, jwt_revocation_strategy: self
 
   # Enums
-  enum role: %i[player temporaria gm master]
+  enum role: %i[player temporary gm master]
   enum account_type: %i[free premium]
 
   scope :gp_staf, -> { where('role = ? OR role = ?', 2, 3) }
   scope :clientes, -> { where('role = ?', 0) }
+
+  after_create :create_users_game_modes
 
   # Devise override for logging in with username or email
   def login
@@ -35,10 +41,10 @@ class User < ApplicationRecord
   end
 
   def client?
-    player? || temporaria?
+    player? || temporary?
   end
 
-  def temporaria?
+  def temporary?
     role == 1 && data_expiracao.present?
   end
 
@@ -61,10 +67,14 @@ class User < ApplicationRecord
     UserMailer.send(notification, self, *args).deliver_later
   end
 
-  %i[qtd_gp_coin qtd_gp_cash bonus_experience bonus_ruby_experience bonus_drop bonus_war_experience bonus_guild_war_experience bonus_energy_recovery bonus_craft_experience
-     bonus_pet_experience].each do |method|
-    define_method "#{method}=" do |value|
-      write_attribute method, (value.to_s.match(/,/) ? value.gsub('.', '').gsub(',', '.') : value)
+  private
+
+  # Auto generates user_game_mode record for each existent game_modes object
+  def create_users_game_modes
+    game_modes = GameMode.all
+    game_modes.each do |obj|
+      self.game_modes << obj
+      self.save
     end
   end
 end

@@ -37,8 +37,8 @@ module Api
         end
         render json: @user_game_mode, status: :ok
       rescue StandardError => e
-        render json: { message: e }, status: :internal_server_error
-      end#I18n.t('api.oops')
+        render json: { message: I18n.t('api.oops') }, status: :internal_server_error
+      end
 
       private
 

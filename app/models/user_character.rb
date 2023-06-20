@@ -29,7 +29,7 @@ class UserCharacter < ApplicationRecord
   end
 
   def can_destroy?
-    return unless lv >= 100
+    return false unless lv >= 100
 
     errors.add(:lv, I18n.t('activerecord.errors.models.user_character.messages.cant_destroy'))
     throw :abort
@@ -45,7 +45,7 @@ class UserCharacter < ApplicationRecord
       when 'fisica'
         upgrade_or_downgrade_strength(3, :upgrade)
       else 'magica'
-           upgrade_or_downgrade_devotion(3, :upgrade)
+        upgrade_or_downgrade_devotion(3, :upgrade)
       end
       self.hability_points = 0
     ########

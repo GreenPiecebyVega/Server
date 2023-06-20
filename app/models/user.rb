@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
+# After user creation two types of game mode is created, they called *moba* and *mmorpg*.
 class User < ApplicationRecord
-  # write
+  # Username or Email can be passed on login attr.
   attr_writer :login
 
   # Identifies and manages a user on a Game Mode(Moba or MMORPG)
+  # They can have diferent characters between game modes.
   has_and_belongs_to_many :game_modes, join_table: 'users_game_modes'
-
+  has_many :users_game_modes, class_name: 'UserGameMode'
+  
   has_many :bans, class_name: 'UserBan', dependent: :destroy
 
   # Concerns
@@ -69,7 +72,7 @@ class User < ApplicationRecord
 
   private
 
-  # Auto generates user_game_mode record for each existent game_modes object
+  # *moba* and *mmorpg* options set to the user on creation.
   def create_users_game_modes
     game_modes = GameMode.all
     game_modes.each do |obj|

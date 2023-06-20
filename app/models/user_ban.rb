@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserBan < ApplicationRecord
   belongs_to :user
 

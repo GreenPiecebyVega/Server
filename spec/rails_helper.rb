@@ -43,14 +43,13 @@ RSpec.configure do |config|
     end
   end
 
-  keep_tables = %w[base_characters characters]
   config.before(:suite) do
     DatabaseCleaner[:redis].db = ENV['REDIS_URL_SIDEKIQ']
     DatabaseCleaner[:redis].strategy = :deletion
     DatabaseCleaner[:redis].clean_with(:deletion)
 
     DatabaseCleaner[:active_record].strategy = DatabaseCleaner::ActiveRecord::Deletion.new(except: %w[
-                                                                                             game_modes base_characters characters
+                                                                                             game_modes users_game_modes base_characters characters
                                                                                            ])
     DatabaseCleaner[:active_record].clean_with(:transaction)
   end

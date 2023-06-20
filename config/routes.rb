@@ -6,7 +6,18 @@ Sidekiq::Web.use ActionDispatch::Cookies
 Sidekiq::Web.use ActionDispatch::Session::CookieStore, key: '_interslice_session'
 
 Rails.application.routes.draw do
+  # Development root
   root to: 'apipie/apipies#index' if Rails.env.development?
+
+  ##########
+  ## Ping ##
+  ##########
+  # Ping to ensure server is up #
+  resources :ping, only: [:index] do
+    collection do
+      get :auth
+    end
+  end
 
   #############
   ## SIDEKIQ ##
@@ -54,17 +65,13 @@ Rails.application.routes.draw do
           get :available
         end
       end
+      # Users Game Modes #
+      resources :users_game_modes, path: 'users/game/modes', path_names: { index: :list },
+                                   except: %i[create update destroy]
+      patch 'users/game/modes/active-game-mode', to: 'users_game_modes#update_active_game_mode',
+                                                 as: :update_active_game_mode
+      # Characters #
       resources :user_characters, path: 'user/characters', only: %i[index create update destroy]
-    end
-  end
-
-  ##########
-  ## Ping ##
-  ##########
-  # Ping to ensure server is up #
-  resources :ping, only: [:index] do
-    collection do
-      get :auth
     end
   end
 

@@ -11,6 +11,10 @@ pt_BR:
     user_character:
       deleted: "Personagem Deletado(a) com sucesso."
   activerecord:
+    attributes:
+      category: "categoria"
+      description: "descrição"
+      expiry_date: "data de expiração"
     errors:
       not_found: 'Rota não encontrada.'
       internal_server_error: 'O Servidor não pode completar sua requisição.'

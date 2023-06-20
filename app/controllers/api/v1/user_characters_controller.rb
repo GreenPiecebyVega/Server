@@ -70,11 +70,12 @@ module Api
       private
 
       def set_user_character
-        @user_character = UserCharacter.find(params[:id])
+        @user_character = UserCharacter.find_by('id = ?', user_characters_params[:id])
       end
 
       def user_characters_params
         params.require(:user_character).permit(
+          :id,
           :user_game_mode_id,
           :character_id,
           :nickname,

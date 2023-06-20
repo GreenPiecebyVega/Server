@@ -1,3 +1,2 @@
 # Account as User
-1. Uma conta ou Um usuário, podem jogar dois modos de jogos, um deles é o **MOBA** e o outro **MMORPG**. De acordo com o modo de jogo que está sendo jogado, o servidor responderá com diferentes informações, este controle teremos a partir de um boolean *is_being_played* na tabela de muitos para muitos chamada **users_game_modes** que identifica o usuário e o game mode escolhido. *atualiza um com true e respectivamente o outro para false*.
-2. Como este controle, veremos muito a palavra **user_game_mode_id** presente em diversas tabelas já que a mesma possui o usuário e o game mode.
+1. Uma conta ou Um usuário, podem jogar dois modos de jogos, um deles é o **MOBA** e o outro **MMORPG**. De acordo com o modo de jogo que está sendo jogado, o servidor responderá com diferentes informações.

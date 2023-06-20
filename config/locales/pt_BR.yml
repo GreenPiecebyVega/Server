@@ -11,6 +11,11 @@ pt_BR:
     user_character:
       deleted: "Personagem Deletado(a) com sucesso."
   activerecord:
+    models:
+      user: Usuário
+      user_game_mode: Modo de Jogo Atual
+      game_mode: Modo de Jogo
+      user_character: Personagem
     attributes:
       category: "categoria"
       description: "descrição"

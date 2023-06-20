@@ -9,11 +9,11 @@ class Users::PasswordsController < Devise::PasswordsController
     yield resource if block_given?
 
     if successfully_sent?(resource)
-      render json: { message: I18n.t('devise.passwords.send_instructions') }, status: :ok
+      render json: { message: I18n.t('devise.passwords.send_instructions') }, status: 200
     else
       render json: resource,
              serializer: ActiveModel::Serializer::ErrorSerializer,
-             status: :unprocessable_entity
+             status: 422
     end
   end
 
@@ -24,12 +24,12 @@ class Users::PasswordsController < Devise::PasswordsController
 
     if resource.errors.empty?
       resource.unlock_access! if unlockable?(resource)
-      render json: { message: I18n.t('devise.passwords.updated') }, status: :ok
+      render json: { message: I18n.t('devise.passwords.updated') }, status: 200
     else
       set_minimum_password_length
       render json: resource,
              serializer: ActiveModel::Serializer::ErrorSerializer,
-             status: :unprocessable_entity
+             status: 422
     end
   end
 end

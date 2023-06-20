@@ -9,11 +9,11 @@ class Users::UnlocksController < Devise::SessionsController
     yield resource if block_given?
 
     if successfully_sent?(resource)
-      render json: { message: I18n.t('devise.unlocks.send_instructions') }, status: :ok
+      render json: { message: I18n.t('devise.unlocks.send_instructions') }, status: 200
     else
       render json: resource,
              serializer: ActiveModel::Serializer::ErrorSerializer,
-             status: :unprocessable_entity
+             status: 422
     end
   end
 
@@ -23,11 +23,11 @@ class Users::UnlocksController < Devise::SessionsController
     yield resource if block_given?
 
     if resource.errors.empty?
-      render json: { message: I18n.t('devise.unlocks.unlocked') }, status: :ok
+      render json: { message: I18n.t('devise.unlocks.unlocked') }, status: 200
     else
       render json: resource,
              serializer: ActiveModel::Serializer::ErrorSerializer,
-             status: :unprocessable_entity
+             status: 422
     end
   end
 end

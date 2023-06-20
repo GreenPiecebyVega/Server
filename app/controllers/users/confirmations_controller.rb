@@ -9,11 +9,11 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     yield resource if block_given?
 
     if successfully_sent?(resource)
-      render json: { message: I18n.t('devise.confirmations.resent') }, status: :ok
+      render json: { message: I18n.t('devise.confirmations.resent') }, status: 200
     else
       render json: resource,
              serializer: ActiveModel::Serializer::ErrorSerializer,
-             status: :unprocessable_entity
+             status: 422
     end
   end
 
@@ -23,11 +23,11 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     yield resource if block_given?
 
     if resource.errors.empty?
-      render json: { message: I18n.t('devise.confirmations.success') }, status: :ok
+      render json: { message: I18n.t('devise.confirmations.success') }, status: 200
     else
       render json: resource,
              serializer: ActiveModel::Serializer::ErrorSerializer,
-             status: :ok
+             status: 200
     end
   end
 end

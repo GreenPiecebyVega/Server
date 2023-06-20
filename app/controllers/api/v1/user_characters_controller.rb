@@ -14,12 +14,12 @@ module Api
         if scoped_user_characters.present? && scoped_user_characters.count.positive?
           render json: scoped_user_characters,
                  each_serializer: UserCharacterSerializer,
-                 status: :ok
+                 status: 200
         else
-          render json: { message: 'data_not_found' }, status: :unprocessable_entity
+          render json: { message: 'data_not_found' }, status: 422
         end
       rescue StandardError => e
-        render json: { message: I18n.t('api.oops') }, status: :internal_server_error
+        render json: { message: I18n.t('api.oops') }, status: 500
       end
 
       api :POST, '/user/characters', 'Cria Personagem'
@@ -28,14 +28,14 @@ module Api
         user_character = UserCharacter.new(user_characters_params)
 
         if user_character.save
-          render json: user_character, status: :ok
+          render json: user_character, status: 200
         else
           render json: user_character,
                  serializer: ActiveModel::Serializer::ErrorSerializer,
-                 status: :unprocessable_entity
+                 status: 422
         end
       rescue StandardError => e
-        render json: { message: I18n.t('api.oops') }, status: :internal_server_error
+        render json: { message: I18n.t('api.oops') }, status: 500
       end
 
       api :PUT, '/user/characters/:id', 'Atualiza Personagem'
@@ -43,11 +43,11 @@ module Api
         authorize @user_character
 
         if @user_character.update(user_characters_params)
-          render json: @user_character, status: :ok
+          render json: @user_character, status: 200
         else
           render json: @user_character,
                  serializer: ActiveModel::Serializer::ErrorSerializer,
-                 status: :unprocessable_entity
+                 status: 422
         end
       rescue StandardError => e
         render json: { message: I18n.t('api.oops') }, status: 500
@@ -57,14 +57,14 @@ module Api
       def destroy
         authorize @user_character
         if @user_character.destroy
-          render json: { message: I18n.t('messages.user_character.deleted') }, status: :ok
+          render json: { message: I18n.t('messages.user_character.deleted') }, status: 200
         else
           render json: @user_character,
                  serializer: ActiveModel::Serializer::ErrorSerializer,
-                 status: :unprocessable_entity
+                 status: 422
         end
       rescue StandardError => e
-        render json: { message: e }, status: 500
+        render json: { message: I18n.t('api.oops') }, status: 500
       end
 
       private

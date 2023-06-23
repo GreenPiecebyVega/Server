@@ -63,6 +63,7 @@ services:
   ###########################
   # Test Driven Development #
   ###########################
+  # docker compose exec tdd rspec
   tdd:
     user: developer:development
     container_name: tdd

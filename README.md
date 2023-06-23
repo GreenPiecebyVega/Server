@@ -5,23 +5,24 @@ Windows users has to set git autocrlf to input before **cloning the project**
 git config --global core.autocrlf input
 ```
 
-Quick Start
+## Quick Start
 ```console
 docker compose up -d --build
 ```
 
-Containers Bash   
+## Containers Bash   
 ```console
 docker compose exec server bash
 docker compose exec tdd bash
 ```
-API Documentation   
+## API Documentation   
 http://localhost:3000/
 
-BackgroundJobs Dashboard   
+## BackgroundJobs Dashboard   
 username: developer   
 password: developer   
 http://localhost:3000/sidekiq
+
 ## Generating Serializers
 [Gem Doc's](https://github.com/rails-api/active_model_serializers/tree/v0.10.6/docs)   
 [Getting Started](https://github.com/rails-api/active_model_serializers/blob/v0.10.6/docs/general/getting_started.md)   
@@ -31,7 +32,7 @@ docker compose exec server rails g serializer SingularModelName
 ```
 
 ## Mailer Preview
-We are using letter_opening gem, we can preview e-mail beside sending them   
+We are using letter_opening gem, so we can preview e-mail beside sending them on a test
 Visible at 'tmp', 'mailers_preview'
 
 ## Green Piece Conventional Docs :recycle:	
@@ -89,8 +90,3 @@ docker compose exec tdd env
 ```
 
 Made with :heart:. Todos os direitos reservados. Green Piece ID:929641795 Copyright © Vega Soft :star:.
-
-## Todo
-- retirar bonus premium de user e passar para a praemium table.   
-- Adicionar premium table { category {:diamante, :gold} data_expiracao: datetime }, belongs_to :user and user has_one: premium and add a callback on before_create user also add a 3 days premium.   
-- Adicionar titles tables { :title, :description, subject: { :war, :turibuluns(dungeons), :general, :pvp, :pvm}}, belongs_to :user_character and user_character has_many titles

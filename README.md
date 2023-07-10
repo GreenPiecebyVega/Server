@@ -89,4 +89,11 @@ docker compose exec server env
 docker compose exec tdd env
 ```
 
+### Rubocop just on modified files through git Adding | xargs rubocop -a
+```console
+  git ls-files -m | xargs ls -1 2>/dev/null | grep '\.rb$'
+  git ls-files -m | xargs ls -1 2>/dev/null | grep '\.erb$'
+  git ls-files -m | xargs ls -1 2>/dev/null | grep '\.rb$' | xargs rubocop -a
+```
+
 Made with :heart:. Todos os direitos reservados. Green Piece ID:929641795 Copyright © Vega Soft :star:.

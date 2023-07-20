@@ -102,7 +102,7 @@ RSpec.describe 'UserCharacters', type: :request do
           id: character.id
         }
       }
-      delete "/api/v1/user/characters/#{character.id}", params: payload, 
+      delete "/api/v1/user/characters/#{character.id}", params: payload,
                                                         headers: { 'Authorization': "Bearer #{get_jwt}" }
       parsed = JSON.parse(response.body, object_class: OpenStruct)
       expect(parsed.message).to include(I18n.t('messages.user_character.deleted'))
@@ -117,7 +117,7 @@ RSpec.describe 'UserCharacters', type: :request do
           id: character.id
         }
       }
-      delete "/api/v1/user/characters/#{character.id}", params: payload, 
+      delete "/api/v1/user/characters/#{character.id}", params: payload,
                                                         headers: { 'Authorization': "Bearer #{get_jwt}" }
       parsed = JSON.parse(response.body, object_class: OpenStruct)
       expect(parsed.errors.count).to be >= 1

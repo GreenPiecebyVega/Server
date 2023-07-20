@@ -35,7 +35,7 @@ class ApplicationController < ActionController::API
     return unless current_user.present? && !current_user.master?
 
     if (request.user_agent.blank? || request.user_agent.downcase.include?('headlesschrome')) &&
-       request.referer.blank? && Rails.env == 'production'
+       request.referer.blank? && Rails.env.production?
       render json: { message: I18n.t('api.oops') }, status: :unauthorized
       # block user here besides rendering json
     end

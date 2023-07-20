@@ -3,7 +3,6 @@
 module Api
   module V1
     class UsersGameModesController < ApplicationController
-      
       before_action :set_user_game_mode, only: %i[update_active_game_mode]
       before_action :authenticate_user!
 

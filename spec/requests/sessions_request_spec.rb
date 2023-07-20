@@ -36,7 +36,7 @@ RSpec.describe 'Sessions', type: :request do
     end
 
     it 'returns valid JWT token' do
-      token_from_request = response.headers['Authorization'].split(' ').last
+      token_from_request = get_jwt
       decoded_token = JWT.decode(token_from_request, ENV['DEVISE_JWT_SECRET_KEY'], true)
       expect(decoded_token.first['sub']).to be_present
     end

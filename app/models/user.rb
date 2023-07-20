@@ -9,7 +9,7 @@ class User < ApplicationRecord
   # They can have diferent characters between game modes.
   has_and_belongs_to_many :game_modes, join_table: 'users_game_modes'
   has_many :users_game_modes, class_name: 'UserGameMode'
-  
+
   has_many :bans, class_name: 'UserBan', dependent: :destroy
 
   # Concerns

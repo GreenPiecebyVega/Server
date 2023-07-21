@@ -76,7 +76,6 @@ module Api
       def user_characters_params
         params.require(:user_character).permit(
           :id,
-          :user_game_mode_id,
           :character_id,
           :nickname,
           :lv,

@@ -6,7 +6,7 @@ module UserCharacters
 
     included do
       # Associations #
-      validates :user_game_mode_id, :character_id, presence: true
+      validates :character_id, presence: true
       # Attr's #
       validates :nickname, presence: true,
                            length: { minimum: 6 },

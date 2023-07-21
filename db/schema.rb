@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_16_200339) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_21_173428) do
   create_table "base_characters", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.integer "gp_character_base", null: false
@@ -59,7 +59,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_16_200339) do
   end
 
   create_table "user_characters", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "user_game_mode_id"
     t.bigint "character_id", null: false
     t.string "nickname", null: false
     t.integer "lv", default: 1
@@ -100,7 +99,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_16_200339) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["character_id"], name: "index_user_characters_on_character_id"
-    t.index ["user_game_mode_id"], name: "index_user_characters_on_user_game_mode_id"
   end
 
   create_table "user_characters_inventory", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -160,21 +158,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_16_200339) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  create_table "users_game_modes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "game_mode_id", null: false
-    t.boolean "is_being_played", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["game_mode_id"], name: "index_users_game_modes_on_game_mode_id"
-    t.index ["user_id"], name: "index_users_game_modes_on_user_id"
-  end
-
   add_foreign_key "characters", "base_characters"
   add_foreign_key "user_character_bans", "user_characters"
   add_foreign_key "user_characters", "characters"
-  add_foreign_key "user_characters", "users_game_modes"
   add_foreign_key "user_characters_inventory", "user_characters"
-  add_foreign_key "users_game_modes", "game_modes"
-  add_foreign_key "users_game_modes", "users"
 end

@@ -10,11 +10,11 @@ class UserCharacterPolicy < ApplicationPolicy
   end
 
   def update?
-    user.master? || (user.id == record.user_game_mode.user_id)
+    user.master? || (user.id == record.usario_id)
   end
 
   def destroy?
-    user.master? || (user.id == record.user_game_mode.user_id)
+    user.master? || (user.id == record.usario_id)
   end
 
   class Scope < Scope
@@ -22,9 +22,7 @@ class UserCharacterPolicy < ApplicationPolicy
       if user.master?
         scope.all
       else
-        scope.includes(:user_game_mode)
-             .where(user_game_mode: { user_id: user.id })
-             .order(lv: :desc)
+        scope.where(user_id: user.id)
       end
     end
   end

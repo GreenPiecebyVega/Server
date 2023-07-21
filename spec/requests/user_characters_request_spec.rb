@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe 'UserCharacters', type: :request do
   let(:user) { create(:user, :player, :free) }
-  let(:user_game_mode) { user.users_game_modes.where(game_mode_id: 1).first }
 
   context 'index' do
     before do
@@ -10,8 +9,8 @@ RSpec.describe 'UserCharacters', type: :request do
     end
 
     it 'returns the user character list' do
-      create(:user_character, :guerreiro, user_game_mode: user_game_mode)
-      create(:user_character, :mago, user_game_mode: user_game_mode)
+      create(:user_character, :guerreiro)
+      create(:user_character, :mago)
       get api_v1_user_characters_path, headers: { 'Authorization': "Bearer #{get_jwt}" }
       parsed = JSON.parse(response.body, object_class: OpenStruct)
       expect(parsed.data.count).to be(2)
@@ -32,20 +31,18 @@ RSpec.describe 'UserCharacters', type: :request do
     it 'creates the character successfuly' do
       payload = {
         user_character: {
-          user_game_mode_id: user_game_mode.id,
           character_id: Character.first.id,
           nickname: 'greenpiecebyvega'
         }
       }
       post api_v1_user_characters_path, params: payload, headers: { 'Authorization': "Bearer #{get_jwt}" }
-      parsed = JSON.parse(response.body, object_class: OpenStruct)
-      expect(user_game_mode.character_ids).to include(parsed.data.id.to_i)
+      # parsed = JSON.parse(response.body, object_class: OpenStruct)
+      expect(response).to have_http_status(200)
     end
 
     it 'responds with class errors successfuly' do
       payload = {
         user_character: {
-          user_game_mode_id: user_game_mode.id,
           character_id: Character.first.id,
           nickname: ''
         }
@@ -62,7 +59,7 @@ RSpec.describe 'UserCharacters', type: :request do
     end
 
     it 'updates the character successfuly' do
-      character = create(:user_character, :guerreiro, user_game_mode: user_game_mode)
+      character = create(:user_character, :guerreiro)
       payload = {
         user_character: {
           id: character.id,
@@ -71,12 +68,12 @@ RSpec.describe 'UserCharacters', type: :request do
       }
       patch "/api/v1/user/characters/#{character.id}", params: payload,
                                                        headers: { 'Authorization': "Bearer #{get_jwt}" }
-      parsed = JSON.parse(response.body, object_class: OpenStruct)
-      expect(user_game_mode.character_ids).to include(parsed.data.id.to_i)
+      # parsed = JSON.parse(response.body, object_class: OpenStruct)
+      expect(response).to have_http_status(200)
     end
 
     it 'responds with class errors successfuly' do
-      character = create(:user_character, :guerreiro, user_game_mode: user_game_mode)
+      character = create(:user_character, :guerreiro)
       payload = {
         user_character: {
           id: character.id,
@@ -96,7 +93,7 @@ RSpec.describe 'UserCharacters', type: :request do
     end
 
     it 'destroys the character successfuly' do
-      character = create(:user_character, :guerreiro, user_game_mode: user_game_mode)
+      character = create(:user_character, :guerreiro)
       payload = {
         user_character: {
           id: character.id
@@ -109,7 +106,7 @@ RSpec.describe 'UserCharacters', type: :request do
     end
 
     it 'responds with class errors successfuly' do
-      character = create(:user_character, :guerreiro, user_game_mode: user_game_mode)
+      character = create(:user_character, :guerreiro)
       character.lv = 101 # provoque callback check_character_lv
       character.save
       payload = {

@@ -5,11 +5,6 @@ class User < ApplicationRecord
   # Username or Email can be passed on login attr.
   attr_writer :login
 
-  # Identifies and manages a user on a Game Mode(Moba or MMORPG)
-  # They can have diferent characters between game modes.
-  has_and_belongs_to_many :game_modes, join_table: 'users_game_modes'
-  has_many :users_game_modes, class_name: 'UserGameMode'
-
   has_many :bans, class_name: 'UserBan', dependent: :destroy
 
   # Concerns
@@ -31,8 +26,6 @@ class User < ApplicationRecord
 
   scope :gp_staf, -> { where('role = ? OR role = ?', 2, 3) }
   scope :clientes, -> { where('role = ?', 0) }
-
-  after_create :create_users_game_modes
 
   # Devise override for logging in with username or email
   def login
@@ -71,13 +64,4 @@ class User < ApplicationRecord
   end
 
   private
-
-  # *moba* and *mmorpg* options set to the user on creation.
-  def create_users_game_modes
-    game_modes = GameMode.all
-    game_modes.each do |obj|
-      self.game_modes << obj
-      save
-    end
-  end
 end

@@ -4,7 +4,6 @@ class UserCharacter < ApplicationRecord
   include UserCharacters::Validations
   include UserCharacters::UpgradeOrDowngradeHabilityPower
 
-  belongs_to :user_game_mode
   belongs_to :character
 
   has_one :inventory, class_name: 'UserCharacterInventory', dependent: :destroy
@@ -39,22 +38,22 @@ class UserCharacter < ApplicationRecord
     ##########
     # MMORPG #
     ##########
-    if user_game_mode.game_mode.category == 'mmorpg'
-      # Lv 1 hability #
-      case base_class
-      when 'fisica'
-        upgrade_or_downgrade_strength(3, :upgrade)
-      else 'magica'
-        upgrade_or_downgrade_devotion(3, :upgrade)
-      end
-      self.hability_points = 0
-    ########
-    # MOBA #
-    ########
-    else
-      # Hability && Game Mode #
-      self.hability_points = 570
-    end
+    # if user_game_mode.game_mode.category == 'mmorpg'
+    #   # Lv 1 hability #
+    #   case base_class
+    #   when 'fisica'
+    #     upgrade_or_downgrade_strength(3, :upgrade)
+    #   else 'magica'
+    #     upgrade_or_downgrade_devotion(3, :upgrade)
+    #   end
+    #   self.hability_points = 0
+    # ########
+    # # MOBA #
+    # ########
+    # else
+    #   # Hability && Game Mode #
+    #   self.hability_points = 570
+    # end
     # Inventory #
     build_inventory
   end

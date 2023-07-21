@@ -55,10 +55,6 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular('user', 'users')
   inflect.irregular('User', 'Users')
 
-  # User Game Mode #
-  inflect.irregular('user_game_mode', 'users_game_modes')
-  inflect.irregular('UserGameMode', 'UsersGameModes')
-
   # User Bans #
   inflect.irregular('user_ban', 'user_bans')
   inflect.irregular('UserBan', 'UserBans')
@@ -71,11 +67,11 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular('character', 'characters')
   inflect.irregular('Character', 'Characters')
 
-  # User Game Mode Characters #
+  # User Characters #
   inflect.irregular('user_character', 'user_characters')
   inflect.irregular('UserCharacter', 'UserCharacters')
 
-  # User User Game Mode Characters Bans #
+  # Characters Bans #
   inflect.irregular('user_character_ban', 'user_character_bans')
   inflect.irregular('UserCharacterBan', 'UserCharacterBans')
 

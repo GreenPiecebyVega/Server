@@ -65,11 +65,6 @@ Rails.application.routes.draw do
           get :available
         end
       end
-      # Users Game Modes #
-      resources :users_game_modes, path: 'users/game/modes', path_names: { index: :list },
-                                   except: %i[create update destroy]
-      patch 'users/game/modes/active-game-mode', to: 'users_game_modes#update_active_game_mode',
-                                                 as: :update_active_game_mode
       # Characters #
       resources :user_characters, path: 'user/characters', only: %i[index create update destroy]
     end

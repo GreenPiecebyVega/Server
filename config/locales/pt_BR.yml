@@ -13,7 +13,6 @@ pt_BR:
   activerecord:
     models:
       user: Usuário
-      user_game_mode: Modo de Jogo Atual
       game_mode: Modo de Jogo
       user_character: Personagem
     attributes:

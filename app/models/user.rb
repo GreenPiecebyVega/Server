@@ -2,12 +2,11 @@
 
 # After user creation two types of game mode is created, they called *moba* and *mmorpg*.
 class User < ApplicationRecord
-  # Username or Email can be passed on login attr.
   attr_writer :login
 
+  has_many :characters, class_name: 'UserCharacter', dependent: :destroy
   has_many :bans, class_name: 'UserBan', dependent: :destroy
 
-  # Concerns
   include Users::Validations
 
   include Devise::JWT::RevocationStrategies::JTIMatcher
@@ -27,7 +26,6 @@ class User < ApplicationRecord
   scope :gp_staf, -> { where('role = ? OR role = ?', 2, 3) }
   scope :clientes, -> { where('role = ?', 0) }
 
-  # Devise override for logging in with username or email
   def login
     @login || username || email
   end
@@ -58,10 +56,7 @@ class User < ApplicationRecord
                             ]).first
   end
 
-  # Make sure to send the devise emails via async
   def send_devise_notification(notification, *args)
     UserMailer.send(notification, self, *args).deliver_later
   end
-
-  private
 end

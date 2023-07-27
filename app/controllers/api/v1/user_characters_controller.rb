@@ -35,7 +35,7 @@ module Api
                  status: 422
         end
       rescue StandardError => e
-        render json: { message: I18n.t('api.oops') }, status: 500
+        render json: { message: e }, status: 500
       end
 
       api :PUT, '/user/characters/:id', 'Atualiza Personagem'
@@ -76,6 +76,7 @@ module Api
       def user_characters_params
         params.require(:user_character).permit(
           :id,
+          :user_id,
           :character_id,
           :nickname,
           :lv,

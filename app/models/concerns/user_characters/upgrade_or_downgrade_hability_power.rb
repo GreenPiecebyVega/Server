@@ -196,7 +196,7 @@ module UserCharacters
       def strength_properties
         {
           ataque: BigDecimal('2.00'),
-          ataque_magico: BigDecimal('0.8'),
+          ataque_magico: BigDecimal('0.80'),
           defesa: BigDecimal('1.50'),
           precisao: BigDecimal('0.10'),
           evasao: BigDecimal('0.08')
@@ -206,7 +206,7 @@ module UserCharacters
       def tenacity_properties
         {
           ataque: BigDecimal('1.50'),
-          ataque_magico: BigDecimal('0.7'),
+          ataque_magico: BigDecimal('0.70'),
           defesa: BigDecimal('2.00'),
           precisao: BigDecimal('0.09'),
           evasao: BigDecimal('0.09')
@@ -216,7 +216,7 @@ module UserCharacters
       def devotion_properties
         {
           ataque_magico: BigDecimal('2.25'),
-          ataque: BigDecimal('0.8'),
+          ataque: BigDecimal('0.80'),
           defesa: BigDecimal('1.25'),
           precisao: BigDecimal('0.08'),
           evasao: BigDecimal('0.10')
@@ -226,7 +226,7 @@ module UserCharacters
       def wisdom_properties
         {
           ataque_magico: BigDecimal('1.50'),
-          ataque: BigDecimal('0.7'),
+          ataque: BigDecimal('0.70'),
           defesa: BigDecimal('2.00'),
           precisao: BigDecimal('0.09'),
           evasao: BigDecimal('0.09')

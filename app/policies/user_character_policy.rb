@@ -10,11 +10,11 @@ class UserCharacterPolicy < ApplicationPolicy
   end
 
   def update?
-    user.master? || (user.id == record.usario_id)
+    user.master? || (user.id == record.user_id)
   end
 
   def destroy?
-    user.master? || (user.id == record.usario_id)
+    user.master? || (user.id == record.user_id)
   end
 
   class Scope < Scope

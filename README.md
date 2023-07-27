@@ -71,6 +71,13 @@ Visible at 'tmp', 'mailers_preview'
 8. **Pundit Matchers**
   [Documentation](https://github.com/punditcommunity/pundit-matchers#matchers)
 
+9. **Faker**
+[Documentation](https://www.rubydoc.info/gems/faker/)
+
+10. **CPF/CNPJ Faker**
+[Documentation](https://github.com/bernardo/cpf_faker#usage)
+
+
 ### Use binding.pry for debugging on development
 To be able to use pry we have to:
 ```console

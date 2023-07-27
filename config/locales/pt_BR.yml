@@ -53,8 +53,8 @@ pt_BR:
         base_character:
           attributes:
             gp_character_base:
-              fisica: 'Classe Mágica'
-              magica: 'Classe Física'
+              physical: 'Classe Mágica'
+              magic: 'Classe Física'
         character:
           attributes:
             gp_character:

@@ -11,7 +11,6 @@ if [ "$1" == "bundle" ] && [[ ! "$*" == *"sidekiq"* ]]; then
   fi
   
   bundle exec rake db:create 2>/dev/null
-  bundle exec rake db:migrate 2>/dev/null
   bundle exec rake db:seed
   exec "$@"
 

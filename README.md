@@ -1,4 +1,4 @@
-# Green Piece by VegaSoft :brazil:
+# Rails7/Docker/API/Devise/JWT/Serialization/Rspec Example
 
 Windows users has to set git autocrlf to input before **cloning the project**
 ```console

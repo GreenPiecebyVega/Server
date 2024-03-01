@@ -2,7 +2,7 @@
 
 Windows users has to set git autocrlf to input before **cloning the project**
 ```console
-git config --global core.autocrlf input
+git config --global core.autocrlf true
 ```
 
 ## Quick Start

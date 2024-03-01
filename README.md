@@ -1,6 +1,6 @@
 # Green Piece by VegaSoft :brazil:
 
-Windows users has to set git autocrlf to input before **cloning the project**
+Set git autocrlf before **cloning the project**.
 ```console
 git config --global core.autocrlf true
 ```
